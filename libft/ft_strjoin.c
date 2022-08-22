@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 20:41:22 by rgatnaou          #+#    #+#             */
-/*   Updated: 2021/11/10 10:37:17 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/20 18:03:47 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	join[i] = 0;
+	free((char *)s1);
 	return (join);
 }

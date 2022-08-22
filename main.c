@@ -6,14 +6,13 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/19 18:09:37 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/22 14:22:31 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
 int main(int ac, char **av)
 {
-    if (ac != 2)
-        write(2,"error : ",);
-        
-    return (0);
+	parce(ac,av);
 }

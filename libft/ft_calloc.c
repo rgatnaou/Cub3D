@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 13:16:44 by rgatnaou          #+#    #+#             */
-/*   Updated: 2021/11/08 18:20:21 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:21:06 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t count, size_t size)
 		count = 1;
 		size = 1;
 	}
-	cal = (char *)malloc(size * count);
+	cal = (char *)malloc(size * count + 1);
 	if (!cal)
 		return (NULL);
 	ft_bzero(cal, (count * size));
