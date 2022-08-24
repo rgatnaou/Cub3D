@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 18:37:48 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/23 14:49:11 by rgatnaou         ###   ########.fr       */
+/*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
+/*   Updated: 2022/08/23 18:36:56 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "draw.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int mini_map()
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	
+}
+
+int draw()
+{
+	
 }

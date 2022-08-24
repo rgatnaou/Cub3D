@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:30:04 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/21 13:28:45 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/23 14:56:44 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	{
 		r_rd = read(fd, rd, 1);
 		if ((r_rd == -1 || !r_rd) && res[0])
-			return(res);
+			return (res);
 		if (r_rd == -1 || !r_rd)
 		{
 			free(res);
@@ -41,47 +41,47 @@ char	*get_next_line(int fd)
 	return (res);
 }
 
-char *read_file(int fd)
+char	*read_file(int fd)
 {
-	char *file;
-	char *line;
-	
+	char	*file;
+	char	*line;
+
 	line = get_next_line(fd);
 	if (!line)
 		return (NULL);
 	file = ft_strdup(line);
-	file = ft_strjoin(file,"\n");
+	file = ft_strjoin(file, "\n");
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line)
 		{
-			file = ft_strjoin(file,line);
-			file = ft_strjoin(file,"\n");	
+			file = ft_strjoin(file, line);
+			file = ft_strjoin(file, "\n");
 		}
 	}
 	free(line);
-	return(file);
+	return (file);
 }
 
-void free_tab2(char **ptr)
+void	free_tab2(char **ptr)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (ptr[i])
 	{
 		free(ptr[i]);
-		i++;		
+		i++;
 	}
 	free(ptr);
 	ptr = NULL;
 }
 
-int ft_error(char *msg, void *ptr)
+int	ft_error(char *msg, void *ptr)
 {
-	write(2 , msg, ft_strlen(msg));
+	write(2, msg, ft_strlen(msg));
 	free(ptr);
 	return (-1);
 }

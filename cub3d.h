@@ -6,13 +6,16 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/20 13:36:17 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:03:37 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include"parce/parce.h"
+# include"parce/parce.h"
+# include"draw/draw.h"
+
+
 
 #endif
