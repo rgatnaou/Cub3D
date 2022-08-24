@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/24 16:47:03 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:51:01 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	initialize_color(char *line, int *color)
 void get_texture(t_data *m,char **s_file, int *l)
 {
 	int i;
-
 	i = 0;
 	while (s_file[i])
 	{
@@ -70,8 +69,6 @@ void get_texture(t_data *m,char **s_file, int *l)
 			*l += 1;
 		i++;
 	}
-	
-	free_tab2(s_file);
 }
 
 void inistize_data(t_data *m,char *file)
@@ -90,10 +87,9 @@ void inistize_data(t_data *m,char *file)
 		return ;
 	}
 	m->map = get_map(s_file, l + 1);
-	if (l == 0)
+	if (!m->map)
 	{
 		free_tab2(s_file);
-		free_tab2(m->map);
 		return ;
 	}
 	m->mlx = mlx_init();
@@ -111,5 +107,6 @@ int	main(int ac, char **av)
 	if (!file)
 		return(-1);
 	inistize_data(m, file);
+	draw(m);
 	return (0);
 }

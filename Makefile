@@ -6,7 +6,7 @@
 #    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/08/24 16:06:24 by rgatnaou         ###   ########.fr        #
+#    Updated: 2022/08/24 18:19:39 by rgatnaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =  main.c parce/parce.c parce/utils_map.c parce/utils.c parce/texture.c parce/map.c
+SRC =  main.c parce/parce.c parce/utils_map.c parce/utils.c parce/texture.c parce/map.c draw/mini_map.c
 
 OBJECTS = $(SRC:.c=.o)
 

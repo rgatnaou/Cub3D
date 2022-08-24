@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:15:57 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/23 13:39:44 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:04:05 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_tab(char *t)
 int	texture(char *file, int *nb)
 {
 	int	i;
-	// int fd;
+	int fd;
 
 	i = 2;
 	*nb += 1;
@@ -45,13 +45,13 @@ int	texture(char *file, int *nb)
 		*nb += 1;
 		return (ft_error("error : texture missing path.\n", NULL));
 	}
-	// fd = open(&file[i], O_RDWR);
-	// if (fd == -1 || !ft_str_cub(&file[i],".xpm"))
-	// {
-	//     *nb += 1;
-	//     return ;
-	// }
-	// close (fd);
+	fd = open(&file[i], O_RDWR);
+	if (fd == -1 || !ft_str_cub(&file[i],".xpm"))
+	{
+	    *nb += 1;
+	    return (ft_error("error : invalid texture.\n", NULL));
+	}
+	close (fd);
 	return (0);
 }
 
