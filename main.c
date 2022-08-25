@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/24 18:51:01 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:47:18 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,33 @@ void	initialize_color(char *line, int *color)
 		i++;
 	}
 	free_tab2(c);
+}
+
+void find_player(t_data *m)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while(m->map[++i])
+	{
+		j = -1;
+		while(m->map[i][++j])
+			if (m->map[i][j] == 'N' || m->map[i][j] == 'S' || m->map[i][j] == 'W'
+				|| m->map[i][j] == 'E')
+			{
+				m->p[0] = j;
+				m->p[1] = i;
+				m->p[2] = 1;
+				if (m->map[i][j] == 'S')
+					m->p[2] = 2;
+				if (m->map[i][j] == 'W')
+					m->p[2] = 3;
+				if (m->map[i][j] == 'E')
+					m->p[2] = 4;
+				return ;
+			}
+	}
 }
 
 void get_texture(t_data *m,char **s_file, int *l)
@@ -92,6 +119,7 @@ void inistize_data(t_data *m,char *file)
 		free_tab2(s_file);
 		return ;
 	}
+	find_player(m);
 	m->mlx = mlx_init();
 	m->win = mlx_new_window(m->mlx, 1920, 1080, "Hello world!");
 	free_tab2(s_file);
