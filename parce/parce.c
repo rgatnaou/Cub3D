@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/23 18:57:42 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:00:53 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*file_existed(int ac, char **av)
 int	check_file(char *file,char **s_file)
 {
 	int		*t;
-
 	t = ft_calloc(6, sizeof(int));
 	if (!t)
 		return (-1);
@@ -73,21 +72,21 @@ int	check_file(char *file,char **s_file)
 
 char	*parce(int ac, char **av)
 {
-	char	*file;
-	char	**s_file;
+    t_parce parce;
 
-	file = file_existed(ac, av);
-	s_file = ft_split(file, '\n');
-	if (!s_file)
+	parce.file = file_existed(ac, av);
+	parce.s_file = ft_split(parce.file, '\n');
+	if (!parce.s_file )
 	{
-		free(file);
+		free(parce.file);
 		return (NULL);
 	}
-	if (check_file(file, s_file))
+	if (check_file(parce.file, parce.s_file ))
 	{
-		free(file);
-		free_tab2(s_file);
+		free(parce.file);
+		free_tab2(parce.s_file );
 		return (NULL);
 	}
-	return(file);
+	free_tab2(parce.s_file );
+	return(parce.file);
 }

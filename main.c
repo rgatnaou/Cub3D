@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/25 14:47:18 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:16:23 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	initialize_color(char *line, int *color)
 	free_tab2(c);
 }
 
-void find_player(t_data *m)
+void find_player(t_mlx *m)
 {
 	int	i;
 	int	j;
@@ -74,7 +74,7 @@ void find_player(t_data *m)
 	}
 }
 
-void get_texture(t_data *m,char **s_file, int *l)
+void get_texture(t_mlx *m,char **s_file, int *l)
 {
 	int i;
 	i = 0;
@@ -98,7 +98,7 @@ void get_texture(t_data *m,char **s_file, int *l)
 	}
 }
 
-void inistize_data(t_data *m,char *file)
+void inistize_data(t_mlx *m,char *file)
 {
 	int		l;
 	char	**s_file;
@@ -120,17 +120,15 @@ void inistize_data(t_data *m,char *file)
 		return ;
 	}
 	find_player(m);
-	m->mlx = mlx_init();
-	m->win = mlx_new_window(m->mlx, 1920, 1080, "Hello world!");
 	free_tab2(s_file);
 }
 
 int	main(int ac, char **av)
 {
 	char *file;
-	t_data *m;
+	t_mlx *m;
 
-	m = malloc(sizeof(t_data));
+	m = malloc(sizeof(t_mlx));
 	file = parce(ac, av);
 	if (!file)
 		return(-1);

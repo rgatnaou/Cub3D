@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/24 18:32:51 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:53:34 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ int	check_map(char **s_file, char *file)
 	char	**map;
 	int		nb_map;
 	int		lenght;
-
+   (void)file;
+    (void)s_file;
 	nb_map = 0;
 	lenght = 0;
 	map_exist(file, &nb_map, &lenght);
@@ -141,5 +142,6 @@ int	check_map(char **s_file, char *file)
 		free_tab2(map);
 		return (-1);
 	}
+    free_tab2(map);
 	return (0);
 }
