@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 15:29:22 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:18:53 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_parse	*inislaze_parse(t_parse	*parse)
 	parse->data->no = 0;
 	parse->data->so = 0;
 	parse->data->we = 0;
-	parse->data->ew = 0;
+	parse->data->ea = 0;
 	parse->data->mlx = malloc(sizeof(t_mlx));
 	if (!parse->data->mlx )
 	{
@@ -46,7 +46,7 @@ void	free_parse(t_parse *parse)
 			free(parse->data->no);
 			free(parse->data->so);
 			free(parse->data->we);
-			free(parse->data->ew);
+			free(parse->data->ea);
 			free_tab2(parse->data->map);
 			
 		}
@@ -66,49 +66,50 @@ char	*file_existed(int ac, char **av)
 
 	i = 0;
 	if (ac != 2)
-		exit (ft_error("error : give me one argument\n", NULL));
+		exit (ft_error("Error : Give Me One Argument\n", NULL));
 	fd = open(av[1], O_RDWR);
-	if (fd == -1 || ft_strncmp(ft_strrchr(av[1], '.'), ".cub", 4))
-		exit (ft_error("error 404 : map not found!\n", NULL));
+	if (fd == -1 || !ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1], '.'), ".cub", 4))
+		exit (ft_error("Error : Map Not Found!\n", NULL));
 	file = read_file(fd);
 	close(fd);
 	if (!file)
-		exit(ft_error("error : map is empty.\n", NULL));
+		exit(ft_error("Error : Map Is Empty.\n", NULL));
 	return (file);
 }
 
 int	check_file(t_parse *parse)
 {
-	int		*t;
+	int		*texture_arr;
 
-	t = ft_calloc(6, sizeof(int));
-	if (!t)
+	texture_arr = ft_calloc(6, sizeof(int));
+	if (!texture_arr)
 		return (-1);
-	if (check_texture(parse, t))
+	if (check_texture(parse, texture_arr))
 	{
-		free(t);
-		return (ft_error("error :texture not valid.\n", NULL));
+		free(texture_arr);
+		return (ft_error("Error :Texture Is Not Valid.\n", NULL));
 	}
-	free(t);
-	printf("hr\n");
+	free(texture_arr);
 	if (check_map(parse))
-		return (ft_error("error :map not valid.\n", NULL));
+		return (ft_error("Error :Map Is Not Valid.\n", NULL));
 	return (0);
 }
 
 t_parse	*parse(int ac, char **av)
 {
 	t_parse	*parse;
+
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
 		return (NULL);
 	parse = inislaze_parse(parse);
+	if (!parse)
+		return (NULL);
 	parse->file = file_existed(ac, av);
-	parse->s_file = ft_split(parse->file, '\n');
-	printf("hr\n");
-	if (!parse || !parse->file || !parse->s_file || check_file(parse))
+	parse->splitted_file = ft_split(parse->file, '\n');
+	if (!parse->file || !parse->splitted_file || check_file(parse))
 	{
-		// free_parse(parse);
+		free_parse(parse);
 		return (NULL);
 	}
 	return (parse);

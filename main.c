@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:44:34 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:29:58 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av)
 	t_parse *parsing;
 
 	parsing = parse(ac, av);
-	draw(parsing->data);
+	if (parsing)
+		draw(parsing->data);
 	return (0);
 }

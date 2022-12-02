@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 15:20:34 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:19:36 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_data
 	char			*no;
 	char			*so;
 	char			*we;
-	char			*ew;
+	char			*ea;
 	t_player		player;
 	t_mlx			*mlx;
 }	t_data;
@@ -75,7 +75,7 @@ typedef struct s_data
 typedef struct s_parse
 {
 	char			*file;
-	char			**s_file;
+	char			**splitted_file;
 	t_data			*data;
 }	t_parse;
 
@@ -89,7 +89,7 @@ int		check_map(t_parse *parse);
 int		wall(char *map);
 int		caractere_map(char *map, int *p, t_parse *parse, int y);
 int		space_map(char **map, int i, int j);
-char	**get_map(char **s_file, int lenght);
+char	**get_map(char **splitted_file, int lenght);
 
 // End Parsing
 

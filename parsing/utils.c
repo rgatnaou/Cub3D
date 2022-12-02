@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:30:04 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:32:00 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		rd[r_rd] = '\0';
+		res = ft_strjoin(res, rd);
 		if (rd[0] == '\n')
 			break ;
-		res = ft_strjoin(res, rd);
 	}
 	return (res);
 }
@@ -49,19 +49,12 @@ char	*read_file(int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (NULL);
-	file = ft_strdup(line);
-	file = ft_strjoin(file, "\n");
-	while (line)
+	file = line;
+	while ((line = get_next_line(fd)) && line)
 	{
+		file = ft_strjoin(file, line);
 		free(line);
-		line = get_next_line(fd);
-		if (line)
-		{
-			file = ft_strjoin(file, line);
-			file = ft_strjoin(file, "\n");
-		}
 	}
-	free(line);
 	return (file);
 }
 
@@ -84,6 +77,7 @@ void	free_tab2(char **ptr)
 int	ft_error(char *msg, void *ptr)
 {
 	write(2, msg, ft_strlen(msg));
-	free(ptr);
+	if(ptr)
+		free(ptr);
 	return (-1);
 }

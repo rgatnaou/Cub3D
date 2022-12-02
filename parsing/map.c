@@ -6,32 +6,32 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 15:38:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:38:15 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	map_exist(char *file, int *nb_map, int *lenght)
+void	map_exist(char *file, int *nb_map, int *length)
 {
-	int	tmp_lenght;
+	int	tmp_length;
 	int	i;
 
 	i = 0;
-	tmp_lenght = 0;
+	tmp_length = 0;
 	while (file[i])
 	{
 		while (file[i] == ' ')
 			i++;
 		if (file[i] == '1')
 		{
-			if (tmp_lenght == 0)
+			if (tmp_length == 0)
 				(*nb_map)++;
-			(*lenght)++;
-			tmp_lenght++;
+			(*length)++;
+			tmp_length++;
 		}
-		else if (tmp_lenght)
-			tmp_lenght = 0;
+		else if (tmp_length)
+			tmp_length = 0;
 		while (file[i] != '\n' && file[i] != '\0')
 			i++;
 		if (file[i])
@@ -39,7 +39,7 @@ void	map_exist(char *file, int *nb_map, int *lenght)
 	}
 }
 
-char	**get_map(char **s_file, int lenght)
+char	**get_map(char **splitted_file, int length)
 {
 	char	**map;
 	int		i;
@@ -48,16 +48,16 @@ char	**get_map(char **s_file, int lenght)
 
 	k = 0;
 	i = 0;
-	map = ft_calloc(lenght, sizeof(char *));
+	map = ft_calloc(length, sizeof(char *));
 	if (!map)
 		return (NULL);
-	while (s_file[i])
+	while (splitted_file[i])
 	{
 		j = 0;
-		while (s_file[i][j] == ' ')
+		while (splitted_file[i][j] == ' ')
 			j++;
-		if (s_file[i][j] == '1')
-			map[k++] = ft_strdup(s_file[i]);
+		if (splitted_file[i][j] == '1')
+			map[k++] = ft_strdup(splitted_file[i]);
 		i++;
 	}
 	map[k] = NULL;
@@ -74,9 +74,6 @@ int	check_char_map(t_parse *parse)
 	if (wall(parse->data->map[0]))
 		return (-1);
 	i = 1;
-	// int i = 0;
-	// while (parse->data->map[i])
-	// 	printf("%s\n", parse->data->map[i++]);
 	while (parse->data->map[i])
 	{
 		k = caractere_map(parse->data->map[i], &p, parse, i);
@@ -126,14 +123,13 @@ int	final_parse_map(char **map)
 int	check_map(t_parse *parse)
 {
 	int		nb_map;
-	int		lenght;
+	int		length;
 
 	nb_map = 0;
-	lenght = 0;
-	map_exist(parse->file, &nb_map, &lenght);
-	if (nb_map != 1 || lenght < 3)
+	map_exist(parse->file, &nb_map, &length);
+	if (nb_map != 1 || length < 3)
 		return (-1);
-	parse->data->map = get_map(parse->s_file, lenght + 1);
+	parse->data->map = get_map(parse->splitted_file, length + 1);
 	if (!parse->data->map || check_char_map(parse)
         || final_parse_map(parse->data->map))
 		return (-1);
