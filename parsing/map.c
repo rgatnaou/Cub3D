@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 12:54:24 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../includes/cub3D.h"
 
 void	map_exist(char *file, int *nb_map, int *lenght)
 {
@@ -71,22 +71,22 @@ int	check_char_map(t_parse *parse)
 	int	p;
 
 	p = 0;
-	if (wall(parse->element->map[0]))
+	if (wall(parse->data->map[0]))
 		return (-1);
 	i = 1;
-	while (parse->element->map[i])
+	while (parse->data->map[i])
 	{
-		k = caractere_map(parse->element->map[i], &p, parse, i);
+		k = caractere_map(parse->data->map[i], &p, parse, i);
 		if (k == -1)
 			return (-1);
 		k--;
-		while (parse->element->map[i][k] == ' ')
+		while (parse->data->map[i][k] == ' ')
 			k--;
-		if (parse->element->map[i][k] != '1')
+		if (parse->data->map[i][k] != '1')
 			return (-1);
 		i++;
 	}
-	if (wall(parse->element->map[i - 1]))
+	if (wall(parse->data->map[i - 1]))
 		return (-1);
 	return (p - 1);
 }
@@ -130,9 +130,9 @@ int	check_map(t_parse *parse)
 	map_exist(parse->file, &nb_map, &lenght);
 	if (nb_map != 1 || lenght < 3)
 		return (-1);
-	parse->element->map = get_map(parse->s_file, lenght + 1);
-	if (!parse->element->map || check_char_map(parse)
-        || final_parse_map(parse->element->map))
+	parse->data->map = get_map(parse->s_file, lenght + 1);
+	if (!parse->data->map || check_char_map(parse)
+        || final_parse_map(parse->data->map))
 		return (-1);
 	return (0);
 }

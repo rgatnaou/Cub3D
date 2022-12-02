@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:23:32 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 10:43:29 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../includes/cub3D.h"
 
 
 int	wall(char *map)
@@ -38,9 +38,9 @@ int	caractere_map(char *map, int *p, t_parse *parse, int y)
 				|| map[i] == 'W')
                 {
 				    *p += 1;
-                    parse->element->player->cord.x = i;
-                    parse->element->player->cord.y = y;
-                    parse->element->player->direction = map[i];
+                    parse->data->player->cord.x = i;
+                    parse->data->player->cord.y = y;
+                    parse->data->player->direction = map[i];
                     
                 }
 			else

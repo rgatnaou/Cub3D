@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/02 12:46:37 by rgatnaou         ###   ########.fr        #
+#    Updated: 2022/12/02 13:45:21 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,19 @@ NAME = CUB3D
 
 LIBFT = libft/libft.a
 
-HEADER = ./cub3d.h ./parse_map/parse.h
+HEADER = includes/cub3D.h \
+		includes/cub3D.h \
+		headers/cub3D.h
 
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -Ofast
 
-SRC =  main.c parse/parse.c \
-	parse/utils_map.c \
-	parse/utils.c \
-	parse/texture.c \
-	parse/map.c \
+SRC =  main.c parsing/parse.c \
+	parsing/utils_map.c \
+	parsing/utils.c \
+	parsing/texture.c \
+	parsing/map.c \
 	draw/draw_in_2d.c
 
 OBJECTS = $(SRC:.c=.o)

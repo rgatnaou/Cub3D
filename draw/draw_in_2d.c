@@ -6,11 +6,11 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/01 19:06:50 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:47:58 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "../includes/cub3D.h"
 
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
@@ -31,7 +31,7 @@ void	draw_square(t_mlx *mlx, int x, int y, int color)
 		j = 0;
 		while (j < 9)
 		{
-			my_mlx_pixel_put(&mlx->img, x + j, y + i, color);
+			my_mlx_pixel_put(&mlx->image, x + j, y + i, color);
 			j ++;
 		}
 		i ++;
@@ -100,65 +100,66 @@ int destroy_win(t_mlx *m)
 // 	return 1;
 // }
 
-int key_hook(int keycode, t_mlx *m)
-{
-	if (keycode == KEY_W && m->map[(int)(m->p[1] - 0.5)][(int)m->p[0]] != '1')
-	{
-		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
-		m->p[1] -= 0.5;
-	}
-	if (keycode == KEY_S && m->map[(int)(m->p[1] + 0.5)][(int)m->p[0]] != '1')
-	{
-		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
-		m->p[1] += 0.5;
-	}
-	if (keycode == KEY_D && m->map[(int)m->p[1]][(int)(m->p[0] + 0.5)] != '1')
-	{
-		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
-		m->p[0] += 0.5;
-	}
-	if (keycode == KEY_A && m->map[(int)m->p[1]][(int)(m->p[0] - 0.5)] != '1')
-	{
-		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
-		m->p[0] -= 0.5;
-	}
-	if (keycode == KEY_ESC)
-		destroy_win(m);
-	return 0;
-}
+// int key_hook(int keycode, t_data *data)
+// {
+// 	if (keycode == KEY_W && m->map[(int)(m->p[1] - 0.5)][(int)m->p[0]] != '1')
+// 	{
+// 		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
+// 		m->p[1] -= 0.5;
+// 	}
+// 	if (keycode == KEY_S && m->map[(int)(m->p[1] + 0.5)][(int)m->p[0]] != '1')
+// 	{
+// 		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
+// 		m->p[1] += 0.5;
+// 	}
+// 	if (keycode == KEY_D && m->map[(int)m->p[1]][(int)(m->p[0] + 0.5)] != '1')
+// 	{
+// 		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
+// 		m->p[0] += 0.5;
+// 	}
+// 	if (keycode == KEY_A && m->map[(int)m->p[1]][(int)(m->p[0] - 0.5)] != '1')
+// 	{
+// 		draw_square(m ,(m->p[0] * 8) + 10,(m->p[1]*8) + 10, 0);
+// 		m->p[0] -= 0.5;
+// 	}
+// 	if (keycode == KEY_ESC)
+// 		destroy_win(m);
+// 	return 0;
+// }
 
-void draw_2d_map(t_mlx *mlx)
+void draw_2d_map(t_data *data)
 {
 	// mlx_clear_window(mlx->mlx, mlx->win);
 	int i = 0;
 	int j = 0;
 
-	while (mlx->map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while (mlx->map[i][j])
+		while (data->map[i][j])
 		{
-			if (mlx->map[i][j] == '1')
-				draw_square(mlx, (j * 10) + 10, (i * 10) + 10, WHITE);
+			if (data->map[i][j] == '1')
+				draw_square(data->mlx, (j * 10) + 10, (i * 10) + 10, WHITE);
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 10, 10);
+	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 10, 10);
 }
 
-int draw(t_mlx *mlx)
+int draw(t_data *data)
 {
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "cub3D");
-	mlx->img.img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img,
-			&mlx->img.bits_per_pixel, &mlx->img.line_length,
-			&mlx->img.endian);
-	draw_2d_map(mlx);
+	data->mlx->mlx = mlx_init();
+	data->mlx->win = mlx_new_window(data->mlx->mlx, WIDTH, HEIGHT, "cub3D");
+	
+	data->mlx->image.img = mlx_new_image(data->mlx->mlx, WIDTH, HEIGHT);
+	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
+			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
+			&data->mlx->image.endian);
+	draw_2d_map(data);
 	// mlx_hook(mlx->win, 17, 0L,&destroy_win, mlx);
 	// mlx_hook(mlx->win, 02, 0L, &key_hook, mlx);
 	// mlx_loop_hook(mlx->mlx, func, mlx);
-	mlx_loop(mlx->mlx);
+	mlx_loop(data->mlx);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 12:02:16 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../includes/cub3D.h"
 
 t_parse	*inislaze_parse(void)
 {
@@ -19,32 +19,33 @@ t_parse	*inislaze_parse(void)
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
 		return (NULL);
-	parse->element = malloc(sizeof(t_elementMap));
-	if (!parse->element)
+	parse->data = malloc(sizeof(t_data));
+	if (!parse->data)
 		return (NULL);
-	parse->element->floor = 0;
-	parse->element->ceiling = 0;
-	parse->element->map = 0;
-	parse->element->no = 0;
-	parse->element->so = 0;
-	parse->element->we = 0;
-	parse->element->ew = 0;
-	parse->element->player = malloc(sizeof(t_player));
-	if (!parse->element->player)
+	parse->data->floor_color = 0;
+	parse->data->ceiling_color = 0;
+	parse->data->map = 0;
+	parse->data->no = 0;
+	parse->data->so = 0;
+	parse->data->we = 0;
+	parse->data->ew = 0;
+	parse->data->mlx = malloc(sizeof(t_mlx));
+	parse->data->player = malloc(sizeof(t_player));
+	if (!parse->data->mlx || !parse->data->player)
 		return (NULL);
 	return (parse);
 }
 
 void	free_parse(t_parse *parse)
 {
-	if (parse->element->player)
-		free(parse->element->player);
-	free(parse->element->no);
-	free(parse->element->so);
-	free(parse->element->we);
-	free(parse->element->ew);
-	if (parse->element)
-		free(parse->element);
+	if (parse->data->player)
+		free(parse->data->player);
+	free(parse->data->no);
+	free(parse->data->so);
+	free(parse->data->we);
+	free(parse->data->ew);
+	if (parse->data)
+		free(parse->data);
 	if (parse)
 		free(parse);
 }
