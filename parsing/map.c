@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:38:24 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	check_char_map(t_parse *parse)
 	if (wall(parse->data->map[0]))
 		return (-1);
 	i = 1;
+	// int i = 0;
+	// while (parse->data->map[i])
+	// 	printf("%s\n", parse->data->map[i++]);
 	while (parse->data->map[i])
 	{
 		k = caractere_map(parse->data->map[i], &p, parse, i);

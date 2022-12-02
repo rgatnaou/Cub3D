@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:23:32 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:44:13 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:43:01 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	caractere_map(char *map, int *p, t_parse *parse, int y)
 				|| map[i] == 'W')
                 {
 				    *p += 1;
-                    parse->data->player->cord.x = i;
-                    parse->data->player->cord.y = y;
-                    parse->data->player->direction = map[i];
+                    parse->data->player.cord.x = i;
+                    parse->data->player.cord.y = y;
+                    parse->data->player.direction = map[i];
                     
                 }
 			else

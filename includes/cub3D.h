@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:47:22 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:20:34 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_data
 	char			*so;
 	char			*we;
 	char			*ew;
-	t_player		*player;
+	t_player		player;
 	t_mlx			*mlx;
 }	t_data;
 
