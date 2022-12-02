@@ -6,11 +6,11 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:23:32 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/08/23 17:52:55 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:43:29 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parce.h"
+#include "parse.h"
 
 
 int	wall(char *map)
@@ -25,7 +25,7 @@ int	wall(char *map)
 	return (0);
 }
 
-int	caractere_map(char *map, int *p)
+int	caractere_map(char *map, int *p, t_parse *parse, int y)
 {
 	int	i;
 
@@ -36,7 +36,13 @@ int	caractere_map(char *map, int *p)
 		{
 			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'S'
 				|| map[i] == 'W')
-				*p += 1;
+                {
+				    *p += 1;
+                    parse->element->player->cord.x = i;
+                    parse->element->player->cord.y = y;
+                    parse->element->player->direction = map[i];
+                    
+                }
 			else
 				return (-1);
 		}

@@ -6,11 +6,11 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/11/30 11:53:34 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:54:24 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parce.h"
+#include "parse.h"
 
 void	map_exist(char *file, int *nb_map, int *lenght)
 {
@@ -57,40 +57,36 @@ char	**get_map(char **s_file, int lenght)
 		while (s_file[i][j] == ' ')
 			j++;
 		if (s_file[i][j] == '1')
-		{
 			map[k++] = ft_strdup(s_file[i]);
-			if (!map[k - 1])
-				return (NULL);
-		}
 		i++;
 	}
 	map[k] = NULL;
 	return (map);
 }
 
-int	check_char_map(char **map)
+int	check_char_map(t_parse *parse)
 {
 	int	i;
 	int	k;
 	int	p;
 
 	p = 0;
-	if (wall(map[0]))
+	if (wall(parse->element->map[0]))
 		return (-1);
 	i = 1;
-	while (map[i])
+	while (parse->element->map[i])
 	{
-		k = caractere_map(map[i], &p);
+		k = caractere_map(parse->element->map[i], &p, parse, i);
 		if (k == -1)
 			return (-1);
 		k--;
-		while (map[i][k] == ' ')
+		while (parse->element->map[i][k] == ' ')
 			k--;
-		if (map[i][k] != '1')
+		if (parse->element->map[i][k] != '1')
 			return (-1);
 		i++;
 	}
-	if (wall(map[i - 1]))
+	if (wall(parse->element->map[i - 1]))
 		return (-1);
 	return (p - 1);
 }
@@ -124,24 +120,19 @@ int	final_parse_map(char **map)
 	return (0);
 }
 
-int	check_map(char **s_file, char *file)
+int	check_map(t_parse *parse)
 {
-	char	**map;
 	int		nb_map;
 	int		lenght;
-   (void)file;
-    (void)s_file;
+
 	nb_map = 0;
 	lenght = 0;
-	map_exist(file, &nb_map, &lenght);
+	map_exist(parse->file, &nb_map, &lenght);
 	if (nb_map != 1 || lenght < 3)
 		return (-1);
-	map = get_map(s_file, lenght + 1);
-	if (!map || check_char_map(map) || final_parse_map(map))
-	{
-		free_tab2(map);
+	parse->element->map = get_map(parse->s_file, lenght + 1);
+	if (!parse->element->map || check_char_map(parse)
+        || final_parse_map(parse->element->map))
 		return (-1);
-	}
-    free_tab2(map);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/01 15:16:23 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:55:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,12 @@ void inistize_data(t_mlx *m,char *file)
 
 int	main(int ac, char **av)
 {
-	char *file;
-	t_mlx *m;
+	t_parse *data_parse;
 
-	m = malloc(sizeof(t_mlx));
-	file = parce(ac, av);
-	if (!file)
-		return(-1);
-	inistize_data(m, file);
-	draw(m);
+	data_parse = parse(ac, av);
+	show_parse(data_parse);
+	
+	// inistize_data(m, file);
+	draw(data_parse->element);
 	return (0);
 }

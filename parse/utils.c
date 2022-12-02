@@ -6,11 +6,11 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:30:04 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/11/30 11:43:11 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:23:03 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parce.h"
+#include "parse.h"
 
 char	*get_next_line(int fd)
 {
@@ -70,6 +70,8 @@ void	free_tab2(char **ptr)
 	int	i;
 
 	i = 0;
+	if (ptr == NULL)
+		return ;
 	while (ptr[i])
 	{
 		free(ptr[i]);
