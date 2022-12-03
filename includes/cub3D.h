@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/03 14:40:44 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:34:08 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # include <math.h>
 
 
+# define SIZE_CUB 20
+# define SPEED 5
 # define WIDTH 1280
 # define HEIGHT 801
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
+# define RED 0Xff0000
 
 # define KEY_W 13
 # define KEY_D 2

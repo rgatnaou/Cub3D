@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_in_2d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/03 14:40:12 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:06:57 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,19 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	}
 }
 
-void	draw_square(t_mlx *mlx, int x, int y, int color, int size)
+void	draw_square(t_mlx *mlx, int x, int y, int color)
 {
 	int i;
 	int j;
 
-	i = -(size / 2);
-	while(i <= (size / 2))
+	i = 0;
+	while(i <= SIZE_CUB )
 	{
-		j = -(size / 2);
-		while (j <= (size / 2))
+		j = 0;
+		while (j <= SIZE_CUB)
 		{
-			// if ((x + j) < WIDTH && (y+ i) < HEIGHT)
-			// {
-				printf("%d  %d\n",(x + j),(y + i));
+			if ((x + j) < WIDTH && (y+ i) < HEIGHT)
 				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
-			
-				
 			j++;
 		}
 		i++;
@@ -108,17 +104,25 @@ int destroy_win(t_parse *parsing)
 // 	return 1;
 // }
 
-// int	check_top_wall(t_cord coords, char **map)
+// int	check_top_wall(t_cord *coord, char **map)
 // {
-	
-// 	return 0;
+// 	int x;
+// 	int y;
+// 	y = (coord->y / SIZE_CUB) - 1;
+// 	x = (coord->x / SIZE_CUB);
+
+// 	if(y <= 0)
+// 		return 0;
+// 	if (map[y][x] == '1')
+// 		return 0;
+// 	return 1;
 // }
 
 // int move_player(int keycode, t_data *data)
 // {
 // 	t_cord coord = data->player.cord;
 
-// 	if (keycode == KEY_W && )
+// 	if (keycode == KEY_W && check_top_wall(&coord,data->map))
 // 	{
 		
 // 	}
@@ -141,23 +145,27 @@ int destroy_win(t_parse *parsing)
 
 void draw_2d_map(t_data *data)
 {
-	mlx_clear_window(data->mlx->init, data->mlx->win);
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
-	
+	mlx_clear_window(data->mlx->init, data->mlx->win);
+	i = 0;
 	while (data->map[i])
 	{
 		j = 0;
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '1')
-				draw_square(data->mlx,( (j * 20) + 10), ((i * 20)  + 10), WHITE, 20);
+				draw_square(data->mlx,j * SIZE_CUB, i * SIZE_CUB, BLUE);
+			else if(data->map[i][j] == '0')
+				draw_square(data->mlx,j * SIZE_CUB, i * SIZE_CUB, WHITE);
 			j++;
 		}
 		i++;
 	}
-	// draw_square(data->mlx, (data->player.cord.x * 20) , (data->player.cord.y * 20), BLUE , 20);
+	data->player.cord.x = data->player.cord.x * SIZE_CUB;
+	data->player.cord.y = data->player.cord.y * SIZE_CUB;
+	draw_square(data->mlx, data->player.cord.x , data->player.cord.y, RED);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0, 0);
 }
 
