@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 19:18:53 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 12:55:24 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,18 @@ void	free_parse(t_parse *parse)
 {
 	if (parse)
 	{
+		free(parse->file);
+		free_tab2(parse->splitted_file);
 		if (parse->data)
 		{
+			free_tab2(parse->data->map);
 			free(parse->data->no);
 			free(parse->data->so);
 			free(parse->data->we);
 			free(parse->data->ea);
-			free_tab2(parse->data->map);
-			
-		}
-		if (parse->data)
-			free(parse->data);
-		if (parse->data->mlx)
 			free(parse->data->mlx);
+			free(parse->data);	
+		}
 		free(parse);
 	}
 }
@@ -90,6 +89,7 @@ int	check_file(t_parse *parse)
 		return (ft_error("Error :Texture Is Not Valid.\n", NULL));
 	}
 	free(texture_arr);
+	
 	if (check_map(parse))
 		return (ft_error("Error :Map Is Not Valid.\n", NULL));
 	return (0);
@@ -107,6 +107,7 @@ t_parse	*parse(int ac, char **av)
 		return (NULL);
 	parse->file = file_existed(ac, av);
 	parse->splitted_file = ft_split(parse->file, '\n');
+	
 	if (!parse->file || !parse->splitted_file || check_file(parse))
 	{
 		free_parse(parse);

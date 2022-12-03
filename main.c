@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 19:29:58 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 12:47:42 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	main(int ac, char **av)
 
 	parsing = parse(ac, av);
 	if (parsing)
-		draw(parsing->data);
+		draw(parsing);
 	return (0);
 }

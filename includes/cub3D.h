@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 19:19:36 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 12:32:26 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 
 
-# define WIDTH 1024
+# define WIDTH 1280
 # define HEIGHT 800
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
@@ -42,7 +42,7 @@ typedef struct	s_image {
 }				t_image;
 
 typedef struct s_mlx {
-	void	*mlx;
+	void	*init;
 	void	*win;
 	t_image	image;
 }	t_mlx;
@@ -79,6 +79,7 @@ typedef struct s_parse
 	t_data			*data;
 }	t_parse;
 
+void	free_parse(t_parse *parse);
 char	*get_next_line(int fd);
 void	free_tab2(char **ptr);
 int		ft_error(char *msg, void *ptr);
@@ -94,6 +95,6 @@ char	**get_map(char **splitted_file, int lenght);
 // End Parsing
 
 // Draw Functions:
-int draw(t_data *data);
+int draw(t_parse *parsing);
 
 #endif

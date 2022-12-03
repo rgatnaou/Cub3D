@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_in_2d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:47:58 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:05:22 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_square(t_mlx *mlx, int x, int y, int color)
+void	draw_square(t_mlx *mlx, int x, int y, int color, int size)
 {
 	float i;
 	float j;
 
 	i = 0;
-	while(i < 9)
+	while(i < size)
 	{
 		j = 0;
-		while (j < 9)
+		while (j < size)
 		{
 			my_mlx_pixel_put(&mlx->image, x + j, y + i, color);
-			j ++;
+			j++;
 		}
-		i ++;
+		i++;
 	}
 }
 
@@ -87,9 +87,12 @@ void	draw_square(t_mlx *mlx, int x, int y, int color)
 // 	// }
 // }
 
-int destroy_win(t_mlx *m)
+int destroy_win(t_parse *parsing)
 {
-	mlx_destroy_window(m->mlx,m->win);
+	mlx_destroy_image(parsing->data->mlx->init, parsing->data->mlx->image.img);
+	mlx_destroy_window(parsing->data->mlx->init, parsing->data->mlx->win);
+	free_parse(parsing);
+	system("leaks CUB3D");
 	exit(0);
 }
 
@@ -129,7 +132,7 @@ int destroy_win(t_mlx *m)
 
 void draw_2d_map(t_data *data)
 {
-	// mlx_clear_window(mlx->mlx, mlx->win);
+	mlx_clear_window(data->mlx->init, data->mlx->win);
 	int i = 0;
 	int j = 0;
 
@@ -139,27 +142,27 @@ void draw_2d_map(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '1')
-				draw_square(data->mlx, (j * 10) + 10, (i * 10) + 10, WHITE);
+				draw_square(data->mlx, (j * 20), (i * 20), WHITE, 19);
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 10, 10);
+	draw_square(data->mlx, (data->player.cord.x * 20), (data->player.cord.y * 20), BLUE , 19);
+	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0, 0);
 }
-
-int draw(t_data *data)
+int draw(t_parse *parsing)
 {
-	data->mlx->mlx = mlx_init();
-	data->mlx->win = mlx_new_window(data->mlx->mlx, WIDTH, HEIGHT, "cub3D");
-	
-	data->mlx->image.img = mlx_new_image(data->mlx->mlx, WIDTH, HEIGHT);
+	t_data *data = parsing->data;
+	data->mlx->init = mlx_init();
+	data->mlx->win = mlx_new_window(data->mlx->init, WIDTH, HEIGHT, "cub3D");
+	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
 	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
 			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
 			&data->mlx->image.endian);
 	draw_2d_map(data);
-	// mlx_hook(mlx->win, 17, 0L,&destroy_win, mlx);
+	mlx_hook(data->mlx->win, 17, 0L,&destroy_win, parsing);
 	// mlx_hook(mlx->win, 02, 0L, &key_hook, mlx);
-	// mlx_loop_hook(mlx->mlx, func, mlx);
-	mlx_loop(data->mlx);
+	// mlx_loop_hook(mlx->init, func, mlx);
+	mlx_loop(data->mlx->init);
 	return (0);
 }
