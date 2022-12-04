@@ -6,7 +6,7 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/02 15:25:41 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/04 16:53:40 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,7 @@ NAME = CUB3D
 
 LIBFT = libft/libft.a
 
-HEADER = includes/cub3D.h \
-		includes/cub3D.h \
-		headers/cub3D.h
+HEADER = includes/cub3D.h
 
 CC = gcc
 
@@ -28,7 +26,9 @@ SRC =  main.c parsing/parse.c \
 	parsing/utils.c \
 	parsing/texture.c \
 	parsing/map.c \
-	draw/draw_in_2d.c
+	draw/draw_in_2d.c \
+	draw/draw_shap.c \
+	draw/mouvements.c
 
 OBJECTS = $(SRC:.c=.o)
 

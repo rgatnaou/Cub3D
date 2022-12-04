@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/03 19:30:51 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:33:23 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	char	*dst;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-void	draw_square(t_mlx *mlx, int x, int y, int color)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while(i <= SIZE_CUB )
-	{
-		j = 0;
-		while (j <= SIZE_CUB)
-		{
-			if ((x + j) < WIDTH && (y + i) < HEIGHT)
-				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
-			j++;
-		}
-		i++;
-	}
 }
 
 // void	draw_terangle_NO(t_mlx *m, int x, int y, int z, int color)
@@ -102,54 +83,9 @@ int destroy_win(t_parse *parsing)
 // 	return 1;
 // }
 
-int	check_top_wall(t_data *data)
-{
-	int x;
-	int y;
 
-	y = ((data->player.cord.y - SPEED)/ SIZE_CUB);
-	x = (data->player.cord.x / SIZE_CUB);
 
-	if (y <= 0)
-		return 0;
-	if (data->map[y][x] == '1')
-			return 0;
-	data->map[y + 1][x] = '0';
-	data->player.cord.y -= SPEED;
-	return (1);
-}
-int	check_down_wall(t_data *data)
-{
-	int x;
-	int y;
 
-	y = ((data->player.cord.y + 20)/ SIZE_CUB);
-	x = (data->player.cord.x / SIZE_CUB);
-
-	if (y <= 0)
-		return 0;
-	if (data->map[y][x] == '1')
-			return 0;
-	data->map[y - 1][x] = '0';
-	data->player.cord.y += SPEED;
-	return (1);
-}
-int  check_right_wall(t_data *data)
-{
-	int x;
-	int y;
-
-	y = ((data->player.cord.y)/ SIZE_CUB);
-	x = (data->player.cord.x + 20 / SIZE_CUB);
-
-	if (y <= 0)
-		return 0;
-	if (data->map[y][x] == '1')
-			return 0;
-	data->map[y][x - 1] = '0';
-	data->player.cord.x += SPEED;
-	return (1);
-}
 void draw_2d_map(t_data *data)
 {
 	int i;
@@ -157,40 +93,23 @@ void draw_2d_map(t_data *data)
 
 	mlx_clear_window(data->mlx->init, data->mlx->win);
 	i = 0;
-	while (data->map[i])
+	while (i < NB_RWS)
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (j < NB_CLS)
 		{
+			int	cube_x = j * SIZE_CUB;
+			int	cube_y = i * SIZE_CUB;
 			if (data->map[i][j] == '1')
-				draw_square(data->mlx,j * SIZE_CUB, i * SIZE_CUB, BLUE);
+				square(data->mlx, cube_x, cube_y, BLUE);
 			else if(data->map[i][j] == '0')
-				draw_square(data->mlx,j * SIZE_CUB, i * SIZE_CUB, WHITE);
+				square(data->mlx, cube_x, cube_y, WHITE);
 			j++;
 		}
 		i++;
 	}
-	draw_square(data->mlx, data->player.cord.x , data->player.cord.y, RED);
+	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0, 0);
-}
-
-
-int move_player(int keycode, t_data *data)
-{
-	if (keycode == KEY_W && check_top_wall(data))
-		draw_2d_map(data);
-	if (keycode == KEY_S && check_down_wall(data))
-		draw_2d_map(data);
-	if (keycode == KEY_D && check_right_wall(data))
-		draw_2d_map(data);
-
-	// if (keycode == KEY_A && ->map[(int)->p[1]][(int)(->p[0] - 0.5)] != '1')
-	// {
-
-	// }
-	// if (keycode == KEY_ESC)
-	// 	destroy_win(data);
-	return 0;
 }
 
 int draw(t_parse *parsing)
@@ -202,8 +121,10 @@ int draw(t_parse *parsing)
 	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
 			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
 			&data->mlx->image.endian);
-	data->player.cord.x = data->player.cord.x * SIZE_CUB;
-	data->player.cord.y = data->player.cord.y * SIZE_CUB;
+	data->map[data->player.cord.y][data->player.cord.x] = '0';
+	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
+	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
+	data->player.rotation_angle =  340* M_PI /180 ;
 	draw_2d_map(data);
 	mlx_hook(data->mlx->win, 17, 0L,&destroy_win, parsing);
 	mlx_hook(data->mlx->win, 02, 0L, &move_player, data);

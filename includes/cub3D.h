@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/03 16:34:08 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:15:14 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 
 # include "../libft/libft.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <mlx.h>
 # include <math.h>
 
-
 # define SIZE_CUB 20
+# define NB_CLS 53
+# define NB_RWS 30
 # define SPEED 5
-# define WIDTH 1280
-# define HEIGHT 801
+# define WIDTH NB_CLS * SIZE_CUB
+# define HEIGHT NB_RWS * SIZE_CUB
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
@@ -32,8 +34,12 @@
 # define KEY_D 2
 # define KEY_A 0
 # define KEY_S 1
+# define KEY_ARROW_TOP 126
+# define KEY_ARROW_RIGHT 124
+# define KEY_ARROW_DOWN 125
+# define KEY_ARROW_LEFT 123
+# define KEY_S 1
 # define KEY_ESC 53
-# define PI 3.14159265359
 
 // Begin Parsing:
 typedef struct	s_image {
@@ -60,6 +66,7 @@ typedef struct s_player
 {
 	t_cord	cord;
 	char	direction;
+	double	rotation_angle;
 }	t_player;
 
 typedef struct s_data
@@ -98,6 +105,14 @@ char	**get_map(char **splitted_file, int lenght);
 // End Parsing
 
 // Draw Functions:
-int draw(t_parse *parsing);
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+int		draw(t_parse *parsing);
+void	draw_2d_map(t_data *data);
+void	circle(t_mlx *mlx, int x, int y, int r, int color);
+void	square(t_mlx *mlx, int x, int y, int color);
+void	line(t_data *data, int x_end, int y_end, int color);
+void	draw_player(t_data *data);
 
+// Mouvements Functions:
+int move_player(int keycode, t_data *data);
 #endif
