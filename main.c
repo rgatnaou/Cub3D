@@ -27,9 +27,9 @@ void	*initialize_texture(char *line)
 
 void	initialize_color(char *line, int *color)
 {
-	char **c;
-	int i;
-	
+	char	**c;
+	int		i;
+
 	i = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
@@ -37,7 +37,7 @@ void	initialize_color(char *line, int *color)
 	if (!c)
 		*color = 0;
 	i = 0;
-	while(c[i])
+	while (c[i])
 	{
 		*color += ft_atoi(c[i]);
 		if (c[i + 1])
@@ -49,10 +49,9 @@ void	initialize_color(char *line, int *color)
 
 int	main(int ac, char **av)
 {
-	t_parse *parsing;
+	t_parse	*parsing;
 
 	parsing = parse(ac, av);
-	
 	if (parsing)
 		draw(parsing);
 	return (0);

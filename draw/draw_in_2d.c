@@ -15,15 +15,16 @@
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
+
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 // void	draw_terangle_NO(t_mlx *m, int x, int y, int z, int color)
 // {
 // 	int i;
 // 	int j;
-	
+
 // 	i = 2;
 // 	while(i < 7)
 // 	{
@@ -68,7 +69,7 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 // 	// }
 // }
 
-int destroy_win(t_parse *parsing)
+int	destroy_win(t_parse *parsing)
 {
 	mlx_destroy_image(parsing->data->mlx->init, parsing->data->mlx->image.img);
 	mlx_destroy_window(parsing->data->mlx->init, parsing->data->mlx->win);
@@ -80,16 +81,15 @@ int destroy_win(t_parse *parsing)
 // {
 // 	player_draw(m);
 // 	printf("color :%f : %d\n", m->p[1],(int)m->p[1]);
-// 	return 1;
+// 	return (1);
 // }
 
-
-
-
-void draw_2d_map(t_data *data)
+void	draw_2d_map(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+	int	cube_x;
+	int	cube_y;
 
 	mlx_clear_window(data->mlx->init, data->mlx->win);
 	i = 0;
@@ -98,35 +98,37 @@ void draw_2d_map(t_data *data)
 		j = 0;
 		while (j < NB_CLS)
 		{
-			int	cube_x = j * SIZE_CUB;
-			int	cube_y = i * SIZE_CUB;
+			cube_x = j * SIZE_CUB;
+			cube_y = i * SIZE_CUB;
 			if (data->map[i][j] == '1')
 				square(data->mlx, cube_x, cube_y, BLUE);
-			else if(data->map[i][j] == '0')
+			else if (data->map[i][j] == '0')
 				square(data->mlx, cube_x, cube_y, WHITE);
 			j++;
 		}
 		i++;
 	}
 	draw_player(data);
-	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
+			0);
 }
 
-int draw(t_parse *parsing)
+int	draw(t_parse *parsing)
 {
 	t_data *data = parsing->data;
 	data->mlx->init = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->init, WIDTH, HEIGHT, "cub3D");
 	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
 	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
-			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
-			&data->mlx->image.endian);
+												&data->mlx->image.bits_per_pixel,
+												&data->mlx->image.line_length,
+												&data->mlx->image.endian);
 	data->map[data->player.cord.y][data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
-	data->player.rotation_angle =  340* M_PI /180 ;
+	data->player.rotation_angle = 340 * M_PI / 180;
 	draw_2d_map(data);
-	mlx_hook(data->mlx->win, 17, 0L,&destroy_win, parsing);
+	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, parsing);
 	mlx_hook(data->mlx->win, 02, 0L, &move_player, data);
 	// mlx_loop_hook(mlx->init, func, mlx);
 	mlx_loop(data->mlx->init);

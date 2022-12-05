@@ -39,15 +39,15 @@ int	check_sp_map(char *splitted_file)
 	return (ft_error(" \".\n", NULL));
 }
 
-int	texture_errors(char *line, int *text_val, t_data *data , char orientation)
+int	texture_errors(char *line, int *text_val, t_data *data, char orientation)
 {
 	int	i;
 	int	fd;
 
 	i = 2;
 	(*text_val)++;
-    if(*text_val > 1)
-        return (ft_error("Error :Texture Duplicated.\n", NULL));
+	if (*text_val > 1)
+		return (ft_error("Error :Texture Duplicated.\n", NULL));
 	if (line[i] != ' ' && line[i] != '\t' && (*text_val)++)
 		return (ft_error("Error :Texture Missing Separator.\n", NULL));
 	while (line[i] == ' ' || line[i] == '\t')
@@ -55,9 +55,10 @@ int	texture_errors(char *line, int *text_val, t_data *data , char orientation)
 	if (!line[i] && (*text_val)++)
 		return (ft_error("Error :Texture Missing Path.\n", NULL));
 	fd = open(&line[i], O_RDWR);
-	if ((fd == -1 || !ft_strrchr(line, '.') || ft_strncmp(ft_strrchr(line, '.'), ".xpm", 4)) && (*text_val)++)
+	if ((fd == -1 || !ft_strrchr(line, '.') || ft_strncmp(ft_strrchr(line, '.'),
+				".xpm", 4)) && (*text_val)++)
 		return (ft_error("Error :Invalid Texture Path.\n", NULL));
-	close (fd);
+	close(fd);
 	if (orientation == 'N')
 		data->no = ft_strdup(&line[i]);
 	if (orientation == 'S')
@@ -98,22 +99,24 @@ int	check_color(char *line, int *text_val, int *color)
 
 	i = 1;
 	(*text_val)++;
-	if(*text_val > 1)
-        return (ft_error("Error :Color Duplicated.\n", NULL));
+	if (*text_val > 1)
+		return (ft_error("Error :Color Duplicated.\n", NULL));
 	if (line[i] != ' ' && line[i] != '\t' && (*text_val)++)
 		return (ft_error("Error :Color Missing Separator.\n", NULL));
-	while (line[i] == ' ' || line[i] == '\t' )
+	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	sp_color = ft_split(&line[i], ',');
 	i = ft_strlen(line) - 1;
-	if (line[i] == ',' || !sp_color || !sp_color[0] || !sp_color[1] || !sp_color[2] || sp_color[3])
+	if (line[i] == ',' || !sp_color || !sp_color[0] || !sp_color[1]
+		|| !sp_color[2] || sp_color[3])
 	{
 		(*text_val)++;
 		free_tab2(sp_color);
 		return (ft_error("Error :The Color Is Not Valid.\n", NULL));
 	}
 	if (!check_color_rang(sp_color, text_val))
-		*color = (ft_atoi(sp_color[0]) << 16) + (ft_atoi(sp_color[1]) << 8) + ft_atoi(sp_color[2]);
+		*color = (ft_atoi(sp_color[0]) << 16) + (ft_atoi(sp_color[1]) << 8)
+			+ ft_atoi(sp_color[2]);
 	free_tab2(sp_color);
 	return (0);
 }
@@ -126,23 +129,29 @@ int	check_texture(t_parse *parse, int *texture_arr)
 	while (parse->splitted_file[i])
 	{
 		if (!ft_strncmp(parse->splitted_file[i], "NO", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[0], parse->data, 'N');
+			texture_errors(parse->splitted_file[i], &texture_arr[0],
+					parse->data, 'N');
 		else if (!ft_strncmp(parse->splitted_file[i], "SO", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[1], parse->data, 'S');
+			texture_errors(parse->splitted_file[i], &texture_arr[1],
+					parse->data, 'S');
 		else if (!ft_strncmp(parse->splitted_file[i], "WE", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[2], parse->data, 'W');
+			texture_errors(parse->splitted_file[i], &texture_arr[2],
+					parse->data, 'W');
 		else if (!ft_strncmp(parse->splitted_file[i], "EA", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[3], parse->data, 'E');
+			texture_errors(parse->splitted_file[i], &texture_arr[3],
+					parse->data, 'E');
 		else if (!ft_strncmp(parse->splitted_file[i], "F", 1))
-			check_color(parse->splitted_file[i], &texture_arr[4], &parse->data->floor_color);
+			check_color(parse->splitted_file[i], &texture_arr[4],
+					&parse->data->floor_color);
 		else if (!ft_strncmp(parse->splitted_file[i], "C", 1))
-			check_color(parse->splitted_file[i], &texture_arr[5], &parse->data->ceiling_color);
+			check_color(parse->splitted_file[i], &texture_arr[5],
+					&parse->data->ceiling_color);
 		else if (check_sp_map(parse->splitted_file[i]))
 			return (-1);
 		i++;
 	}
-	if (texture_arr[0] == 1 && texture_arr[1] == 1 && texture_arr[2] == 1 && texture_arr[3] == 1
-		&& texture_arr[4] == 1 && texture_arr[5] == 1)
+	if (texture_arr[0] == 1 && texture_arr[1] == 1 && texture_arr[2] == 1
+		&& texture_arr[3] == 1 && texture_arr[4] == 1 && texture_arr[5] == 1)
 		return (0);
 	return (-1);
 }

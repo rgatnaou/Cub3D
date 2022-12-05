@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/04 19:15:14 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:42:30 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ void	line(t_data *data, int x_end, int y_end, int color);
 void	draw_player(t_data *data);
 
 // Mouvements Functions:
-int move_player(int keycode, t_data *data);
+int		move_player(int keycode, t_data *data);
 #endif

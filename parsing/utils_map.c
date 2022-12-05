@@ -12,7 +12,6 @@
 
 #include "../includes/cub3D.h"
 
-
 int	wall(char *map)
 {
 	int	j;
@@ -36,13 +35,12 @@ int	caractere_map(char *map, int *p, t_parse *parse, int y)
 		{
 			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'S'
 				|| map[i] == 'W')
-                {
-				    *p += 1;
-                    parse->data->player.cord.x = i;
-                    parse->data->player.cord.y = y;
-                    parse->data->player.direction = map[i];
-                    
-                }
+			{
+				*p += 1;
+				parse->data->player.cord.x = i;
+				parse->data->player.cord.y = y;
+				parse->data->player.direction = map[i];
+			}
 			else
 				return (-1);
 		}
@@ -55,14 +53,13 @@ int	space_map(char **map, int i, int j)
 {
 	if (map[i][j] == ' ')
 	{
-		if (map[i + 1] && (int)ft_strlen(map[i + 1]) > j
-			&& map[i + 1][j] != ' ' && map[i + 1][j] != '1')
+		if (map[i + 1] && (int)ft_strlen(map[i + 1]) > j && map[i + 1][j] != ' '
+			&& map[i + 1][j] != '1')
 			return (-1);
-		if (map[i][j + 1] && (map[i][j + 1] != ' '
-			&& map[i][j + 1] != '1'))
+		if (map[i][j + 1] && (map[i][j + 1] != ' ' && map[i][j + 1] != '1'))
 			return (-1);
-		if (i != 0 && (int)ft_strlen(map[i - 1]) > j
-			&& map[i - 1][j] != ' ' && map[i - 1][j] != '1')
+		if (i != 0 && (int)ft_strlen(map[i - 1]) > j && map[i - 1][j] != ' '
+			&& map[i - 1][j] != '1')
 			return (-1);
 		if (j != 0 && map[i][j - 1] != ' ' && map[i][j - 1] != '1')
 			return (-1);

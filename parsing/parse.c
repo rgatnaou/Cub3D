@@ -12,7 +12,7 @@
 
 #include "../includes/cub3D.h"
 
-t_parse	*inislaze_parse(t_parse	*parse)
+t_parse	*inislaze_parse(t_parse *parse)
 {
 	parse->data = malloc(sizeof(t_data));
 	if (!parse->data)
@@ -28,7 +28,7 @@ t_parse	*inislaze_parse(t_parse	*parse)
 	parse->data->we = 0;
 	parse->data->ea = 0;
 	parse->data->mlx = malloc(sizeof(t_mlx));
-	if (!parse->data->mlx )
+	if (!parse->data->mlx)
 	{
 		free(parse->data);
 		free(parse);
@@ -51,7 +51,7 @@ void	free_parse(t_parse *parse)
 			free(parse->data->we);
 			free(parse->data->ea);
 			free(parse->data->mlx);
-			free(parse->data);	
+			free(parse->data);
 		}
 		free(parse);
 	}
@@ -65,10 +65,11 @@ char	*file_existed(int ac, char **av)
 
 	i = 0;
 	if (ac != 2)
-		exit (ft_error("Error : Give Me One Argument\n", NULL));
+		exit(ft_error("Error : Give Me One Argument\n", NULL));
 	fd = open(av[1], O_RDWR);
-	if (fd == -1 || !ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1], '.'), ".cub", 4))
-		exit (ft_error("Error : Map Not Found!\n", NULL));
+	if (fd == -1 || !ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1],
+				'.'), ".cub", 4))
+		exit(ft_error("Error : Map Not Found!\n", NULL));
 	file = read_file(fd);
 	close(fd);
 	if (!file)
@@ -78,7 +79,7 @@ char	*file_existed(int ac, char **av)
 
 int	check_file(t_parse *parse)
 {
-	int		*texture_arr;
+	int	*texture_arr;
 
 	texture_arr = ft_calloc(6, sizeof(int));
 	if (!texture_arr)
@@ -89,7 +90,6 @@ int	check_file(t_parse *parse)
 		return (ft_error("Error :Texture Is Not Valid.\n", NULL));
 	}
 	free(texture_arr);
-	
 	if (check_map(parse))
 		return (ft_error("Error :Map Is Not Valid.\n", NULL));
 	return (0);
@@ -107,7 +107,6 @@ t_parse	*parse(int ac, char **av)
 		return (NULL);
 	parse->file = file_existed(ac, av);
 	parse->splitted_file = ft_split(parse->file, '\n');
-	
 	if (!parse->file || !parse->splitted_file || check_file(parse))
 	{
 		free_parse(parse);
