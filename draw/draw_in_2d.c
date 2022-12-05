@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 18:48:22 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:54:46 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_2d_map(t_data *data)
 	while (i < NB_RWS)
 	{
 		j = 0;
-		while (j < NB_CLS)
+		while (data->map[i][j])
 		{
 			cube_x = j * SIZE_CUB;
 			cube_y = i * SIZE_CUB;
@@ -126,7 +126,14 @@ int	draw(t_parse *parsing)
 	data->map[data->player.cord.y][data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
-	data->player.rotation_angle = 340 * M_PI / 180;
+	if(data->player.direction == 'N')
+		data->player.rotation_angle = 270 * M_PI / 180;
+	else if(data->player.direction == 'S')
+		data->player.rotation_angle =  M_PI / 2;
+	else if(data->player.direction == 'W')
+		data->player.rotation_angle =  M_PI;
+	else if(data->player.direction == 'E')
+		data->player.rotation_angle =  0;
 	draw_2d_map(data);
 	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, parsing);
 	mlx_hook(data->mlx->win, 02, 0L, &move_player, parsing);

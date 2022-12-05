@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/05 18:53:33 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:27:24 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	move_player(int keycode, t_parse *parsing)
 	if (keycode == KEY_D)
 		key_press_d(parsing->data);
 	if (keycode == KEY_A)
-		key_press_d(parsing->data);
+		key_press_a(parsing->data);
 	if (keycode == KEY_S)
 		key_press_s(parsing->data);
 	if (keycode == KEY_W)
