@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 17:58:35 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:48:22 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	draw(t_parse *parsing)
 	data->player.rotation_angle = 340 * M_PI / 180;
 	draw_2d_map(data);
 	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, parsing);
-	mlx_hook(data->mlx->win, 02, 0L, &move_player, data);
+	mlx_hook(data->mlx->win, 02, 0L, &move_player, parsing);
 	// mlx_loop_hook(mlx->init, func, mlx);
 	mlx_loop(data->mlx->init);
 	return (0);
