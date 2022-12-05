@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/05 14:18:25 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:19:30 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,30 @@ int	check_if_wall(t_data *data, int x_cord_win, int y_cord_win)
 
 int	move_player(int keycode, t_data *data)
 {
-	// if (keycode == KEY_W && check_top_wall(data))
-	// 	draw_2d_map(data);
-	// if (keycode == KEY_S && check_down_wall(data))
-	// 	draw_2d_map(data);
-	// if (keycode == KEY_D && check_right_wall(data))
-	// 	draw_2d_map(data);
+	if (keycode == KEY_D)
+	{
+		double angle =  data->player.rotation_angle + (M_PI/2) ;
+		int x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
+		int y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
+		if (!check_if_wall(data, x_player, y_player))
+		{	
+			data->player.cord.x = x_player;
+			data->player.cord.y = y_player;
+		}
+		draw_2d_map(data);
+	}
+	if (keycode == KEY_A)
+	{
+		double angle =  data->player.rotation_angle - (M_PI/2) ;
+		int x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
+		int y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
+		if (!check_if_wall(data, x_player, y_player))
+		{	
+			data->player.cord.x = x_player;
+			data->player.cord.y = y_player;
+		}
+		draw_2d_map(data);
+	}
 	if (keycode == KEY_ARROW_RIGHT)
 	{
 		data->player.rotation_angle += SPEED * M_PI / 180.0;
@@ -43,7 +61,7 @@ int	move_player(int keycode, t_data *data)
 		data->player.rotation_angle -= SPEED * M_PI / 180.0;
 		draw_2d_map(data);
 	}
-	if (keycode == KEY_ARROW_TOP)
+	if (keycode == KEY_W)
 	{
 		int x_player = roundf(data->player.cord.x
 				+ cos(data->player.rotation_angle) * SPEED);
@@ -56,7 +74,7 @@ int	move_player(int keycode, t_data *data)
 		}
 		draw_2d_map(data);
 	}
-	if (keycode == KEY_ARROW_DOWN)
+	if (keycode == KEY_S)
 	{
 		int x_player = roundf(data->player.cord.x
 				- cos(data->player.rotation_angle) * SPEED);
