@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 15:42:30 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:46:06 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include <math.h>
 
-# define SIZE_CUB 20
+# define SIZE_CUB 30
 # define NB_CLS 53
 # define NB_RWS 30
 # define SPEED 5

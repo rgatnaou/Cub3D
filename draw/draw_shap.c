@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/05 14:25:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:46:27 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	draw_player(t_data *data)
 				* 20));
 	int y_end = roundf(data->player.cord.y + (sin(data->player.rotation_angle)
 				* 20));
-	circle(data->mlx, data->player.cord.x, data->player.cord.y, SIZE_CUB / 4,
+	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2,
 			RED);
 	line(data, x_end, y_end, RED);
 }
