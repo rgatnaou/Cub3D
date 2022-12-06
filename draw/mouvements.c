@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/05 19:27:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:17:15 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,19 @@ int	move_player(int keycode, t_parse *parsing)
 	if (keycode == KEY_ESC)
 		destroy_win(parsing);
 	return (0);
+}
+
+void	raycasting(t_data *data)
+{
+	int	i;
+	double	ray_angle;
+
+	i = 0;
+	ray_angle = data->player.rotation_angle - (FOV / 2);
+	while (i <( WIDTH))
+	{
+		line(data, roundf(data->player.cord.x + cos(ray_angle) * 50), roundf(data->player.cord.y + sin(ray_angle) * 50), RED);
+		ray_angle += (FOV / WIDTH);
+		i++;
+	}
 }

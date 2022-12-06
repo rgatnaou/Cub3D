@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 19:56:33 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:14:51 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 # define NB_CLS 53
 # define NB_RWS 30
 # define SPEED 5
-# define WIDTH NB_CLS * SIZE_CUB
-# define HEIGHT NB_RWS * SIZE_CUB
+# define WIDTH (NB_CLS * SIZE_CUB)
+# define HEIGHT (NB_RWS * SIZE_CUB)
+# define FOV (60 * (M_PI / 180))
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
@@ -115,6 +116,7 @@ void	draw_player(t_data *data);
 
 // Mouvements Functions:
 int		move_player(int keycode, t_parse *parse);
+void	raycasting(t_data *data);
 
 int	destroy_win(t_parse *parsing);
 #endif
