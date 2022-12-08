@@ -14,9 +14,9 @@
 
 char	*get_next_line(int fd)
 {
-	char		rd[2];
-	char		*res;
-	int			r_rd;
+	char	rd[2];
+	char	*res;
+	int		r_rd;
 
 	res = malloc(1);
 	if (!res)
@@ -77,7 +77,7 @@ void	free_tab2(char **ptr)
 int	ft_error(char *msg, void *ptr)
 {
 	write(2, msg, ft_strlen(msg));
-	if(ptr)
+	if (ptr)
 		free(ptr);
 	return (-1);
 }

@@ -126,14 +126,14 @@ int	draw(t_parse *parsing)
 	data->map[data->player.cord.y][data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
-	if(data->player.direction == 'N')
+	if (data->player.direction == 'N')
 		data->player.rotation_angle = 270 * M_PI / 180;
-	else if(data->player.direction == 'S')
-		data->player.rotation_angle =  M_PI / 2;
-	else if(data->player.direction == 'W')
-		data->player.rotation_angle =  M_PI;
-	else if(data->player.direction == 'E')
-		data->player.rotation_angle =  0;
+	else if (data->player.direction == 'S')
+		data->player.rotation_angle = M_PI / 2;
+	else if (data->player.direction == 'W')
+		data->player.rotation_angle = M_PI;
+	else if (data->player.direction == 'E')
+		data->player.rotation_angle = 0;
 	draw_2d_map(data);
 	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, parsing);
 	mlx_hook(data->mlx->win, 02, 0L, &move_player, parsing);

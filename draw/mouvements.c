@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/06 14:01:31 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:16:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,51 +25,15 @@ int	check_if_wall(t_data *data, int x_cord_win, int y_cord_win)
 	return (1);
 }
 
-void key_press_d(t_data *data)
+void	key_press_d(t_data *data)
 {
-		double angle =  data->player.rotation_angle + (M_PI/2) ;
-		int x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
-		int y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
-		if (!check_if_wall(data, x_player, y_player))
-		{	
-			data->player.cord.x = x_player;
-			data->player.cord.y = y_player;
-		}
-		draw_2d_map(data);
-}
+	double	angle;
+	int		x_player;
+	int		y_player;
 
-void key_press_a(t_data *data)
-{
-		double angle =  data->player.rotation_angle - (M_PI/2) ;
-		int x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
-		int y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
-		if (!check_if_wall(data, x_player, y_player))
-		{	
-			data->player.cord.x = x_player;
-			data->player.cord.y = y_player;
-		}
-		draw_2d_map(data);
-}
-
-void key_press_s(t_data *data)
-{
-		int x_player = roundf(data->player.cord.x
-				- cos(data->player.rotation_angle) * SPEED);
-		int y_player = roundf(data->player.cord.y
-				- sin(data->player.rotation_angle) * SPEED);
-		if (!check_if_wall(data, x_player, y_player))
-		{
-			data->player.cord.x = x_player;
-			data->player.cord.y = y_player;
-		}
-		draw_2d_map(data);
-}
-void key_press_w(t_data *data)
-{
-	int x_player = roundf(data->player.cord.x
-			+ cos(data->player.rotation_angle) * SPEED);
-	int y_player = roundf(data->player.cord.y
-			+ sin(data->player.rotation_angle) * SPEED);
+	angle = data->player.rotation_angle + (M_PI / 2);
+	x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
+	y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
 	if (!check_if_wall(data, x_player, y_player))
 	{
 		data->player.cord.x = x_player;
@@ -78,6 +42,55 @@ void key_press_w(t_data *data)
 	draw_2d_map(data);
 }
 
+void	key_press_a(t_data *data)
+{
+	double	angle;
+	int		x_player;
+	int		y_player;
+
+	angle = data->player.rotation_angle - (M_PI / 2);
+	x_player = roundf(data->player.cord.x + (cos(angle) * SPEED));
+	y_player = roundf(data->player.cord.y + (sin(angle) * SPEED));
+	if (!check_if_wall(data, x_player, y_player))
+	{
+		data->player.cord.x = x_player;
+		data->player.cord.y = y_player;
+	}
+	draw_2d_map(data);
+}
+
+void	key_press_s(t_data *data)
+{
+	int	x_player;
+	int	y_player;
+
+	x_player = roundf(data->player.cord.x - cos(data->player.rotation_angle)
+			* SPEED);
+	y_player = roundf(data->player.cord.y - sin(data->player.rotation_angle)
+			* SPEED);
+	if (!check_if_wall(data, x_player, y_player))
+	{
+		data->player.cord.x = x_player;
+		data->player.cord.y = y_player;
+	}
+	draw_2d_map(data);
+}
+void	key_press_w(t_data *data)
+{
+	int	x_player;
+	int	y_player;
+
+	x_player = roundf(data->player.cord.x + cos(data->player.rotation_angle)
+			* SPEED);
+	y_player = roundf(data->player.cord.y + sin(data->player.rotation_angle)
+			* SPEED);
+	if (!check_if_wall(data, x_player, y_player))
+	{
+		data->player.cord.x = x_player;
+		data->player.cord.y = y_player;
+	}
+	draw_2d_map(data);
+}
 
 int	move_player(int keycode, t_parse *parsing)
 {
@@ -104,16 +117,20 @@ int	move_player(int keycode, t_parse *parsing)
 	return (0);
 }
 
-void	raycasting(t_data *data)
+void	draw_rays(t_data *data)
 {
-	int	i;
-	double	ray_angle;
+	int i;
+	double ray_angle;
 
 	i = 0;
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	while (i < WIDTH)
 	{
-		line(data, roundf(data->player.cord.x + cos(ray_angle) * 50), roundf(data->player.cord.y + sin(ray_angle) * 50), RED);
+		// Casting Before Displaying
+		raycasting(data, ray_angle);
+		// ----------------------
+		// line(data, roundf(data->player.cord.x + cos(ray_angle) * 100),
+		// 		roundf(data->player.cord.y + sin(ray_angle) * 100), RED);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}

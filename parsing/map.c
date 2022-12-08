@@ -105,8 +105,8 @@ int	final_parse_map(char **map)
 			if (space_map(map, i, j))
 				return (-1);
 			if (map[i][j] != ' ' &&
-				((map[i + 1] && (int)ft_strlen(map[i + 1]) <= j)
-				|| (i != 0 && j >= (int)ft_strlen(map[i - 1]))))
+				((map[i + 1] && (int)ft_strlen(map[i + 1]) <= j) || (i != 0
+							&& j >= (int)ft_strlen(map[i - 1]))))
 			{
 				while (map[i][j] && map[i][j] == '1')
 					j++;
@@ -122,8 +122,8 @@ int	final_parse_map(char **map)
 
 int	check_map(t_parse *parse)
 {
-	int		nb_map;
-	int		length;
+	int	nb_map;
+	int	length;
 
 	nb_map = 0;
 	map_exist(parse->file, &nb_map, &length);
@@ -131,7 +131,7 @@ int	check_map(t_parse *parse)
 		return (-1);
 	parse->data->map = get_map(parse->splitted_file, length + 1);
 	if (!parse->data->map || check_char_map(parse)
-        || final_parse_map(parse->data->map))
+		|| final_parse_map(parse->data->map))
 		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:15:57 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 20:30:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:44:27 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,22 +130,22 @@ int	check_texture(t_parse *parse, int *texture_arr)
 	{
 		if (!ft_strncmp(parse->splitted_file[i], "NO", 2))
 			texture_errors(parse->splitted_file[i], &texture_arr[0],
-					parse->data, 'N');
+				parse->data, 'N');
 		else if (!ft_strncmp(parse->splitted_file[i], "SO", 2))
 			texture_errors(parse->splitted_file[i], &texture_arr[1],
-					parse->data, 'S');
+				parse->data, 'S');
 		else if (!ft_strncmp(parse->splitted_file[i], "WE", 2))
 			texture_errors(parse->splitted_file[i], &texture_arr[2],
-					parse->data, 'W');
+				parse->data, 'W');
 		else if (!ft_strncmp(parse->splitted_file[i], "EA", 2))
 			texture_errors(parse->splitted_file[i], &texture_arr[3],
-					parse->data, 'E');
+				parse->data, 'E');
 		else if (!ft_strncmp(parse->splitted_file[i], "F", 1))
 			check_color(parse->splitted_file[i], &texture_arr[4],
-					&parse->data->floor_color);
+				&parse->data->floor_color);
 		else if (!ft_strncmp(parse->splitted_file[i], "C", 1))
 			check_color(parse->splitted_file[i], &texture_arr[5],
-					&parse->data->ceiling_color);
+				&parse->data->ceiling_color);
 		else if (check_sp_map(parse->splitted_file[i]))
 			return (-1);
 		i++;

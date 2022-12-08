@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/06 13:17:04 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:49:26 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ void	line(t_data *data, int x_end, int y_end, int color)
 
 void	draw_player(t_data *data)
 {
-	// int x_end = roundf(data->player.cord.x + (cos(data->player.rotation_angle)
+	// int x_end = roundf(data->player.cord.x
+			// + (cos(data->player.rotation_angle)
 	// 			* 50));
-	// int y_end = roundf(data->player.cord.y + (sin(data->player.rotation_angle)
+	// int y_end = roundf(data->player.cord.y
+			// + (sin(data->player.rotation_angle)
 	// 			* 50));
-	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2,
-			RED);
+	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, RED);
 	// line(data, x_end, y_end, RED);
-	raycasting(data);
+	draw_rays(data);
 }
