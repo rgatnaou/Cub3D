@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 19:54:46 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:02:06 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,21 @@ void	draw_2d_map(t_data *data)
 	}
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
-			0);
+		0);
 }
 
 int	draw(t_parse *parsing)
 {
-	t_data *data = parsing->data;
+	t_data	*data;
+
+	data = parsing->data;
 	data->mlx->init = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->init, WIDTH, HEIGHT, "cub3D");
 	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
 	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
-												&data->mlx->image.bits_per_pixel,
-												&data->mlx->image.line_length,
-												&data->mlx->image.endian);
+			&data->mlx->image.bits_per_pixel,
+			&data->mlx->image.line_length,
+			&data->mlx->image.endian);
 	data->map[data->player.cord.y][data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;

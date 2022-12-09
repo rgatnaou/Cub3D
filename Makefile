@@ -6,7 +6,7 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/08 14:46:36 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/09 18:55:28 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC =  main.c parsing/parse.c \
 	draw/draw_in_2d.c \
 	draw/draw_shap.c \
 	draw/mouvements.c \
-	raycasting/raycasting.c
+	raycasting/raycasting.c \
+	raycasting/raycasting_utils.c
 
 OBJECTS = $(SRC:.c=.o)
 

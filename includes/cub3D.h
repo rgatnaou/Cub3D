@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/09 18:11:03 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:42:53 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
-# include <stdio.h>
 # include <stdbool.h>
+# include <stdio.h>
 
 # define SIZE_CUB 30
 # define NB_CLS 53
@@ -43,23 +43,21 @@
 # define KEY_ESC 53
 
 // Begin Parsing:
+
 typedef struct s_ray
 {
-	bool	up_ray;	
-	bool	right_ray;
-	bool	down_ray;	
-	bool	left_ray;
-	bool	found_horz_wall;
-	double	xfinal_horz_coord;
-	double	yfinal_horz_coord;
-	bool	found_vert_wall;
-	double	xfinal_vert_coord;
-	double	yfinal_vert_coord;
-	double	horz_distance;
-	double	vert_distance;
-	double	xpoint;
-	double	ypoint;
-}	t_ray;
+	bool		up_ray;
+	bool		right_ray;
+	bool		down_ray;
+	bool		left_ray;
+	double		xfinal_horz_coord;
+	double		yfinal_horz_coord;
+	double		xfinal_vert_coord;
+	double		yfinal_vert_coord;
+	double		horz_distance;
+	double		vert_distance;
+
+}				t_ray;
 
 typedef struct s_image
 {
@@ -143,6 +141,9 @@ int				destroy_win(t_parse *parsing);
 
 // Raycasting Functions
 int				check_if_wall(t_data *data, int x_cord_win, int y_cord_win);
+double			limit_angle(double ray_angle);
+void			check_ray_position(t_data *data, double ray);
+double			distance(int xplayer, int yplayer, double xpoint,
+					double ypoint);
 void			raycasting(t_data *data, double ray_angle);
-double	limit_angle(double ray_angle);
 #endif

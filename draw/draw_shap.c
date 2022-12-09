@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/08 14:49:26 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:14:10 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	circle(t_mlx *mlx, int x, int y, int r, int color)
 			x1 = r * cos(angle * M_PI / 180);
 			y1 = r * sin(angle * M_PI / 180);
 			my_mlx_pixel_put(&mlx->image, roundf(x + x1), roundf(y + y1),
-					color);
+				color);
 			i += 0.1;
 		}
 		r--;
@@ -81,37 +81,10 @@ void	line(t_data *data, int x_end, int y_end, int color)
 		y += dis_y;
 		step--;
 	}
-	//////////////////////////////////
-	// int x= data->player.cord.x;
-	// int y= data->player.cord.y;
-	// int dx;
-	// int dy;
-	// float xinc;
-	// float yinc;
-	// float step;
-	// dx = x_end - data->player.cord.x;
-	// dy = y_end - data->player.cord.y;
-	// step = fmaxf(abs(dy), abs(dx));
-	// xinc = dx / step;
-	// yinc = dy / step;
-	// while (step >= 0)
-	// {
-	// 	my_mlx_pixel_put(&data->mlx->image, round(x), round(y), color);
-	//     x += xinc;
-	//     y += yinc;
-	//     step--;
-	// }
 }
 
 void	draw_player(t_data *data)
 {
-	// int x_end = roundf(data->player.cord.x
-			// + (cos(data->player.rotation_angle)
-	// 			* 50));
-	// int y_end = roundf(data->player.cord.y
-			// + (sin(data->player.rotation_angle)
-	// 			* 50));
 	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, RED);
-	// line(data, x_end, y_end, RED);
 	draw_rays(data);
 }
