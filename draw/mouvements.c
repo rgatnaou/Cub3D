@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/08 20:16:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:04:24 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,19 @@ void	draw_rays(t_data *data)
 	while (i < WIDTH)
 	{
 		// Casting Before Displaying
-		raycasting(data, ray_angle);
+		raycasting(data, limit_angle(ray_angle));
+		// line(data, roundf(data->player.cord.x + cos(limit_angle(ray_angle)) * 100),
+		// 	roundf(data->player.cord.y + sin(limit_angle(ray_angle)) * 100), 0x000000);
 		// ----------------------
-		// line(data, roundf(data->player.cord.x + cos(ray_angle) * 100),
-		// 		roundf(data->player.cord.y + sin(ray_angle) * 100), RED);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}
+		// raycasting(data, limit_angle(data->player.rotation_angle));
+
+	// line(data, roundf(data->player.cord.x + cos(data->player.rotation_angle) * 100),
+	// 		roundf(data->player.cord.y + sin(data->player.rotation_angle) * 100), 0x0000ff);
+	// double ray =limit_angle(data->player.rotation_angle);
+		// raycasting(data, limit_angle(ray));
+		// line(data, roundf(data->player.cord.x + cos(ray) * 100),
+		// 	roundf(data->player.cord.y + sin(ray) * 100), 0x000000);
 }

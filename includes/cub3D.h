@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/09 14:22:48 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:11:03 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define SIZE_CUB 30
 # define NB_CLS 53
 # define NB_RWS 30
-# define SPEED 5
+# define SPEED 7
 # define WIDTH (NB_CLS * SIZE_CUB)
 # define HEIGHT (NB_RWS * SIZE_CUB)
 # define FOV (60 * (M_PI / 180))
@@ -144,4 +144,5 @@ int				destroy_win(t_parse *parsing);
 // Raycasting Functions
 int				check_if_wall(t_data *data, int x_cord_win, int y_cord_win);
 void			raycasting(t_data *data, double ray_angle);
+double	limit_angle(double ray_angle);
 #endif
