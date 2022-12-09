@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/08 19:59:09 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:22:48 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,17 @@ typedef struct s_ray
 	bool	up_ray;	
 	bool	right_ray;
 	bool	down_ray;	
-	bool	left_ray;	
+	bool	left_ray;
+	bool	found_horz_wall;
+	double	xfinal_horz_coord;
+	double	yfinal_horz_coord;
+	bool	found_vert_wall;
+	double	xfinal_vert_coord;
+	double	yfinal_vert_coord;
+	double	horz_distance;
+	double	vert_distance;
+	double	xpoint;
+	double	ypoint;
 }	t_ray;
 
 typedef struct s_image
