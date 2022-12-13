@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/12 16:04:52 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:45:02 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	circle(t_mlx *mlx, int x, int y, int r, int color)
 	double	x1;
 	double	y1;
 
+	x *= MINIMAP_FACTOR;
+	y *= MINIMAP_FACTOR;
+	r *= MINIMAP_FACTOR;
 	while (r)
 	{
 		i = 0;
@@ -39,16 +42,19 @@ void	square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
 	int	j;
+	int	size_cube_minimap = SIZE_CUB * MINIMAP_FACTOR;
+	x *= MINIMAP_FACTOR;
+	y *= MINIMAP_FACTOR;
 
 	i = 0;
-	while (i <= SIZE_CUB)
+	while (i <= size_cube_minimap)
 	{
 		j = 0;
-		while (j <= SIZE_CUB && ((x + j) < WIDTH && (y + i) < HEIGHT))
+		while (j <= size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
 		{
-			if ((j > SIZE_CUB - 1) || (i > SIZE_CUB - 1) || i < 1 || j < 1)
-				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x00ffff);
-			else
+			// if ((j > size_cube_minimap - 1) || (i > size_cube_minimap - 1) || i < 1 || j < 1)
+			// 	my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x00ffff);
+			// else
 				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
 			j++;
 		}
@@ -87,12 +93,15 @@ void	line(t_data *data, double x_end, double y_end, int color)
 	double	x;
 	double	y;
 	int		step;
+
+	x_end *= MINIMAP_FACTOR;
+	x = data->player.cord.x * MINIMAP_FACTOR;
+	y = data->player.cord.y * MINIMAP_FACTOR;
+	y_end *= MINIMAP_FACTOR;
 	// int i = 0;
-	dis_x = x_end - data->player.cord.x;
-	dis_y = y_end - data->player.cord.y;
+	dis_x = x_end - x;
+	dis_y = y_end - y;
 	step = fmax(fabs(dis_x), fabs(dis_y));
-	x = data->player.cord.x;
-	y = data->player.cord.y;
 	dis_x /= step;
 	dis_y /= step;
 	while (step)

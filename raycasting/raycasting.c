@@ -6,13 +6,14 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/12 18:15:03 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:57:42 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 #include <limits.h>
 #include <float.h>
+
 bool	found_horz_hit_wall(t_data *data, double x_intersect,
 		double y_intersect, double xstep, double ystep)
 {
@@ -123,7 +124,7 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 	return (found_vert_hit_wall(data, x_intersect, y_intersect, xstep, ystep));
 }
 
-void	raycasting(t_data *data, double ray_angle)
+double	raycasting(t_data *data, double ray_angle)
 {
 	double	xpoint;
 	double	ypoint;
@@ -145,6 +146,7 @@ void	raycasting(t_data *data, double ray_angle)
 		}
 	}
 	line(data, xpoint, ypoint, RED);
+	return (distance(data->player.cord.x, data->player.cord.y, xpoint, ypoint));
 }
 
 void	draw_rays(t_data *data)
@@ -153,11 +155,13 @@ void	draw_rays(t_data *data)
 	double	ray_angle;
 
 	i = 0;
+	
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	// raycasting(data, limit_angle(data->player.rotation_angle));
 	while (i < WIDTH)
 	{
-		raycasting(data, limit_angle(ray_angle));
+		// raycasting(data, limit_angle(ray_angle));
+		projection(data, limit_angle(ray_angle), i);
 		// line(data, data->player.cord.x + cos(ray_angle) * 100,data->player.cord.y + sin(ray_angle) * 100,0x000000);
 		ray_angle += (FOV / WIDTH);
 		i++;

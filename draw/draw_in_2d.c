@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/12 15:13:18 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:35:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 	
-	if ((x >= WIDTH &&  x <= 0) || (y >= HEIGHT &&  y <= 0))
-		return ;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	if ((x < WIDTH &&  x >= 0) && (y < HEIGHT &&  y >= 0))
+	{	
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 // void	draw_terangle_NO(t_mlx *m, int x, int y, int z, int color)
@@ -94,6 +95,11 @@ void	draw_2d_map(t_data *data)
 	int	cube_y;
 
 	mlx_clear_window(data->mlx->init, data->mlx->win);
+	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
+	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
+			&data->mlx->image.bits_per_pixel,
+			&data->mlx->image.line_length,
+			&data->mlx->image.endian);
 	i = 0;
 	while (i < NB_RWS)
 	{
@@ -122,11 +128,6 @@ int	draw(t_parse *parsing)
 	data = parsing->data;
 	data->mlx->init = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->init, WIDTH, HEIGHT, "cub3D");
-	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
-	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
-			&data->mlx->image.bits_per_pixel,
-			&data->mlx->image.line_length,
-			&data->mlx->image.endian);
 	data->map[data->player.cord.y][data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;

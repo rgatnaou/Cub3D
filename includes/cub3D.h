@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/12 18:12:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:05:35 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # define SIZE_CUB 32
 # define NB_CLS 53
 # define NB_RWS 30
-# define SPEED 2
+# define SPEED 7
 # define WIDTH (NB_CLS * SIZE_CUB)
 # define HEIGHT (NB_RWS * SIZE_CUB)
 # define FOV (60 * (M_PI / 180))
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
+# define MINIMAP_FACTOR 0.2
 
 # define KEY_W 13
 # define KEY_D 2
@@ -145,5 +146,6 @@ double			limit_angle(double ray_angle);
 void			check_ray_position(t_data *data, double ray);
 double			distance(int xplayer, int yplayer, double xpoint,
 					double ypoint);
-void			raycasting(t_data *data, double ray_angle);
+double			raycasting(t_data *data, double ray_angle);
+void			projection(t_data *data, double ray_angle, int i);
 #endif
