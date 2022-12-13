@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/09 19:14:10 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:04:52 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,50 @@ void	square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-void	line(t_data *data, int x_end, int y_end, int color)
+void	line(t_data *data, double x_end, double y_end, int color)
 {
-	float	dis_x;
-	float	dis_y;
-	float	x;
-	float	y;
-	int		step;
+	// float    x;
+	// float    y;
+	// float    step_x;
+    // float    step_y;
+    // int    max_v;
+	
+	// y = data->player.cord.y;
+	// x = data->player.cord.x;
+    // step_x = data->player.cord.x - x_end;
+    // step_y = data->player.cord.y - y_end;
+    // max_v = fmax(fabs(step_x), fabs(step_y));
+    // step_x /= max_v;
+    // step_y /= max_v;
+    // while (max_v)
+    // {
+    //     my_mlx_pixel_put(&data->mlx->image, x, y, color);
+    //     x += step_x;
+    //     y += step_y;
+    //     max_v--;
+    // }
+	
+	
 
+	
+	double	dis_x;
+	double	dis_y;
+	double	x;
+	double	y;
+	int		step;
+	// int i = 0;
 	dis_x = x_end - data->player.cord.x;
 	dis_y = y_end - data->player.cord.y;
-	if (fabs(dis_x) >= fabs(dis_y))
-		step = fabs(dis_x);
-	else
-		step = fabs(dis_y);
+	step = fmax(fabs(dis_x), fabs(dis_y));
 	x = data->player.cord.x;
 	y = data->player.cord.y;
 	dis_x /= step;
 	dis_y /= step;
 	while (step)
 	{
-		my_mlx_pixel_put(&data->mlx->image, roundf(x), roundf(y), color);
+		// if ((x >= WIDTH &&  x <= 0) || (y >= HEIGHT &&  y <= 0))
+		// 	return ;
+		my_mlx_pixel_put(&data->mlx->image, x, y, color);
 		x += dis_x;
 		y += dis_y;
 		step--;

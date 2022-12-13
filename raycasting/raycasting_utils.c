@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:53:53 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/09 19:05:32 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:06:32 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_ray_position(t_data *data, double ray)
 	if (ray > 0 && ray < M_PI)
 		data->ray.down_ray = 1;
 	data->ray.up_ray = !data->ray.down_ray;
-	if ((ray < M_PI / 2) || (ray > ((3 * M_PI) / 2)))
+	if ((ray < 0.5 * M_PI) || (ray >  1.5 * M_PI))
 		data->ray.right_ray = 1;
 	data->ray.left_ray = !data->ray.right_ray;
 }

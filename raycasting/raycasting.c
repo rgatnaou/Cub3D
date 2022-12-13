@@ -6,15 +6,19 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/09 19:44:02 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:15:03 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
+#include <limits.h>
+#include <float.h>
 bool	found_horz_hit_wall(t_data *data, double x_intersect,
 		double y_intersect, double xstep, double ystep)
 {
+	data->ray.xfinal_horz_coord = 0;
+	data->ray.yfinal_horz_coord = 0;
+	
 	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
 		&& y_intersect <= HEIGHT)
 	{
@@ -40,6 +44,9 @@ bool	found_horz_hit_wall(t_data *data, double x_intersect,
 bool	found_vert_hit_wall(t_data *data, double x_intersect,
 		double y_intersect, double xstep, double ystep)
 {
+	data->ray.xfinal_vert_coord = 0;
+	data->ray.yfinal_vert_coord = 0;
+
 	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
 		&& y_intersect <= HEIGHT)
 	{
@@ -69,6 +76,7 @@ bool	horizontal_raycasting(t_data *data, double ray_angle)
 	double	xstep;
 	double	ystep;
 
+	data->ray.horz_distance = INT_MAX;
 	check_ray_position(data, ray_angle);
 	y_intersect = floor(data->player.cord.y / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.down_ray)
@@ -79,9 +87,7 @@ bool	horizontal_raycasting(t_data *data, double ray_angle)
 	if (data->ray.up_ray)
 		ystep *= -1;
 	xstep = SIZE_CUB / tan(ray_angle);
-	if (data->ray.left_ray && xstep > 0)
-		xstep *= -1;
-	if (data->ray.right_ray && xstep < 0)
+	if ((data->ray.left_ray && xstep > 0) || (data->ray.right_ray && xstep < 0))
 		xstep *= -1;
 	if (data->ray.up_ray)
 		y_intersect--;
@@ -94,7 +100,8 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 	double	y_intersect;
 	double	xstep;
 	double	ystep;
-
+	
+	data->ray.vert_distance = INT_MAX;
 	check_ray_position(data, ray_angle);
 	x_intersect = (data->player.cord.x / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.right_ray)
@@ -121,10 +128,14 @@ void	raycasting(t_data *data, double ray_angle)
 	double	xpoint;
 	double	ypoint;
 
-	horizontal_raycasting(data, ray_angle);
-	vertical_raycasting(data, ray_angle);
-	xpoint = data->ray.xfinal_horz_coord;
-	ypoint = data->ray.yfinal_horz_coord;
+	if (horizontal_raycasting(data, ray_angle))
+	{
+		xpoint = data->ray.xfinal_horz_coord;
+		ypoint = data->ray.yfinal_horz_coord;
+	}
+	// vertical_raycasting(data, ray_angle);
+	// xpoint = data->ray.xfinal_vert_coord;
+	// ypoint = data->ray.yfinal_vert_coord;
 	if (vertical_raycasting(data, ray_angle))
 	{
 		if (data->ray.vert_distance < data->ray.horz_distance)
@@ -143,9 +154,11 @@ void	draw_rays(t_data *data)
 
 	i = 0;
 	ray_angle = data->player.rotation_angle - (FOV / 2);
+	// raycasting(data, limit_angle(data->player.rotation_angle));
 	while (i < WIDTH)
 	{
 		raycasting(data, limit_angle(ray_angle));
+		// line(data, data->player.cord.x + cos(ray_angle) * 100,data->player.cord.y + sin(ray_angle) * 100,0x000000);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}

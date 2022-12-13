@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/09 19:42:53 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:12:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-# define SIZE_CUB 30
+# define SIZE_CUB 32
 # define NB_CLS 53
 # define NB_RWS 30
-# define SPEED 7
+# define SPEED 2
 # define WIDTH (NB_CLS * SIZE_CUB)
 # define HEIGHT (NB_RWS * SIZE_CUB)
 # define FOV (60 * (M_PI / 180))
@@ -130,7 +130,7 @@ int				draw(t_parse *parsing);
 void			draw_2d_map(t_data *data);
 void			circle(t_mlx *mlx, int x, int y, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
-void			line(t_data *data, int x_end, int y_end, int color);
+void			line(t_data *data, double x_end, double y_end, int color);
 void			draw_player(t_data *data);
 
 // Mouvements Functions:
