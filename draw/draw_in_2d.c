@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/13 19:35:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:10:11 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	draw_2d_map(t_data *data)
 			&data->mlx->image.line_length,
 			&data->mlx->image.endian);
 	i = 0;
+	draw_in_3d(data);
 	while (i < NB_RWS)
 	{
 		j = 0;
@@ -116,7 +117,7 @@ void	draw_2d_map(t_data *data)
 		}
 		i++;
 	}
-	draw_player(data);
+	raycasting(data);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
 		0);
 }

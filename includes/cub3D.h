@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/13 19:05:35 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:35:47 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,16 @@ typedef struct s_ray
 	bool		right_ray;
 	bool		down_ray;
 	bool		left_ray;
+	bool		vert_hit_wall;
+	bool		horz_hit_wall;
 	double		xfinal_horz_coord;
 	double		yfinal_horz_coord;
 	double		xfinal_vert_coord;
 	double		yfinal_vert_coord;
 	double		horz_distance;
 	double		vert_distance;
+	double		xpoint;
+	double		ypoint;
 
 }				t_ray;
 
@@ -132,11 +136,11 @@ void			draw_2d_map(t_data *data);
 void			circle(t_mlx *mlx, int x, int y, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
 void			line(t_data *data, double x_end, double y_end, int color);
-void			draw_player(t_data *data);
+void			raycasting(t_data *data);
 
 // Mouvements Functions:
 int				move_player(int keycode, t_parse *parse);
-void			draw_rays(t_data *data);
+void			draw_in_3d(t_data *data);
 
 int				destroy_win(t_parse *parsing);
 
@@ -146,6 +150,6 @@ double			limit_angle(double ray_angle);
 void			check_ray_position(t_data *data, double ray);
 double			distance(int xplayer, int yplayer, double xpoint,
 					double ypoint);
-double			raycasting(t_data *data, double ray_angle);
-void			projection(t_data *data, double ray_angle, int i);
+double			distance_to_wall(t_data *data, double ray_angle);
+void	projection(t_data *data, double ray_angle, int i);
 #endif
