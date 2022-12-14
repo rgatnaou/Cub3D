@@ -6,23 +6,23 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/14 18:19:16 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:41:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	square1(t_mlx *mlx, double x, double y, double h, int color)
+void	square1(t_mlx *mlx, double x, double y, double h,double w, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	// printf("%f\n", h);
-	while (i <= h)
+	while (i < h)
 	{
 		j = 0;
-		while (j <=  SIZE_CUB)
+		while (j <  w)
 		{
 			
 			// if (i == 0 || i == h )
@@ -45,7 +45,17 @@ void	projection(t_data *data, double ray_angle, int i)
 	dis_to_prj_wall = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = (SIZE_CUB / distance_to_wall(data, ray_angle)) * dis_to_prj_wall;
 	if (data->ray.horz_hit_wall)
-		square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height , 0xffffff);
+	{
+		if (data->ray.up_ray)
+			square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height ,1, 0xffffff);
+		else
+			square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height ,1, 0xc0c0c0);
+	}
 	else
-		square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height , 0xc0c0c0);
+	{
+		if (data->ray.right_ray)
+			square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height ,1, 0x808080);
+		else
+			square1(data->mlx, i, (HEIGHT - wall_height) / 2, wall_height ,1, 0x708090);	
+	}
 }
