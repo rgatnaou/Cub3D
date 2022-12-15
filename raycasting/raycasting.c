@@ -6,13 +6,11 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/14 18:21:30 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:05:48 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-#include <limits.h>
-#include <float.h>
 
 bool	found_horz_hit_wall(t_data *data, double x_intersect,
 		double y_intersect, double xstep, double ystep)
@@ -150,13 +148,10 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		data->ray.xpoint = data->ray.xfinal_vert_coord;
 		data->ray.ypoint = data->ray.yfinal_vert_coord;
 	}
-		
-
 	// line(data, xpoint, ypoint, RED);
 	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
 	return (final_distance);
 }
-
 void	draw_in_3d(t_data *data)
 {
 	int		i;

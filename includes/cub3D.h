@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/14 16:35:47 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:20:58 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <mlx.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <limits.h>
 
 # define SIZE_CUB 32
 # define NB_CLS 53
