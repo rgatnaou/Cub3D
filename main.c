@@ -6,45 +6,28 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:37:14 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:19:46 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3D.h"
 
-void	*initialize_texture(char *line)
+void	init_data(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	// while (line[i] == ' ' || line[i] == '\t')
-	// 	i++;
-	// *fd = open(&line[i], O_RDWR);
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	return (0);
-}
-
-void	initialize_color(char *line, int *color)
-{
-	char	**c;
-	int		i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	c = ft_split(&line[i], ',');
-	if (!c)
-		*color = 0;
-	i = 0;
-	while (c[i])
-	{
-		*color += ft_atoi(c[i]);
-		if (c[i + 1])
-			*color *= 256;
-		i++;
-	}
-	free_tab2(c);
+	data->map[data->player.cord.y][data->player.cord.x] = '0';
+	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
+	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
+	if (data->player.direction == 'N')
+		data->player.rotation_angle = 270 * M_PI / 180;
+	else if (data->player.direction == 'S')
+		data->player.rotation_angle = M_PI / 2;
+	else if (data->player.direction == 'W')
+		data->player.rotation_angle = M_PI;
+	else if (data->player.direction == 'E')
+		data->player.rotation_angle = 0;
+	data->move.ws_move = -1;
+	data->move.ad_move = -1;
+	data->move.rotation = -1;
 }
 
 int	main(int ac, char **av)
@@ -53,11 +36,8 @@ int	main(int ac, char **av)
 
 	data = parse(ac, av);
 	if (!data)
-		return(0);
-	
-	data->move.ws_move = -1;
-	data->move.ad_move = -1;
-	data->move.rotation = -1;
+		return (0);
+	init_data(data);
 	draw(data);
 	return (0);
 }

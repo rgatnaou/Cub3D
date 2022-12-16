@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:35:51 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:19:18 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char			**get_map(char **splitted_file, int lenght);
 void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
 int				draw(t_data *data);
 int				rendering(t_data *data);
-void			circle(t_mlx *mlx, int x, int y, int r, int color);
+void			circle(t_mlx *mlx, t_cord coord, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
 void			line(t_data *data, double x_end, double y_end, int color);
 void			draw_player(t_data *data);
@@ -162,5 +162,5 @@ double			distance(int xplayer, int yplayer, double xpoint,
 double			distance_to_wall(t_data *data, double ray_angle);
 void			projection(t_data *data, double ray_angle, int i);
 void			move_player(t_data *data);
-int	key_release(int keycode, t_data *data);
+int				key_release(int keycode, t_data *data);
 #endif

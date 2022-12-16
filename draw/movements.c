@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/16 18:15:12 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:28:53 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	key_press_s(t_data *data)
 	int	x_player;
 	int	y_player;
 
+
 	x_player = roundf(data->player.cord.x - cos(data->player.rotation_angle)
 			* SPEED);
 	y_player = roundf(data->player.cord.y - sin(data->player.rotation_angle)
 			* SPEED);
+	
 	if (!check_if_wall(data, x_player, y_player))
 	{
 		data->player.cord.x = x_player;
@@ -87,7 +89,6 @@ void	move_player(t_data *data)
 	if (KEY_A == data->move.ad_move)
 		key_press_a(data);
 	if (KEY_ARROW_RIGHT == data->move.rotation)
-	// SPEED == SPEED / 2
 		data->player.rotation_angle += M_PI / 180.0;
 	if (KEY_ARROW_LEFT == data->move.rotation)
 		data->player.rotation_angle -= M_PI / 180.0;

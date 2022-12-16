@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:01 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:19:52 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
-	
-	if ((x < WIDTH &&  x >= 0) && (y < HEIGHT &&  y >= 0))
-	{	
-		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+
+	if ((x < WIDTH && x >= 0) && (y < HEIGHT && y >= 0))
+	{
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel
+					/ 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -56,19 +57,20 @@ void	draw_2d(t_data *data)
 	}
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
-		0);
+			0);
 }
 
 int	rendering(t_data *data)
 {
-	if (data->move.ws_move != -1 || data->move.ad_move != -1 || data->move.rotation != -1)
+	if (data->move.ws_move != -1 || data->move.ad_move != -1
+		|| data->move.rotation != -1)
 	{
 		move_player(data);
 		ft_bzero(data->mlx->image.addr, data->mlx->image.line_length * HEIGHT);
 		draw_3d(data);
 		draw_2d(data);
 	}
-	return(0);
+	return (0);
 }
 
 int	draw(t_data *data)
@@ -80,17 +82,6 @@ int	draw(t_data *data)
 			&data->mlx->image.bits_per_pixel,
 			&data->mlx->image.line_length,
 			&data->mlx->image.endian);
-	data->map[data->player.cord.y][data->player.cord.x] = '0';
-	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
-	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
-	if (data->player.direction == 'N')
-		data->player.rotation_angle = 270 * M_PI / 180;
-	else if (data->player.direction == 'S')
-		data->player.rotation_angle = M_PI / 2;
-	else if (data->player.direction == 'W')
-		data->player.rotation_angle = M_PI;
-	else if (data->player.direction == 'E')
-		data->player.rotation_angle = 0;
 	draw_3d(data);
 	draw_2d(data);
 	mlx_hook(data->mlx->win, 02, 0L, &key_pressed, data);

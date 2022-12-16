@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:34:33 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:51:47 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	check_file(t_parse *parse)
 t_data	*parse(int ac, char **av)
 {
 	t_parse	*parse;
-	t_data  *data;
+	t_data	*data;
 
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
