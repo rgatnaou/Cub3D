@@ -6,7 +6,7 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/13 16:14:58 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/16 18:44:13 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ SRC =  main.c parsing/parse.c \
 	parsing/utils.c \
 	parsing/texture.c \
 	parsing/map.c \
-	draw/draw_in_2d.c \
+	draw/draw.c \
 	draw/draw_shap.c \
-	draw/mouvements.c \
+	draw/movements.c \
+	draw/key_events.c \
 	raycasting/raycasting.c \
 	raycasting/raycasting_utils.c \
 	projection/projection.c

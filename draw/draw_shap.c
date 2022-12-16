@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/15 17:57:43 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:22:45 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	line(t_data *data, double x_end, double y_end, int color)
 	}
 }
 
-void	raycasting(t_data *data)
+void	draw_player(t_data *data)
 {
 	int		i;
 	double	ray_angle;
@@ -123,13 +123,6 @@ void	raycasting(t_data *data)
 	// Draw Player
 	i = 0;	
 	ray_angle = data->player.rotation_angle - (FOV / 2);
-	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, RED);
-
-	while (i < WIDTH)
-	{
-		distance_to_wall(data, limit_angle(ray_angle));
-		line(data, data->ray.xpoint, data->ray.ypoint, RED);
-		ray_angle += (FOV / WIDTH);
-		i++;
-	}
+	circle(data->mlx, data->player.cord.x, data->player.cord.y, 5, RED);
+	line(data, data->player.cord.x + (cos(data->player.rotation_angle) * 50), data->player.cord.y + (sin(data->player.rotation_angle) * 50), RED);
 }

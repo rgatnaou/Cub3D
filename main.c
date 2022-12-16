@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/05 19:51:10 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:37:14 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ void	initialize_color(char *line, int *color)
 
 int	main(int ac, char **av)
 {
-	t_parse	*parsing;
+	t_data	*data;
 
-	parsing = parse(ac, av);
-	if (parsing)
-		draw(parsing);
+	data = parse(ac, av);
+	if (!data)
+		return(0);
+	
+	data->move.ws_move = -1;
+	data->move.ad_move = -1;
+	data->move.rotation = -1;
+	draw(data);
 	return (0);
 }

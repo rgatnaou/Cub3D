@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/03 12:55:24 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:34:33 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ int	check_file(t_parse *parse)
 	return (0);
 }
 
-t_parse	*parse(int ac, char **av)
+t_data	*parse(int ac, char **av)
 {
 	t_parse	*parse;
+	t_data  *data;
 
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
@@ -112,5 +113,9 @@ t_parse	*parse(int ac, char **av)
 		free_parse(parse);
 		return (NULL);
 	}
-	return (parse);
+	data = parse->data;
+	free(parse->file);
+	free_tab2(parse->splitted_file);
+	free(parse);
+	return (data);
 }

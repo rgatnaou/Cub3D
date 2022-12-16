@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouvements.c                                       :+:      :+:    :+:   */
+/*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/13 18:19:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:15:12 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	key_press_d(t_data *data)
 		data->player.cord.x = x_player;
 		data->player.cord.y = y_player;
 	}
-	draw_2d_map(data);
 }
 
 void	key_press_a(t_data *data)
@@ -43,7 +42,6 @@ void	key_press_a(t_data *data)
 		data->player.cord.x = x_player;
 		data->player.cord.y = y_player;
 	}
-	draw_2d_map(data);
 }
 
 void	key_press_s(t_data *data)
@@ -60,7 +58,6 @@ void	key_press_s(t_data *data)
 		data->player.cord.x = x_player;
 		data->player.cord.y = y_player;
 	}
-	draw_2d_map(data);
 }
 
 void	key_press_w(t_data *data)
@@ -77,30 +74,21 @@ void	key_press_w(t_data *data)
 		data->player.cord.x = x_player;
 		data->player.cord.y = y_player;
 	}
-	draw_2d_map(data);
 }
 
-int	move_player(int keycode, t_parse *parsing)
+void	move_player(t_data *data)
 {
-	if (keycode == KEY_D)
-		key_press_d(parsing->data);
-	if (keycode == KEY_A)
-		key_press_a(parsing->data);
-	if (keycode == KEY_S)
-		key_press_s(parsing->data);
-	if (keycode == KEY_W)
-		key_press_w(parsing->data);
-	if (keycode == KEY_ARROW_RIGHT)
-	{
-		parsing->data->player.rotation_angle += SPEED * M_PI / 180.0;
-		draw_2d_map(parsing->data);
-	}
-	if (keycode == KEY_ARROW_LEFT)
-	{
-		parsing->data->player.rotation_angle -= SPEED * M_PI / 180.0;
-		draw_2d_map(parsing->data);
-	}
-	if (keycode == KEY_ESC)
-		destroy_win(parsing);
-	return (0);
+	if (KEY_S == data->move.ws_move)
+		key_press_s(data);
+	if (KEY_D == data->move.ad_move)
+		key_press_d(data);
+	if (KEY_W == data->move.ws_move)
+		key_press_w(data);
+	if (KEY_A == data->move.ad_move)
+		key_press_a(data);
+	if (KEY_ARROW_RIGHT == data->move.rotation)
+	// SPEED == SPEED / 2
+		data->player.rotation_angle += M_PI / 180.0;
+	if (KEY_ARROW_LEFT == data->move.rotation)
+		data->player.rotation_angle -= M_PI / 180.0;
 }

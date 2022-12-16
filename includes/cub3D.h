@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/15 19:20:58 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:35:51 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define SIZE_CUB 32
 # define NB_CLS 53
 # define NB_RWS 30
-# define SPEED 7
+# define SPEED 2
 # define WIDTH (NB_CLS * SIZE_CUB)
 # define HEIGHT (NB_RWS * SIZE_CUB)
 # define FOV (60 * (M_PI / 180))
@@ -64,6 +64,13 @@ typedef struct s_ray
 	double		ypoint;
 
 }				t_ray;
+
+typedef struct s_move
+{
+	int	ws_move;
+	int	ad_move;
+	int	rotation;
+}	t_move;
 
 typedef struct s_image
 {
@@ -106,6 +113,7 @@ typedef struct s_data
 	t_player	player;
 	t_mlx		*mlx;
 	t_ray		ray;
+	t_move		move;
 }				t_data;
 
 typedef struct s_parse
@@ -120,7 +128,7 @@ char			*get_next_line(int fd);
 void			free_tab2(char **ptr);
 int				ft_error(char *msg, void *ptr);
 char			*read_file(int fd);
-t_parse			*parse(int ac, char **av);
+t_data			*parse(int ac, char **av);
 int				check_texture(t_parse *parse, int *t);
 int				check_map(t_parse *parse);
 int				wall(char *map);
@@ -132,18 +140,18 @@ char			**get_map(char **splitted_file, int lenght);
 
 // Draw Functions:
 void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
-int				draw(t_parse *parsing);
-void			draw_2d_map(t_data *data);
+int				draw(t_data *data);
+int				rendering(t_data *data);
 void			circle(t_mlx *mlx, int x, int y, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
 void			line(t_data *data, double x_end, double y_end, int color);
-void			raycasting(t_data *data);
+void			draw_player(t_data *data);
 
 // Mouvements Functions:
-int				move_player(int keycode, t_parse *parse);
-void			draw_in_3d(t_data *data);
+int				key_pressed(int keycode, t_data *data);
+void			draw_3d(t_data *data);
 
-int				destroy_win(t_parse *parsing);
+int				destroy_win(t_data *data);
 
 // Raycasting Functions
 int				check_if_wall(t_data *data, int x_cord_win, int y_cord_win);
@@ -152,5 +160,7 @@ void			check_ray_position(t_data *data, double ray);
 double			distance(int xplayer, int yplayer, double xpoint,
 					double ypoint);
 double			distance_to_wall(t_data *data, double ray_angle);
-void	projection(t_data *data, double ray_angle, int i);
+void			projection(t_data *data, double ray_angle, int i);
+void			move_player(t_data *data);
+int	key_release(int keycode, t_data *data);
 #endif

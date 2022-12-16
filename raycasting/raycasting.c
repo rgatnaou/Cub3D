@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/15 16:05:48 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:16:45 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ bool	horizontal_raycasting(t_data *data, double ray_angle)
 	xstep = SIZE_CUB / tan(ray_angle);
 	if ((data->ray.left_ray && xstep > 0) || (data->ray.right_ray && xstep < 0))
 		xstep *= -1;
-	// if (data->ray.up_ray)
-	// 	y_intersect--;
 	return (found_horz_hit_wall(data, x_intersect, y_intersect, xstep, ystep));
 }
 
@@ -115,10 +113,6 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 		ystep *= -1;
 	if (data->ray.down_ray && ystep < 0)
 		ystep *= -1;
-	// if (data->ray.left_ray)
-	// 	x_intersect--;
-	// if (data->ray.right_ray)
-	// 	y_intersect++;
 	return (found_vert_hit_wall(data, x_intersect, y_intersect, xstep, ystep));
 }
 
@@ -148,11 +142,10 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		data->ray.xpoint = data->ray.xfinal_vert_coord;
 		data->ray.ypoint = data->ray.yfinal_vert_coord;
 	}
-	// line(data, xpoint, ypoint, RED);
 	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
 	return (final_distance);
 }
-void	draw_in_3d(t_data *data)
+void	draw_3d(t_data *data)
 {
 	int		i;
 	double	ray_angle;

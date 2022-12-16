@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:30:04 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/02 20:32:00 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:28:24 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ char	*read_file(int fd)
 	char	*file;
 	char	*line;
 
-	line = get_next_line(fd);
-	if (!line)
+	file = get_next_line(fd);
+	if (!file)
 		return (NULL);
-	file = line;
-	while ((line = get_next_line(fd)) && line)
+	line = get_next_line(fd);
+	while (line)
 	{
 		file = ft_strjoin(file, line);
 		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
 	return (file);
 }
 
