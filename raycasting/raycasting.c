@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/16 18:16:45 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:09:33 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,23 @@ double	distance_to_wall(t_data *data, double ray_angle)
 void	draw_3d(t_data *data)
 {
 	int		i;
+	int		j;
 	double	ray_angle;
 	i = 0;
-	
+	while( i < HEIGHT)
+	{
+		j = 0;
+		while(j < WIDTH)
+		{
+			if ( i < HEIGHT /2)
+				my_mlx_pixel_put(&data->mlx->image,j,i,data->ceiling_color);
+			else 
+				my_mlx_pixel_put(&data->mlx->image,j,i,data->floor_color);
+			j++;
+		}
+		i++;
+	}
+	i = 0;
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	while (i < WIDTH)
 	{

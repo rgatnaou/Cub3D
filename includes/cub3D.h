@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 19:19:18 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:41:32 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,30 @@ typedef struct s_player
 	double		rotation_angle;
 }				t_player;
 
+typedef struct s_texture
+{
+	unsigned int	*no;
+	unsigned int	*so;
+	unsigned int	*we;
+	unsigned int	*ea;
+	int				img_width;
+	int				img_height;
+}	t_texture;
+
 typedef struct s_data
 {
 	char		**map;
 	int			floor_color;
 	int			ceiling_color;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
 	t_player	player;
 	t_mlx		*mlx;
 	t_ray		ray;
 	t_move		move;
+	t_texture	texture;	
 }				t_data;
 
 typedef struct s_parse

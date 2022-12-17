@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:15:57 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/08 13:44:27 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:34:26 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	texture_errors(char *line, int *text_val, t_data *data, char orientation)
 		return (ft_error("Error :Invalid Texture Path.\n", NULL));
 	close(fd);
 	if (orientation == 'N')
-		data->no = ft_strdup(&line[i]);
+		data->path_no = ft_strdup(&line[i]);
 	if (orientation == 'S')
-		data->so = ft_strdup(&line[i]);
+		data->path_so = ft_strdup(&line[i]);
 	if (orientation == 'W')
-		data->we = ft_strdup(&line[i]);
+		data->path_we = ft_strdup(&line[i]);
 	if (orientation == 'E')
-		data->ea = ft_strdup(&line[i]);
+		data->path_ea = ft_strdup(&line[i]);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:51:47 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:34:11 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_parse	*inislaze_parse(t_parse *parse)
 	parse->data->floor_color = 0;
 	parse->data->ceiling_color = 0;
 	parse->data->map = 0;
-	parse->data->no = 0;
-	parse->data->so = 0;
-	parse->data->we = 0;
-	parse->data->ea = 0;
+	parse->data->path_no = 0;
+	parse->data->path_so = 0;
+	parse->data->path_we = 0;
+	parse->data->path_ea = 0;
 	parse->data->mlx = malloc(sizeof(t_mlx));
 	if (!parse->data->mlx)
 	{
@@ -46,10 +46,10 @@ void	free_parse(t_parse *parse)
 		if (parse->data)
 		{
 			free_tab2(parse->data->map);
-			free(parse->data->no);
-			free(parse->data->so);
-			free(parse->data->we);
-			free(parse->data->ea);
+			free(parse->data->path_no);
+			free(parse->data->path_so);
+			free(parse->data->path_we);
+			free(parse->data->path_ea);
 			free(parse->data->mlx);
 			free(parse->data);
 		}
