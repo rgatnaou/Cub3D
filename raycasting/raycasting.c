@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/17 14:09:33 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:04:10 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,13 +150,14 @@ void	draw_3d(t_data *data)
 	int		i;
 	int		j;
 	double	ray_angle;
+
 	i = 0;
 	while( i < HEIGHT)
 	{
 		j = 0;
 		while(j < WIDTH)
 		{
-			if ( i < HEIGHT /2)
+			if ( i < HEIGHT / 2)
 				my_mlx_pixel_put(&data->mlx->image,j,i,data->ceiling_color);
 			else 
 				my_mlx_pixel_put(&data->mlx->image,j,i,data->floor_color);

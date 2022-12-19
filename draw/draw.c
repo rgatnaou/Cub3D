@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 19:19:52 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:01:00 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int	draw(t_data *data)
 			&data->mlx->image.bits_per_pixel,
 			&data->mlx->image.line_length,
 			&data->mlx->image.endian);
+	// for(int i = 0; i < data->texture.img_height ; i++)
+	// {
+	// 	for(int j = 0; j < data->texture.img_height; j++)
+	// 		mlx_pixel_put(data->mlx->init, data->mlx->win, j, i, data->texture.no[(i *  data->texture.img_width) + j]);
+	// }
 	draw_3d(data);
 	draw_2d(data);
 	mlx_hook(data->mlx->win, 02, 0L, &key_pressed, data);
