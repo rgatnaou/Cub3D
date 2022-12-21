@@ -1,7 +1,7 @@
 NO ./texture/NO.xpm
-SO ./texture/NO.xpm
-WE ./texture/NO.xpm
-EA ./texture/NO.xpm
+SO ./texture/SO.xpm
+WE ./texture/WE.xpm
+EA ./texture/EA.xpm
 
 F 154,115,82
 C 0,191,255

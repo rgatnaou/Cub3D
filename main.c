@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/19 14:58:42 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:15:23 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_data(t_data *data)
 {
 	void *data_tmp;
 
-	data->map[data->player.cord.y][data->player.cord.x] = '0';
+	data->map[(int)data->player.cord.y][(int)data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
 	if (data->player.direction == 'N')
