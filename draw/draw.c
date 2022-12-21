@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/19 15:01:00 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:57:49 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,61 @@ int	destroy_win(t_data *data)
 	exit(0);
 }
 
+// void	draw_2d(t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	cube_x;
+// 	int	cube_y;
+
+// 	i = 0;
+// 	while (i < NB_RWS)
+// 	{
+// 		j = 0;
+// 		while (data->map[i][j])
+// 		{
+// 			cube_x = j * SIZE_CUB;
+// 			cube_y = i * SIZE_CUB;
+// 			if (data->map[i][j] == '1')
+// 				square(data->mlx, cube_x, cube_y, BLUE);
+// 			else if (data->map[i][j] == '0')
+// 				square(data->mlx, cube_x, cube_y, WHITE);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	draw_player(data);
+// 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
+// 			0);
+// }
+
 void	draw_2d(t_data *data)
 {
 	int	i;
 	int	j;
-	int	cube_x;
-	int	cube_y;
+	t_cord	start;
+	start.x = data->player.cord.x / SIZE_CUB;
+	start.y = data->player.cord.y / SIZE_CUB;
 
-	i = 0;
-	while (i < NB_RWS)
+	start.y = (start.y - 10 < 0)? 0 : start.y - 10;
+	start.x = (start.x - 10 < 0)? 0 : start.x - 10;
+	i = start.y;
+	while (i < start.y + 20 && data->map[i])
 	{
-		j = 0;
-		while (data->map[i][j])
+		j = start.x;
+		while (data->map[i][j] && j < start.x + 20)
 		{
-			cube_x = j * SIZE_CUB;
-			cube_y = i * SIZE_CUB;
 			if (data->map[i][j] == '1')
-				square(data->mlx, cube_x, cube_y, BLUE);
+				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
 			else if (data->map[i][j] == '0')
-				square(data->mlx, cube_x, cube_y, WHITE);
+				square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
 			j++;
 		}
 		i++;
 	}
-	draw_player(data);
+	start.x = data->player.cord.x - (start.x * SIZE_CUB);
+	start.y = data->player.cord.y - (start.y * SIZE_CUB); 
+	draw_player(data, &start);
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
 			0);
 }
