@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/21 15:34:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:05:32 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_ray
 	double		vert_distance;
 	double		xpoint;
 	double		ypoint;
-
 }				t_ray;
 
 typedef struct s_move
