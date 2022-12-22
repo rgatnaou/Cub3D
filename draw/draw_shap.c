@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/21 19:00:22 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:14:43 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ void	square(t_mlx *mlx, int x, int y, int color)
 		j = 0;
 		while (j <= size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
 		{
-			my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
+			if (i == 0 || j == 0)
+				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x808080);
+			else
+				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
 			j++;
 		}
 		i++;

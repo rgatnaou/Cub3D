@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/21 18:57:49 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/22 09:31:03 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	draw_2d(t_data *data)
 	start.x = data->player.cord.x / SIZE_CUB;
 	start.y = data->player.cord.y / SIZE_CUB;
 
-	start.y = (start.y - 10 < 0)? 0 : start.y - 10;
-	start.x = (start.x - 10 < 0)? 0 : start.x - 10;
+	start.y = (start.y - 5 < 0)? 0 : start.y - 5;
+	start.x = (start.x - 5 < 0)? 0 : start.x - 5;
 	i = start.y;
-	while (i < start.y + 20 && data->map[i])
+	while (i < start.y + 11 && data->map[i])
 	{
 		j = start.x;
-		while (data->map[i][j] && j < start.x + 20)
+		while (data->map[i][j] && j < start.x + 11)
 		{
 			if (data->map[i][j] == '1')
 				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);

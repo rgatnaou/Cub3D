@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/21 19:00:48 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:33:05 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
-# define MINIMAP_FACTOR 0.2
+# define MINIMAP_FACTOR 0.5
 
 # define KEY_W 13
 # define KEY_D 2
