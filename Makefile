@@ -6,7 +6,7 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/16 18:44:13 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/22 13:58:42 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -Ofast
 
-SRC =  main.c parsing/parse.c \
+SRC =  main.c \
+	parsing/parse.c \
 	parsing/utils_map.c \
 	parsing/utils.c \
 	parsing/texture.c \

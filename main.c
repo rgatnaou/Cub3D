@@ -6,16 +6,40 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/20 17:15:23 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:04:51 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3D.h"
 
+void	init_img_arrs(t_data *data)
+{
+	void	*data_tmp;
+
+	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_ea,
+			&data->texture.img_width, &data->texture.img_height);
+	data->texture.ea = (unsigned int *)mlx_get_data_addr(data_tmp,
+			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
+			&data->mlx->image.endian);
+	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_we,
+			&data->texture.img_width, &data->texture.img_height);
+	data->texture.we = (unsigned int *)mlx_get_data_addr(data_tmp,
+			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
+			&data->mlx->image.endian);
+	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_so,
+			&data->texture.img_width, &data->texture.img_height);
+	data->texture.so = (unsigned int *)mlx_get_data_addr(data_tmp,
+			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
+			&data->mlx->image.endian);
+	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_no,
+			&data->texture.img_width, &data->texture.img_height);
+	data->texture.no = (unsigned int *)mlx_get_data_addr(data_tmp,
+			&data->mlx->image.bits_per_pixel, &data->mlx->image.line_length,
+			&data->mlx->image.endian);
+}
+
 void	init_data(t_data *data)
 {
-	void *data_tmp;
-
 	data->map[(int)data->player.cord.y][(int)data->player.cord.x] = '0';
 	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
 	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
@@ -30,18 +54,7 @@ void	init_data(t_data *data)
 	data->move.ws_move = -1;
 	data->move.ad_move = -1;
 	data->move.rotation = -1;
-
-	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_ea, &data->texture.img_width, &data->texture.img_height);
-	data->texture.ea = (unsigned int *)mlx_get_data_addr(data_tmp, &data->mlx->image.bits_per_pixel, &data->mlx->image.line_length, &data->mlx->image.endian);
-
-	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_we, &data->texture.img_width, &data->texture.img_height);
-	data->texture.we = (unsigned int *)mlx_get_data_addr(data_tmp, &data->mlx->image.bits_per_pixel, &data->mlx->image.line_length, &data->mlx->image.endian);
-
-	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_so, &data->texture.img_width, &data->texture.img_height);
-	data->texture.so = (unsigned int *)mlx_get_data_addr(data_tmp, &data->mlx->image.bits_per_pixel, &data->mlx->image.line_length, &data->mlx->image.endian);
-
-	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_no, &data->texture.img_width, &data->texture.img_height);
-	data->texture.no = (unsigned int *)mlx_get_data_addr(data_tmp, &data->mlx->image.bits_per_pixel, &data->mlx->image.line_length, &data->mlx->image.endian);
+	init_img_arrs(data);
 }
 
 int	main(int ac, char **av)
