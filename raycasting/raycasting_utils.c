@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:53:53 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 14:22:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:00:44 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,16 @@ void	check_ray_position(t_data *data, double ray)
 	data->ray.left_ray = !data->ray.right_ray;
 }
 
-int	check_if_wall(t_data *data, int x_cord_win, int y_cord_win)
+int	check_if_wall(t_data *data, double x_cord_win, double y_cord_win)
 {
 	int	x_cor_in_map;
 	int	y_cor_in_map;
 
-	x_cor_in_map = roundf(x_cord_win / SIZE_CUB);
-	y_cor_in_map = roundf(y_cord_win / SIZE_CUB);
-	// if (x_cor_in_map > NB_CLS || y_cor_in_map > NB_RWS)
-	// 	{
-	// 		printf("khirij\n");
-	// 		exit(1);
-	// 	}
-		
-	// 		printf("ok1 %d , %d\n",y_cor_in_map,x_cor_in_map);
-	// printf( "%s\n",data->map[y_cor_in_map]);
-
+	x_cor_in_map = floor(x_cord_win / SIZE_CUB);
+	y_cor_in_map = floor(y_cord_win / SIZE_CUB);
 	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws
 		&& data->map[y_cor_in_map][x_cor_in_map] == '0')
-	{
-			return (0);
-	}
-	// if (data->map[y_cor_in_map][x_cor_in_map] == '0')
+			return (0);	
 	return (1);
 }
 

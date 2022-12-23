@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 14:28:04 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:08:09 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_img_arrs(t_data *data)
 void	init_data(t_data *data)
 {
 	data->map[(int)data->player.cord.y][(int)data->player.cord.x] = '0';
-	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + 10;
-	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + 10;
+	data->player.cord.x = (data->player.cord.x * SIZE_CUB) + SIZE_CUB / 2;
+	data->player.cord.y = (data->player.cord.y * SIZE_CUB) + SIZE_CUB / 2;
 	if (data->player.direction == 'N')
 		data->player.rotation_angle = 270 * M_PI / 180;
 	else if (data->player.direction == 'S')
@@ -51,29 +51,22 @@ void	init_data(t_data *data)
 		data->player.rotation_angle = M_PI;
 	else if (data->player.direction == 'E')
 		data->player.rotation_angle = 0;
-	data->move.ws_move = -1;
-	data->move.ad_move = -1;
-	data->move.rotation = -1;
+	data->move.ws_move = 0;
+	data->move.ad_move = 0;
+	data->move.rotation = 0;
 	init_img_arrs(data);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	*data;
+	int		i;
+	int		j;
 
 	data = parse(ac, av);
+	i = 0;
 	if (!data)
 		return (0);
-	int i = 0;
-	int j;
-	// while(data->map[i])
-	// {
-	// 	printf("cols: %zu\n",ft_strlen(data->map[i]));
-	// 	i++;
-	// }
-	// printf("rws: %d \n",i - 1);
-	// i = 0;
-	// data->nb_cls = 0;
 	while(data->map[i])
 	{
 		j = -1;

@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 13:12:28 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 16:03:46 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	square(t_mlx *mlx, int x, int y, int color)
 	x *= MINIMAP_FACTOR;
 	y *= MINIMAP_FACTOR;
 	i = 0;
-	while (i <= size_cube_minimap)
+	while (i < size_cube_minimap)
 	{
 		j = 0;
-		while (j <= size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
+		while (j < size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
 		{
-			if (i == 0 || j == 0)
+			if (i == 0 || j == 0 )
 				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x808080);
 			else
 				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);

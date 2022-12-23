@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 14:33:55 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:02:20 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height, char dir)
 	int	textOffsetX;
 	int textOffsetY;
 	double dist;
-	// (void)dir;
+	(void)dir;
 
 	// printf("horzo %d\n",data->ray.horz_hit_wall);
 	// printf("vert %d\n",data->ray.vert_hit_wall);
@@ -37,32 +37,32 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height, char dir)
 		// textOffsetY = ((cord_wall->y + i) * data->texture.img_height;
 		textOffsetY = dist * ((double) data->texture.no.img_width / wall_height) ;
 		// textOffsetY =((i - cord_wall->y) * ((float)SIZE_CUB / (int)h));
-		if (dir == 'N')
-		{
-			textOffsetY = dist * ((double) data->texture.no.img_height / wall_height);
-			my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
-				data->texture.no.arr[(data->texture.no.img_width * textOffsetY) + textOffsetX]);
-		}
-		else if (dir == 'S')
-		{
-			textOffsetY = dist * ((double) data->texture.so.img_width / wall_height) ;
-			my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
-				data->texture.so.arr[(data->texture.so.img_width * textOffsetY) + textOffsetX]);
-		}
-		else if (dir == 'W')
-		{
-			textOffsetY = dist * ((double) data->texture.we.img_width / wall_height) ;
-			my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
-				data->texture.we.arr[(data->texture.we.img_width * textOffsetY) + textOffsetX]);
-		}
-		else if (dir == 'E')
-		{	
-			textOffsetY = dist * ((double) data->texture.ea.img_width / wall_height) ;
-			my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
-				data->texture.ea.arr[(data->texture.ea.img_width * textOffsetY) + textOffsetX]);
-		}
+		// if (dir == 'N')
+		// {
+		// 	textOffsetY = dist * ((double) data->texture.no.img_height / wall_height);
+		// 	my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
+		// 		data->texture.no.arr[(data->texture.no.img_width * textOffsetY) + textOffsetX]);
+		// }
+		// else if (dir == 'S')
+		// {
+		// 	textOffsetY = dist * ((double) data->texture.so.img_width / wall_height) ;
+		// 	my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
+		// 		data->texture.so.arr[(data->texture.so.img_width * textOffsetY) + textOffsetX]);
+		// }
+		// else if (dir == 'W')
+		// {
+		// 	textOffsetY = dist * ((double) data->texture.we.img_width / wall_height) ;
+		// 	my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
+		// 		data->texture.we.arr[(data->texture.we.img_width * textOffsetY) + textOffsetX]);
+		// }
+		// else if (dir == 'E')
+		// {	
+		// 	textOffsetY = dist * ((double) data->texture.ea.img_width / wall_height) ;
+		// 	my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i,
+		// 		data->texture.ea.arr[(data->texture.ea.img_width * textOffsetY) + textOffsetX]);
+		// }
 		// else
-		// 	my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i, 0x808080);
+			my_mlx_pixel_put(&data->mlx->image, cord_wall->x, i, 0x808080);
 		i++;
 	}
 }

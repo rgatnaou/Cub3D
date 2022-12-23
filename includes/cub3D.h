@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 14:21:47 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:39:01 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ typedef struct s_mlx
 
 typedef struct s_cord
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
 }				t_cord;
 
 typedef struct s_player
@@ -174,7 +174,7 @@ void			draw_3d(t_data *data);
 int				destroy_win(t_data *data);
 
 // Raycasting Functions
-int				check_if_wall(t_data *data, int x_cord_win, int y_cord_win);
+int				check_if_wall(t_data *data, double x_cord_win, double y_cord_win);
 double			limit_angle(double ray_angle);
 void			check_ray_position(t_data *data, double ray);
 double			distance(int xplayer, int yplayer, double xpoint,

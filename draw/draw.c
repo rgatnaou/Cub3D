@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 14:31:46 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:40:27 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,15 @@ void	raycasting(t_data *data)
 	i = 0;	
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, RED);
-	circle(data->mlx, 382, 112, 2, BLUE);
-
-
+	
 
 	while (i < WIDTH)
 	{
+		distance_to_wall(data,limit_angle(ray_angle));
+		line(data,
+		data->ray.xpoint,
+		data->ray.ypoint,
+		RED);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}
@@ -200,7 +203,7 @@ int	draw(t_data *data)
 	// 	for(int j = 0; j < data->texture.img_height; j++)
 	// 		mlx_pixel_put(data->mlx->init, data->mlx->win, j, i, data->texture.no[(i *  data->texture.img_width) + j]);
 	// }
-	// draw_3d(data);
+	draw_3d(data);
 	draw_2d(data);
 	mlx_hook(data->mlx->win, 02, 0L, &key_pressed, data);
 	mlx_hook(data->mlx->win, 03, 0L, &key_release, data);

@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 13:36:56 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:45:47 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,6 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		data->ray.ypoint = data->ray.yfinal_horz_coord;
 		data->ray.xpoint = data->ray.xfinal_horz_coord;
 	}
-	else if (data->ray.vert_hit_wall)
-	{
-		data->ray.xpoint = data->ray.xfinal_vert_coord;
-		data->ray.ypoint = data->ray.yfinal_vert_coord;
-	}
 	if (data->ray.horz_hit_wall && data->ray.vert_hit_wall)
 	{
 		if (data->ray.vert_distance < data->ray.horz_distance)
@@ -142,6 +137,11 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		}
 		else
 		data->ray.vert_hit_wall = false;
+	}
+	else if (data->ray.vert_hit_wall)
+	{
+		data->ray.xpoint = data->ray.xfinal_vert_coord;
+		data->ray.ypoint = data->ray.yfinal_vert_coord;
 	}
 	
 	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
