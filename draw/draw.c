@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 18:40:27 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:52:30 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ void	raycasting(t_data *data)
 
 	while (i < WIDTH)
 	{
-		distance_to_wall(data,limit_angle(ray_angle));
+		distance_to_wall(data, limit_angle(ray_angle));
 		line(data,
-		data->ray.xpoint,
-		data->ray.ypoint,
-		RED);
+			data->ray.xpoint,
+			data->ray.ypoint,
+			RED);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}
