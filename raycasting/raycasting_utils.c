@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:53:53 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/22 12:34:24 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/23 14:22:24 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,21 @@ int	check_if_wall(t_data *data, int x_cord_win, int y_cord_win)
 
 	x_cor_in_map = roundf(x_cord_win / SIZE_CUB);
 	y_cor_in_map = roundf(y_cord_win / SIZE_CUB);
-	if (!(x_cor_in_map >= NB_CLS || y_cor_in_map >= NB_RWS)
+	// if (x_cor_in_map > NB_CLS || y_cor_in_map > NB_RWS)
+	// 	{
+	// 		printf("khirij\n");
+	// 		exit(1);
+	// 	}
+		
+	// 		printf("ok1 %d , %d\n",y_cor_in_map,x_cor_in_map);
+	// printf( "%s\n",data->map[y_cor_in_map]);
+
+	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws
 		&& data->map[y_cor_in_map][x_cor_in_map] == '0')
+	{
 			return (0);
+	}
+	// if (data->map[y_cor_in_map][x_cor_in_map] == '0')
 	return (1);
 }
 

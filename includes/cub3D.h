@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/22 12:33:05 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/23 14:21:47 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 # include <stdio.h>
 # include <limits.h>
 
-# define SIZE_CUB 32
-# define NB_CLS 53
-# define NB_RWS 30
+# define SIZE_CUB 16
+// # define NB_CLS 10000
+// # define NB_RWS 39
 # define SPEED 2
-# define WIDTH (NB_CLS * SIZE_CUB)
-# define HEIGHT (NB_RWS * SIZE_CUB)
+# define WIDTH 1696
+# define HEIGHT 960
 # define FOV (60 * (M_PI / 180))
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
-# define MINIMAP_FACTOR 0.5
+# define MINIMAP_FACTOR 1
 
 # define KEY_W 13
 # define KEY_D 2
@@ -102,13 +102,18 @@ typedef struct s_player
 
 typedef struct s_texture
 {
-	unsigned int	*no;
-	unsigned int	*so;
-	unsigned int	*we;
-	unsigned int	*ea;
+	unsigned int	*arr;
 	int				img_width;
 	int				img_height;
 }	t_texture;
+
+typedef struct s_textures
+{
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
+	t_texture	no;
+}	t_textures;
 
 typedef struct s_data
 {
@@ -119,11 +124,13 @@ typedef struct s_data
 	char		*path_so;
 	char		*path_we;
 	char		*path_ea;
+	int			nb_cls;
+	int			nb_rws;
 	t_player	player;
 	t_mlx		*mlx;
 	t_ray		ray;
 	t_move		move;
-	t_texture	texture;	
+	t_textures	texture;	
 }				t_data;
 
 typedef struct s_parse
@@ -153,7 +160,8 @@ void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
 int				draw(t_data *data);
 int				rendering(t_data *data);
 // void			circle(t_mlx *mlx, t_cord coord, int r, int color);
-void			circle(t_mlx *mlx, t_cord *coord, int r, int color);
+// void			circle(t_mlx *mlx, t_cord *coord, int r, int color);
+void	circle(t_mlx *mlx, int x, int y, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
 void			line(t_data *data, double x_end, double y_end, int color);
 // void			draw_player(t_data *data);

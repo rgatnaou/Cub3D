@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/07 11:36:40 by rgatnaou          #+#    #+#              #
-#    Updated: 2021/11/20 16:47:23 by rgatnaou         ###   ########.fr        #
+#    Updated: 2022/12/23 13:17:30 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADER = libft.h
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC =   ft_isalnum.c	\
 		ft_isascii.c	\

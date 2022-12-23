@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/21 14:18:13 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:36:56 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		else
 		data->ray.vert_hit_wall = false;
 	}
+	
 	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
 	return (final_distance);
 }
