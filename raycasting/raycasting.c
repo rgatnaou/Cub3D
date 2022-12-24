@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 19:07:03 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/24 12:29:05 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 	
 	data->ray.vert_distance = INT_MAX;
 	check_ray_position(data, ray_angle);
-	x_intersect = (data->player.cord.x / SIZE_CUB) * SIZE_CUB;
+	x_intersect = floor(data->player.cord.x / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.right_ray)
 		x_intersect += SIZE_CUB;
 	y_intersect = data->player.cord.y + ((x_intersect - data->player.cord.x)

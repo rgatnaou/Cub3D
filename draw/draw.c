@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 18:52:30 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/24 12:43:02 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,29 @@ void	circle(t_mlx *mlx, int x, int y, int r, int color)
 		r--;
 	}
 }
+void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
+{
+	double	dis_x;
+	double	dis_y;
+	double	x;
+	double	y;
+	int		step;
+
+	x = start->x;
+	y = start->y;
+	dis_x = x_end - x;
+	dis_y = y_end - y;
+	step = fmax(fabs(dis_x), fabs(dis_y));
+	dis_x /= step;
+	dis_y /= step;
+	while (step)
+	{
+		my_mlx_pixel_put(&data->mlx->image, x, y, color);
+		x += dis_x;
+		y += dis_y;
+		step--;
+	}
+}
 
 void	raycasting(t_data *data)
 {
@@ -125,19 +148,18 @@ void	raycasting(t_data *data)
 	// Draw Player
 	i = 0;	
 	ray_angle = data->player.rotation_angle - (FOV / 2);
-	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, RED);
-	
 
 	while (i < WIDTH)
 	{
 		distance_to_wall(data, limit_angle(ray_angle));
 		line(data,
 			data->ray.xpoint,
-			data->ray.ypoint,
+			data->ray.ypoint ,
 			RED);
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}
+	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, BLUE);
 }
 
 void	draw_2d(t_data *data)
@@ -146,6 +168,7 @@ void	draw_2d(t_data *data)
 	int	j;
 	int	cube_x;
 	int	cube_y;
+	// t_cord	start;
 
 	mlx_clear_window(data->mlx->init, data->mlx->win);
 	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
@@ -170,6 +193,27 @@ void	draw_2d(t_data *data)
 		}
 		i++;
 	}
+	// start.x = data->player.cord.x / SIZE_CUB;
+	// start.y = data->player.cord.y / SIZE_CUB;
+
+	// start.y = (start.y - 15 < 0)? 0 : start.y - 15;
+	// start.x = (start.x - 15 < 0)? 0 : start.x - 15;
+	// i = start.y;
+	// while (i < start.y + 31 && data->map[i])
+	// {
+	// 	j = start.x;
+	// 	while (data->map[i][j] && j < start.x + 31 && j < (int)ft_strlen(data->map[i]))
+	// 	{
+	// 		if (data->map[i][j] == '1')
+	// 			square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
+	// 		else if (data->map[i][j] == '0')
+	// 			square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	// start.x = data->player.cord.x - (start.x * SIZE_CUB);
+	// start.y = data->player.cord.y - (start.y * SIZE_CUB); 
 	raycasting(data);
 	
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,

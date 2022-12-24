@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 16:03:46 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/24 12:26:44 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	line(t_data *data, double x_end, double y_end, int color)
 	double	dis_y;
 	double	x;
 	double	y;
-	int		step;
+	double		step;
 
 	x_end *= MINIMAP_FACTOR;
 	x = data->player.cord.x * MINIMAP_FACTOR;
@@ -106,9 +106,9 @@ void	line(t_data *data, double x_end, double y_end, int color)
 	step = fmax(fabs(dis_x), fabs(dis_y));
 	dis_x /= step;
 	dis_y /= step;
-	while (step)
+	while (step >= 0)
 	{
-		my_mlx_pixel_put(&data->mlx->image, x, y, color);
+		my_mlx_pixel_put(&data->mlx->image, roundf(x), roundf(y), color);
 		x += dis_x;
 		y += dis_y;
 		step--;
@@ -127,29 +127,29 @@ void	line(t_data *data, double x_end, double y_end, int color)
 // 			data->player.cord.y + (sin(data->player.rotation_angle) * 50), RED);
 // }
 
-void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
-{
-	double	dis_x;
-	double	dis_y;
-	double	x;
-	double	y;
-	int		step;
+// void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
+// {
+// 	double	dis_x;
+// 	double	dis_y;
+// 	double	x;
+// 	double	y;
+// 	int		step;
 
-	x = start->x;
-	y = start->y;
-	dis_x = x_end - x;
-	dis_y = y_end - y;
-	step = fmax(fabs(dis_x), fabs(dis_y));
-	dis_x /= step;
-	dis_y /= step;
-	while (step)
-	{
-		my_mlx_pixel_put(&data->mlx->image, x, y, color);
-		x += dis_x;
-		y += dis_y;
-		step--;
-	}
-}
+// 	x = start->x;
+// 	y = start->y;
+// 	dis_x = x_end - x;
+// 	dis_y = y_end - y;
+// 	step = fmax(fabs(dis_x), fabs(dis_y));
+// 	dis_x /= step;
+// 	dis_y /= step;
+// 	while (step)
+// 	{
+// 		my_mlx_pixel_put(&data->mlx->image, x, y, color);
+// 		x += dis_x;
+// 		y += dis_y;
+// 		step--;
+// 	}
+// }
 
 // void	draw_player(t_data *data ,t_cord *start)
 // {
