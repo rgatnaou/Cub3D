@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/24 11:52:14 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 19:25:03 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 # include <stdio.h>
 # include <limits.h>
 
-# define SIZE_CUB 16
-// # define NB_CLS 10000
-// # define NB_RWS 39
+# define SIZE_CUB 32
 # define SPEED 2
 # define WIDTH 1696
 # define HEIGHT 960
@@ -31,7 +29,7 @@
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
-# define MINIMAP_FACTOR 0.5
+# define MINIMAP_FACTOR 0.2
 
 # define KEY_W 13
 # define KEY_D 2

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 18:55:15 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/25 18:05:26 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,25 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height, char dir)
 	}
 }
 
-void	projection(t_data *data, double ray_angle, int i)
+void	projection(t_data *data, double ray_angle, int x)
 {
-	double	dis_to_prj_wall;
+	double	dis_projection;
 	double	wall_height;
 	t_cord	cord_wall;
+	int 	y;
 
-	dis_to_prj_wall = (WIDTH / 2) / tan(FOV / 2);
+	dis_projection = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = (SIZE_CUB / distance_to_wall(data, ray_angle))
-		* dis_to_prj_wall;
+		* dis_projection; 
 	
-	cord_wall.x = i;
-	cord_wall.y = (HEIGHT - wall_height) / 2;
-	// if (cord_wall.y < 0)
-	// 	cord_wall.y = 0;
+	cord_wall.x = x;
+	cord_wall.y = HEIGHT / 2 - wall_height / 2;
+	y = 0;
+	while (y < cord_wall.y)
+	{
+		my_mlx_pixel_put(&data->mlx->image, cord_wall.x, y, data->ceiling_color);
+		y++;
+	}
 	if (data->ray.horz_hit_wall)
 	{
 		if (data->ray.up_ray)
@@ -94,5 +99,11 @@ void	projection(t_data *data, double ray_angle, int i)
 			put_texture(data, &cord_wall , wall_height, 'E');
 		else
 			put_texture(data, &cord_wall , wall_height, 'W');
+	}
+	y = cord_wall.y + wall_height;
+	while (y < HEIGHT)
+	{
+		my_mlx_pixel_put(&data->mlx->image, cord_wall.x, y, data->floor_color);
+		y++;
 	}
 }

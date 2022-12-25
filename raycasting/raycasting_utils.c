@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:53:53 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 18:52:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/25 19:14:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	check_if_wall(t_data *data, double x_cord_win, double y_cord_win)
 
 	x_cor_in_map = floor(x_cord_win / SIZE_CUB);
 	y_cor_in_map = floor(y_cord_win / SIZE_CUB);
-	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws
-		&& data->map[y_cor_in_map][x_cor_in_map] == '0')
-			return (0);	
-	return (1);
+	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws)
+		return !(data->map[y_cor_in_map][x_cor_in_map] == '0');
+	// 		return (0);	
+	return (0);
 }
 
 double	distance(int xplayer, int yplayer, double xpoint, double ypoint)

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/24 12:29:05 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 19:23:48 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	found_horz_hit_wall(t_data *data, double x_intersect,
 	data->ray.yfinal_horz_coord = 0;
 	
 	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
-		&& y_intersect <= HEIGHT)
+		&& y_intersect * MINIMAP_FACTOR <= HEIGHT )
 	{
 		if (check_if_wall(data, x_intersect, y_intersect - data->ray.up_ray))
 		{
@@ -37,6 +37,7 @@ bool	found_horz_hit_wall(t_data *data, double x_intersect,
 			y_intersect += ystep;
 		}
 	}
+	data->ray.horz_distance = INT_MAX;
 	return (false);
 }
 
@@ -47,7 +48,7 @@ bool	found_vert_hit_wall(t_data *data, double x_intersect,
 	data->ray.yfinal_vert_coord = 0;
 
 	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
-		&& y_intersect <= HEIGHT)
+		&& y_intersect * MINIMAP_FACTOR<= HEIGHT)
 	{
 		if (check_if_wall(data, x_intersect - data->ray.left_ray, y_intersect))
 		{
@@ -65,6 +66,7 @@ bool	found_vert_hit_wall(t_data *data, double x_intersect,
 			y_intersect += ystep;
 		}
 	}
+	data->ray.vert_distance = INT_MAX;
 	return (false);
 }
 
@@ -76,7 +78,6 @@ bool	horizontal_raycasting(t_data *data, double ray_angle)
 	double	ystep;
 
 	data->ray.horz_distance = INT_MAX;
-	check_ray_position(data, ray_angle);
 	y_intersect = floor(data->player.cord.y / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.down_ray)
 		y_intersect += SIZE_CUB;
@@ -99,7 +100,6 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 	double	ystep;
 	
 	data->ray.vert_distance = INT_MAX;
-	check_ray_position(data, ray_angle);
 	x_intersect = floor(data->player.cord.x / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.right_ray)
 		x_intersect += SIZE_CUB;
@@ -117,60 +117,35 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 double	distance_to_wall(t_data *data, double ray_angle)
 {
 	double	final_distance;
+	check_ray_position(data, ray_angle);
 	data->ray.horz_hit_wall = horizontal_raycasting(data, ray_angle);
 	data->ray.vert_hit_wall = vertical_raycasting(data, ray_angle);
-	
-	if (data->ray.horz_hit_wall)
-	{
-		data->ray.ypoint = data->ray.yfinal_horz_coord;
-		data->ray.xpoint = data->ray.xfinal_horz_coord;
-	}
-	if (data->ray.horz_hit_wall && data->ray.vert_hit_wall)
-	{
-		if (data->ray.vert_distance < data->ray.horz_distance)
-		{
-			data->ray.xpoint = data->ray.xfinal_vert_coord;
-			data->ray.ypoint = data->ray.yfinal_vert_coord;
-			data->ray.horz_hit_wall = false;
-		}
-		else
-			data->ray.vert_hit_wall = false;
-	}
-	else if (data->ray.vert_hit_wall)
+	if (data->ray.vert_distance < data->ray.horz_distance)
 	{
 		data->ray.xpoint = data->ray.xfinal_vert_coord;
 		data->ray.ypoint = data->ray.yfinal_vert_coord;
+		data->ray.horz_hit_wall = false;
 	}
-	
+	else
+	{
+		data->ray.xpoint = data->ray.xfinal_horz_coord;
+		data->ray.ypoint = data->ray.yfinal_horz_coord;
+		data->ray.vert_hit_wall = false;
+	}
 	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
-	return (final_distance);
+ 	return (final_distance);
 }
 void	draw_3d(t_data *data)
 {
-	int		i;
-	int		j;
+	int		x;
 	double	ray_angle;
 
-	i = 0;
-	while( i < HEIGHT)
-	{
-		j = 0;
-		while(j < WIDTH)
-		{
-			if ( i < HEIGHT / 2)
-				my_mlx_pixel_put(&data->mlx->image,j,i,data->ceiling_color);
-			else 
-				my_mlx_pixel_put(&data->mlx->image,j,i,data->floor_color);
-			j++;
-		}
-		i++;
-	}
-	i = 0;
+	x = 0;
 	ray_angle = data->player.rotation_angle - (FOV / 2);
-	while (i < WIDTH)
+	while (x < WIDTH)
 	{
-		projection(data, limit_angle(ray_angle), i);
-		ray_angle += (FOV / WIDTH);
-		i++;
+		projection(data, limit_angle(ray_angle), x);
+		ray_angle += FOV / WIDTH;
+		x++;
 	}
 }

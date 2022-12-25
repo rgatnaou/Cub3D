@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/23 18:08:09 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/24 14:20:19 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	init_data(t_data *data)
 	if (data->player.direction == 'N')
 		data->player.rotation_angle = 270 * M_PI / 180;
 	else if (data->player.direction == 'S')
-		data->player.rotation_angle = M_PI / 2;
+		data->player.rotation_angle = 90 * M_PI / 180;
 	else if (data->player.direction == 'W')
-		data->player.rotation_angle = M_PI;
+		data->player.rotation_angle =  180 * M_PI / 180;
 	else if (data->player.direction == 'E')
 		data->player.rotation_angle = 0;
 	data->move.ws_move = 0;

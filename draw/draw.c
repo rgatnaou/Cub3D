@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/24 12:43:02 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 19:25:33 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	circle(t_mlx *mlx, int x, int y, int r, int color)
 		r--;
 	}
 }
+
 void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
 {
 	double	dis_x;
@@ -159,6 +160,10 @@ void	raycasting(t_data *data)
 		ray_angle += (FOV / WIDTH);
 		i++;
 	}
+	line(data,
+			data->player.cord.x + cos(data->player.rotation_angle) * 10,
+			data->player.cord.y + sin(data->player.rotation_angle) * 10,
+			BLUE);
 	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, BLUE);
 }
 
@@ -170,12 +175,7 @@ void	draw_2d(t_data *data)
 	int	cube_y;
 	// t_cord	start;
 
-	mlx_clear_window(data->mlx->init, data->mlx->win);
-	data->mlx->image.img = mlx_new_image(data->mlx->init, WIDTH, HEIGHT);
-	data->mlx->image.addr = mlx_get_data_addr(data->mlx->image.img,
-			&data->mlx->image.bits_per_pixel,
-			&data->mlx->image.line_length,
-			&data->mlx->image.endian);
+	// mlx_clear_window(data->mlx->init, data->mlx->win);
 	i = 0;
 	draw_3d(data);
 	while (data->map[i])
@@ -247,8 +247,10 @@ int	draw(t_data *data)
 	// 	for(int j = 0; j < data->texture.img_height; j++)
 	// 		mlx_pixel_put(data->mlx->init, data->mlx->win, j, i, data->texture.no[(i *  data->texture.img_width) + j]);
 	// }
-	draw_3d(data);
+	//draw_3d(data);
 	draw_2d(data);
+
+	
 	mlx_hook(data->mlx->win, 02, 0L, &key_pressed, data);
 	mlx_hook(data->mlx->win, 03, 0L, &key_release, data);
 	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, data);
