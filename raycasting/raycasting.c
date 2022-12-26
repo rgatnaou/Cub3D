@@ -6,64 +6,56 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/25 19:23:48 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:19:47 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-bool	found_horz_hit_wall(t_data *data, double x_intersect,
-		double y_intersect, double xstep, double ystep)
+bool	found_horz_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 {
-	data->ray.xfinal_horz_coord = 0;
-	data->ray.yfinal_horz_coord = 0;
-	
-	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
-		&& y_intersect * MINIMAP_FACTOR <= HEIGHT )
+	data->ray.horz.x = 0;
+	data->ray.horz.y = 0;
+	while (intercept->x >= 0 && intercept->x <= data->width
+		&& intercept->y >= 0 && intercept->y <= data->height)
 	{
-		if (check_if_wall(data, x_intersect, y_intersect - data->ray.up_ray))
+		if (check_if_wall(data, intercept->x, intercept->y - data->ray.up))
 		{
-			data->ray.xfinal_horz_coord = x_intersect;
-			data->ray.yfinal_horz_coord = y_intersect;
-			data->ray.horz_distance = distance(data->player.cord.x,
-					data->player.cord.y,
-					data->ray.xfinal_horz_coord,
-					data->ray.yfinal_horz_coord);
-			return (true);
+			data->ray.horz.x = intercept->x;
+			data->ray.horz.y = intercept->y;
+			data->ray.horz_distance = distance(&data->player.cord,
+					&data->ray.horz);
+			return(true);
 		}
 		else
 		{
-			x_intersect += xstep;
-			y_intersect += ystep;
+			intercept->x += step->x;
+			intercept->y += step->y;
 		}
 	}
 	data->ray.horz_distance = INT_MAX;
 	return (false);
 }
 
-bool	found_vert_hit_wall(t_data *data, double x_intersect,
-		double y_intersect, double xstep, double ystep)
+bool	found_vert_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 {
-	data->ray.xfinal_vert_coord = 0;
-	data->ray.yfinal_vert_coord = 0;
-
-	while (x_intersect >= 0 && x_intersect <= WIDTH && y_intersect >= 0
-		&& y_intersect * MINIMAP_FACTOR<= HEIGHT)
+	data->ray.vert.x = 0;
+	data->ray.vert.y = 0;
+	while (intercept->x >= 0 && intercept->x <= data->width
+		&& intercept->y >= 0 && intercept->y <= data->height)
 	{
-		if (check_if_wall(data, x_intersect - data->ray.left_ray, y_intersect))
+		if (check_if_wall(data, intercept->x - !data->ray.right, intercept->y))
 		{
-			data->ray.xfinal_vert_coord = x_intersect;
-			data->ray.yfinal_vert_coord = y_intersect;
-			data->ray.vert_distance = distance(data->player.cord.x,
-					data->player.cord.y,
-					data->ray.xfinal_vert_coord,
-					data->ray.yfinal_vert_coord);
+			data->ray.vert.x = intercept->x;
+			data->ray.vert.y = intercept->y;
+			data->ray.vert_distance = distance(&data->player.cord,
+					&data->ray.vert);
 			return (true);
 		}
 		else
 		{
-			x_intersect += xstep;
-			y_intersect += ystep;
+			intercept->x += step->x;
+			intercept->y += step->y;
 		}
 	}
 	data->ray.vert_distance = INT_MAX;
@@ -72,46 +64,43 @@ bool	found_vert_hit_wall(t_data *data, double x_intersect,
 
 bool	horizontal_raycasting(t_data *data, double ray_angle)
 {
-	double	x_intersect;
-	double	y_intersect;
-	double	xstep;
-	double	ystep;
+	t_cord intercept;
+	t_cord step;
+
 
 	data->ray.horz_distance = INT_MAX;
-	y_intersect = floor(data->player.cord.y / SIZE_CUB) * SIZE_CUB;
-	if (data->ray.down_ray)
-		y_intersect += SIZE_CUB;
-	x_intersect = data->player.cord.x + ((y_intersect - data->player.cord.y)
+	intercept.y = floor(data->player.cord.y / SIZE_CUB) * SIZE_CUB;
+	if (!data->ray.up)
+		intercept.y += SIZE_CUB;
+	intercept.x = data->player.cord.x + ((intercept.y - data->player.cord.y)
 			/ tan(ray_angle));
-	ystep = SIZE_CUB;
-	if (data->ray.up_ray)
-		ystep *= -1;
-	xstep = SIZE_CUB / tan(ray_angle);
-	if ((data->ray.left_ray && xstep > 0) || (data->ray.right_ray && xstep < 0))
-		xstep *= -1;
-	return (found_horz_hit_wall(data, x_intersect, y_intersect, xstep, ystep));
+	step.y = SIZE_CUB;
+	if (data->ray.up)
+		step.y *= -1;
+	step.x = SIZE_CUB / tan(ray_angle);
+	if ((!data->ray.right && step.x > 0) || (data->ray.right && step.x < 0))
+		step.x *= -1;
+	return (found_horz_hit_wall(data, &intercept, &step));
 }
 
 bool	vertical_raycasting(t_data *data, double ray_angle)
 {
-	double	x_intersect;
-	double	y_intersect;
-	double	xstep;
-	double	ystep;
+	t_cord intercept;
+	t_cord step;
 	
 	data->ray.vert_distance = INT_MAX;
-	x_intersect = floor(data->player.cord.x / SIZE_CUB) * SIZE_CUB;
-	if (data->ray.right_ray)
-		x_intersect += SIZE_CUB;
-	y_intersect = data->player.cord.y + ((x_intersect - data->player.cord.x)
+	intercept.x = floor(data->player.cord.x / SIZE_CUB) * SIZE_CUB;
+	if (data->ray.right)
+		intercept.x += SIZE_CUB;
+	intercept.y = data->player.cord.y + ((intercept.x - data->player.cord.x)
 			* tan(ray_angle));
-	xstep = SIZE_CUB;
-	if (data->ray.left_ray)
-		xstep *= -1;
-	ystep = xstep * tan(ray_angle);
-	if ((data->ray.up_ray && ystep > 0) || (data->ray.down_ray && ystep < 0))
-		ystep *= -1;
-	return (found_vert_hit_wall(data, x_intersect, y_intersect, xstep, ystep));
+	step.x = SIZE_CUB;
+	if (!data->ray.right)
+		step.x *= -1;
+	step.y = step.x * tan(ray_angle);
+	if ((data->ray.up && step.y > 0) || (!data->ray.up && step.y < 0))
+		step.y *= -1;
+	return (found_vert_hit_wall(data, &intercept, &step));
 }
 
 double	distance_to_wall(t_data *data, double ray_angle)
@@ -122,17 +111,17 @@ double	distance_to_wall(t_data *data, double ray_angle)
 	data->ray.vert_hit_wall = vertical_raycasting(data, ray_angle);
 	if (data->ray.vert_distance < data->ray.horz_distance)
 	{
-		data->ray.xpoint = data->ray.xfinal_vert_coord;
-		data->ray.ypoint = data->ray.yfinal_vert_coord;
+		data->ray.cast.x = data->ray.vert.x;
+		data->ray.cast.y = data->ray.vert.y;
 		data->ray.horz_hit_wall = false;
 	}
 	else
 	{
-		data->ray.xpoint = data->ray.xfinal_horz_coord;
-		data->ray.ypoint = data->ray.yfinal_horz_coord;
+		data->ray.cast.x = data->ray.horz.x;
+		data->ray.cast.y = data->ray.horz.y;
 		data->ray.vert_hit_wall = false;
 	}
-	final_distance = distance(data->player.cord.x, data->player.cord.y, data->ray.xpoint, data->ray.ypoint) * cos(ray_angle - data->player.rotation_angle);
+	final_distance = distance(&data->player.cord, &data->ray.cast) * cos(ray_angle - data->player.rotation_angle);
  	return (final_distance);
 }
 void	draw_3d(t_data *data)

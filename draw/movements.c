@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 18:36:40 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:08:36 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	key_press_w(t_data *data)
 
 void	move_player(t_data *data)
 {
-	data->player.rotation_angle += data->move.rotation * 3 * M_PI / 180.0;
+	data->player.rotation_angle += data->move.rotation * 2 * M_PI / 180.0;
 
 	if (data->move.ws_move)
 	{	

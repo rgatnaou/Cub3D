@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/25 19:25:03 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:08:43 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdio.h>
 # include <limits.h>
 
-# define SIZE_CUB 32
-# define SPEED 2
+# define SIZE_CUB 64
+# define SPEED 10
 # define WIDTH 1696
 # define HEIGHT 960
 # define FOV (60 * (M_PI / 180))
@@ -43,23 +43,23 @@
 # define KEY_ESC 53
 
 // Begin Parsing:
+typedef struct s_cord
+{
+	double			x;
+	double			y;
+}				t_cord;
 
 typedef struct s_ray
 {
-	bool		up_ray;
-	bool		right_ray;
-	bool		down_ray;
-	bool		left_ray;
+	bool		up;
+	bool		right;
 	bool		vert_hit_wall;
 	bool		horz_hit_wall;
-	double		xfinal_horz_coord;
-	double		yfinal_horz_coord;
-	double		xfinal_vert_coord;
-	double		yfinal_vert_coord;
+	t_cord		horz;
+	t_cord		vert;
+	t_cord		cast;
 	double		horz_distance;
 	double		vert_distance;
-	double		xpoint;
-	double		ypoint;
 }				t_ray;
 
 typedef struct s_move
@@ -85,11 +85,6 @@ typedef struct s_mlx
 	t_image		image;
 }				t_mlx;
 
-typedef struct s_cord
-{
-	double			x;
-	double			y;
-}				t_cord;
 
 typedef struct s_player
 {
@@ -124,11 +119,13 @@ typedef struct s_data
 	char		*path_ea;
 	int			nb_cls;
 	int			nb_rws;
+	int			width;
+	int			height;
 	t_player	player;
 	t_mlx		*mlx;
 	t_ray		ray;
 	t_move		move;
-	t_textures	texture;	
+	t_textures	texture;
 }				t_data;
 
 typedef struct s_parse
@@ -158,8 +155,8 @@ void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
 int				draw(t_data *data);
 int				rendering(t_data *data);
 // void			circle(t_mlx *mlx, t_cord coord, int r, int color);
-// void			circle(t_mlx *mlx, t_cord *coord, int r, int color);
-void	circle(t_mlx *mlx, int x, int y, int r, int color);
+void			circle(t_mlx *mlx, t_cord *coord, int r, int color);
+// void	circle(t_mlx *mlx, int x, int y, int r, int color);
 void			square(t_mlx *mlx, int x, int y, int color);
 void			line(t_data *data, double x_end, double y_end, int color);
 // void			draw_player(t_data *data);
@@ -175,8 +172,7 @@ int				destroy_win(t_data *data);
 int				check_if_wall(t_data *data, double x_cord_win, double y_cord_win);
 double			limit_angle(double ray_angle);
 void			check_ray_position(t_data *data, double ray);
-double			distance(int xplayer, int yplayer, double xpoint,
-					double ypoint);
+double			distance(t_cord *point1, t_cord *point2);
 double			distance_to_wall(t_data *data, double ray_angle);
 void			projection(t_data *data, double ray_angle, int i);
 void			move_player(t_data *data);

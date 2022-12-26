@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/24 14:20:19 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:19:09 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	init_data(t_data *data)
 	data->move.ws_move = 0;
 	data->move.ad_move = 0;
 	data->move.rotation = 0;
+	
+	
 	init_img_arrs(data);
 }
 
@@ -76,6 +78,8 @@ int	main(int ac, char **av)
 		i++;
 	}
 	data->nb_rws = i;
+	data->width = data->nb_cls * SIZE_CUB;
+	data->height = data->nb_rws * SIZE_CUB;
 	// printf("nb cls: %d\n", data->nb_cls);
 	// printf("nb rws: %d\n", data->nb_rws);
 	// exit(1);

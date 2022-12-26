@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/25 19:25:33 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:03:07 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,130 +91,111 @@ int	destroy_win(t_data *data)
 // 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
 // 			0);
 // }
-void	circle(t_mlx *mlx, int x, int y, int r, int color)
-{
-	double	i;
-	double	angle;
-	double	x1;
-	double	y1;
+// void	circle(t_mlx *mlx, int x, int y, int r, int color)
+// {
+// 	double	i;
+// 	double	angle;
+// 	double	x1;
+// 	double	y1;
 
-	x *= MINIMAP_FACTOR;
-	y *= MINIMAP_FACTOR;
-	r *= MINIMAP_FACTOR;
-	while (r)
-	{
-		i = 0;
-		while (i < 360)
-		{
-			angle = i;
-			x1 = r * cos(angle * M_PI / 180);
-			y1 = r * sin(angle * M_PI / 180);
-			my_mlx_pixel_put(&mlx->image, roundf(x + x1), roundf(y + y1),
-				color);
-			i += 0.1;
-		}
-		r--;
-	}
-}
+// 	x *= MINIMAP_FACTOR;
+// 	y *= MINIMAP_FACTOR;
+// 	r *= MINIMAP_FACTOR;
+// 	while (r)
+// 	{
+// 		i = 0;
+// 		while (i < 360)
+// 		{
+// 			angle = i;
+// 			x1 = r * cos(angle * M_PI / 180);
+// 			y1 = r * sin(angle * M_PI / 180);
+// 			my_mlx_pixel_put(&mlx->image, roundf(x + x1), roundf(y + y1),
+// 				color);
+// 			i += 0.1;
+// 		}
+// 		r--;
+// 	}
+// }
 
-void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
-{
-	double	dis_x;
-	double	dis_y;
-	double	x;
-	double	y;
-	int		step;
+// void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
+// {
+// 	double	dis_x;
+// 	double	dis_y;
+// 	double	x;
+// 	double	y;
+// 	int		step;
 
-	x = start->x;
-	y = start->y;
-	dis_x = x_end - x;
-	dis_y = y_end - y;
-	step = fmax(fabs(dis_x), fabs(dis_y));
-	dis_x /= step;
-	dis_y /= step;
-	while (step)
-	{
-		my_mlx_pixel_put(&data->mlx->image, x, y, color);
-		x += dis_x;
-		y += dis_y;
-		step--;
-	}
-}
+// 	x = start->x;
+// 	y = start->y;
+// 	dis_x = x_end - x;
+// 	dis_y = y_end - y;
+// 	step = fmax(fabs(dis_x), fabs(dis_y));
+// 	dis_x /= step;
+// 	dis_y /= step;
+// 	while (step)
+// 	{
+// 		my_mlx_pixel_put(&data->mlx->image, x, y, color);
+// 		x += dis_x;
+// 		y += dis_y;
+// 		step--;
+// 	}
+// }
 
-void	raycasting(t_data *data)
-{
-	int		i;
-	double	ray_angle;
+// void	raycasting(t_data *data)
+// {
+// 	int		i;
+// 	double	ray_angle;
 
-	// Draw Player
-	i = 0;	
-	ray_angle = data->player.rotation_angle - (FOV / 2);
+// 	// Draw Player
+// 	i = 0;	
+// 	ray_angle = data->player.rotation_angle - (FOV / 2);
 
-	while (i < WIDTH)
-	{
-		distance_to_wall(data, limit_angle(ray_angle));
-		line(data,
-			data->ray.xpoint,
-			data->ray.ypoint ,
-			RED);
-		ray_angle += (FOV / WIDTH);
-		i++;
-	}
-	line(data,
-			data->player.cord.x + cos(data->player.rotation_angle) * 10,
-			data->player.cord.y + sin(data->player.rotation_angle) * 10,
-			BLUE);
-	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, BLUE);
-}
+// 	while (i < WIDTH)
+// 	{
+// 		distance_to_wall(data, limit_angle(ray_angle));
+// 		line(data,
+// 			data->ray.cast.x,
+// 			data->ray.cast.y ,
+// 			RED);
+// 		ray_angle += (FOV / WIDTH);
+// 		i++;
+// 	}
+// 	line(data,
+// 			data->player.cord.x + cos(data->player.rotation_angle) * 10,
+// 			data->player.cord.y + sin(data->player.rotation_angle) * 10,
+// 			BLUE);
+// 	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, BLUE);
+// }
 
 void	draw_2d(t_data *data)
 {
 	int	i;
 	int	j;
-	int	cube_x;
-	int	cube_y;
-	// t_cord	start;
+	t_cord	start;
 
-	// mlx_clear_window(data->mlx->init, data->mlx->win);
-	i = 0;
 	draw_3d(data);
-	while (data->map[i])
+	start.x = data->player.cord.x / SIZE_CUB;
+	start.y = data->player.cord.y / SIZE_CUB;
+
+	start.y = (start.y - 15 < 0)? 0 : start.y - 15;
+	start.x = (start.x - 15 < 0)? 0 : start.x - 15;
+	i = start.y;
+	while (i < start.y + 31 && data->map[i])
 	{
-		j = 0;
-		while (data->map[i][j])
+		j = start.x;
+		while (data->map[i][j] && j < start.x + 31 && j < (int)ft_strlen(data->map[i]))
 		{
-			cube_x = j * SIZE_CUB;
-			cube_y = i * SIZE_CUB;
 			if (data->map[i][j] == '1')
-				square(data->mlx, cube_x, cube_y, BLUE);
+				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
 			else if (data->map[i][j] == '0')
-				square(data->mlx, cube_x, cube_y, WHITE);
+				square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
 			j++;
 		}
 		i++;
 	}
-	// start.x = data->player.cord.x / SIZE_CUB;
-	// start.y = data->player.cord.y / SIZE_CUB;
-
-	// start.y = (start.y - 15 < 0)? 0 : start.y - 15;
-	// start.x = (start.x - 15 < 0)? 0 : start.x - 15;
-	// i = start.y;
-	// while (i < start.y + 31 && data->map[i])
-	// {
-	// 	j = start.x;
-	// 	while (data->map[i][j] && j < start.x + 31 && j < (int)ft_strlen(data->map[i]))
-	// 	{
-	// 		if (data->map[i][j] == '1')
-	// 			square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
-	// 		else if (data->map[i][j] == '0')
-	// 			square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	// start.x = data->player.cord.x - (start.x * SIZE_CUB);
-	// start.y = data->player.cord.y - (start.y * SIZE_CUB); 
-	raycasting(data);
+	start.x = data->player.cord.x - (start.x * SIZE_CUB);
+	start.y = data->player.cord.y - (start.y * SIZE_CUB); 
+	draw_player(data ,&start);
 	
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
 		0);
@@ -247,7 +228,7 @@ int	draw(t_data *data)
 	// 	for(int j = 0; j < data->texture.img_height; j++)
 	// 		mlx_pixel_put(data->mlx->init, data->mlx->win, j, i, data->texture.no[(i *  data->texture.img_width) + j]);
 	// }
-	//draw_3d(data);
+	// draw_3d(data);
 	draw_2d(data);
 
 	
