@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/26 16:03:07 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:28:00 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,141 +32,6 @@ int	destroy_win(t_data *data)
 	exit(0);
 }
 
-// void	draw_2d(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	cube_x;
-// 	int	cube_y;
-
-// 	i = 0;
-// 	while (i < NB_RWS)
-// 	{
-// 		j = 0;
-// 		while (data->map[i][j])
-// 		{
-// 			cube_x = j * SIZE_CUB;
-// 			cube_y = i * SIZE_CUB;
-// 			if (data->map[i][j] == '1')
-// 				square(data->mlx, cube_x, cube_y, BLUE);
-// 			else if (data->map[i][j] == '0')
-// 				square(data->mlx, cube_x, cube_y, WHITE);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	draw_player(data);
-// 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
-// 			0);
-// }
-
-// void	draw_2d(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-// 	t_cord	start;
-
-// 	start.x = data->player.cord.x / SIZE_CUB;
-// 	start.y = data->player.cord.y / SIZE_CUB;
-
-// 	start.y = (start.y - 5 < 0)? 0 : start.y - 5;
-// 	start.x = (start.x - 5 < 0)? 0 : start.x - 5;
-// 	i = start.y;
-// 	while (i < start.y + 11 && data->map[i])
-// 	{
-// 		j = start.x;
-// 		while (data->map[i][j] && j < start.x + 11)
-// 		{
-// 			if (data->map[i][j] == '1')
-// 				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
-// 			else if (data->map[i][j] == '0')
-// 				square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	start.x = data->player.cord.x - (start.x * SIZE_CUB);
-// 	start.y = data->player.cord.y - (start.y * SIZE_CUB); 
-// 	draw_player(data, &start);
-// 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
-// 			0);
-// }
-// void	circle(t_mlx *mlx, int x, int y, int r, int color)
-// {
-// 	double	i;
-// 	double	angle;
-// 	double	x1;
-// 	double	y1;
-
-// 	x *= MINIMAP_FACTOR;
-// 	y *= MINIMAP_FACTOR;
-// 	r *= MINIMAP_FACTOR;
-// 	while (r)
-// 	{
-// 		i = 0;
-// 		while (i < 360)
-// 		{
-// 			angle = i;
-// 			x1 = r * cos(angle * M_PI / 180);
-// 			y1 = r * sin(angle * M_PI / 180);
-// 			my_mlx_pixel_put(&mlx->image, roundf(x + x1), roundf(y + y1),
-// 				color);
-// 			i += 0.1;
-// 		}
-// 		r--;
-// 	}
-// }
-
-// void	line1(t_data *data, double x_end, double y_end,t_cord *start, int color)
-// {
-// 	double	dis_x;
-// 	double	dis_y;
-// 	double	x;
-// 	double	y;
-// 	int		step;
-
-// 	x = start->x;
-// 	y = start->y;
-// 	dis_x = x_end - x;
-// 	dis_y = y_end - y;
-// 	step = fmax(fabs(dis_x), fabs(dis_y));
-// 	dis_x /= step;
-// 	dis_y /= step;
-// 	while (step)
-// 	{
-// 		my_mlx_pixel_put(&data->mlx->image, x, y, color);
-// 		x += dis_x;
-// 		y += dis_y;
-// 		step--;
-// 	}
-// }
-
-// void	raycasting(t_data *data)
-// {
-// 	int		i;
-// 	double	ray_angle;
-
-// 	// Draw Player
-// 	i = 0;	
-// 	ray_angle = data->player.rotation_angle - (FOV / 2);
-
-// 	while (i < WIDTH)
-// 	{
-// 		distance_to_wall(data, limit_angle(ray_angle));
-// 		line(data,
-// 			data->ray.cast.x,
-// 			data->ray.cast.y ,
-// 			RED);
-// 		ray_angle += (FOV / WIDTH);
-// 		i++;
-// 	}
-// 	line(data,
-// 			data->player.cord.x + cos(data->player.rotation_angle) * 10,
-// 			data->player.cord.y + sin(data->player.rotation_angle) * 10,
-// 			BLUE);
-// 	circle(data->mlx, data->player.cord.x, data->player.cord.y, 2, BLUE);
-// }
-
 void	draw_2d(t_data *data)
 {
 	int	i;
@@ -177,16 +42,16 @@ void	draw_2d(t_data *data)
 	start.x = data->player.cord.x / SIZE_CUB;
 	start.y = data->player.cord.y / SIZE_CUB;
 
-	start.y = (start.y - 15 < 0)? 0 : start.y - 15;
-	start.x = (start.x - 15 < 0)? 0 : start.x - 15;
+	start.y = (start.y - 10 < 0)? 0 : start.y - 10;
+	start.x = (start.x - 10 < 0)? 0 : start.x - 10;
 	i = start.y;
-	while (i < start.y + 31 && data->map[i])
+	while (i < start.y + 21 && data->map[i])
 	{
 		j = start.x;
 		while (data->map[i][j] && j < start.x + 31 && j < (int)ft_strlen(data->map[i]))
 		{
 			if (data->map[i][j] == '1')
-				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , BLUE);
+				square(data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , 0x000000);
 			else if (data->map[i][j] == '0')
 				square(data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
 			j++;
@@ -196,7 +61,6 @@ void	draw_2d(t_data *data)
 	start.x = data->player.cord.x - (start.x * SIZE_CUB);
 	start.y = data->player.cord.y - (start.y * SIZE_CUB); 
 	draw_player(data ,&start);
-	
 	mlx_put_image_to_window(data->mlx, data->mlx->win, data->mlx->image.img, 0,
 		0);
 }
@@ -208,7 +72,6 @@ int	rendering(t_data *data)
 	{
 		move_player(data);
 		ft_bzero(data->mlx->image.addr, data->mlx->image.line_length * HEIGHT);
-		// draw_3d(data);
 		draw_2d(data);
 	}
 	return (0);
@@ -223,12 +86,6 @@ int	draw(t_data *data)
 			&data->mlx->image.bits_per_pixel,
 			&data->mlx->image.line_length,
 			&data->mlx->image.endian);
-	// for(int i = 0; i < data->texture.img_height ; i++)
-	// {
-	// 	for(int j = 0; j < data->texture.img_height; j++)
-	// 		mlx_pixel_put(data->mlx->init, data->mlx->win, j, i, data->texture.no[(i *  data->texture.img_width) + j]);
-	// }
-	// draw_3d(data);
 	draw_2d(data);
 
 	
@@ -236,7 +93,6 @@ int	draw(t_data *data)
 	mlx_hook(data->mlx->win, 03, 0L, &key_release, data);
 	mlx_hook(data->mlx->win, 17, 0L, &destroy_win, data);
 	mlx_loop_hook(data->mlx->init, &rendering, data);
-	// mlx_mouse_hook(data->mlx->win, mouse_hook, &data);
 	mlx_loop(data->mlx->init);
 	return (0);
 }

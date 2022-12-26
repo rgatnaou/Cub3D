@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/26 16:00:35 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:43:45 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	square(t_mlx *mlx, int x, int y, int color)
 	int	j;
 	int	size_cube_minimap;
 
+
 	size_cube_minimap = SIZE_CUB * MINIMAP_FACTOR;
 	x *= MINIMAP_FACTOR;
 	y *= MINIMAP_FACTOR;
@@ -79,6 +80,9 @@ void	square(t_mlx *mlx, int x, int y, int color)
 		j = 0;
 		while (j <= size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
 		{
+			if(i ==0 || j ==0 )
+				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x808080);
+			else
 				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
 			j++;
 		}

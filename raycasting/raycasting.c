@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/26 16:19:47 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:46:04 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	draw_3d(t_data *data)
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	while (x < WIDTH)
 	{
+		
 		projection(data, limit_angle(ray_angle), x);
 		ray_angle += FOV / WIDTH;
 		x++;

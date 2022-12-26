@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:51 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/26 16:19:09 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:15:14 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_img_arrs(t_data *data)
 {
+
 	void	*data_tmp;
 
 	data_tmp = mlx_xpm_file_to_image(data->mlx, data->path_ea,
@@ -80,9 +81,6 @@ int	main(int ac, char **av)
 	data->nb_rws = i;
 	data->width = data->nb_cls * SIZE_CUB;
 	data->height = data->nb_rws * SIZE_CUB;
-	// printf("nb cls: %d\n", data->nb_cls);
-	// printf("nb rws: %d\n", data->nb_rws);
-	// exit(1);
 	init_data(data);
 	draw(data);
 	return (0);

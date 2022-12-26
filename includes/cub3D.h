@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/26 16:08:43 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:50:45 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_data
 	t_mlx		*mlx;
 	t_ray		ray;
 	t_move		move;
+	void		*gun;
 	t_textures	texture;
 }				t_data;
 
