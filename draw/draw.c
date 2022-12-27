@@ -6,50 +6,16 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:30:36 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:20:23 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+void	draw_minimap(t_data *data, t_cord start, int i)
 {
-	char	*dst;
+	int	j;
 
-	if ((x < WIDTH && x >= 0) && (y < HEIGHT && y >= 0))
-	{
-		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel
-					/ 8));
-		*(unsigned int *)dst = color;
-	}
-}
-
-int	destroy_win(t_data *data)
-{
-	mlx_destroy_image(data->mlx.init, data->mlx.image.img);
-	mlx_destroy_window(data->mlx.init, data->mlx.win);
-	free_data(data);
-	exit(0);
-}
-
-void	draw_2d(t_data *data)
-{
-	int		i;
-	int		j;
-	t_cord	start;
-
-	draw_3d(data);
-	start.x = data->player.cord.x / SIZE_CUB;
-	start.y = data->player.cord.y / SIZE_CUB;
-	if (start.x - 10 < 0)
-		start.x = 0;
-	else
-		start.x -= 10;
-	if (start.y - 10 < 0)
-		start.y = 0;
-	else
-		start.y -= 10;
-	i = start.y;
 	while (i < start.y + 21 && data->map[i])
 	{
 		j = start.x;
@@ -66,6 +32,26 @@ void	draw_2d(t_data *data)
 		}
 		i++;
 	}
+}
+
+void	draw_2d(t_data *data)
+{
+	int		i;
+	t_cord	start;
+
+	draw_3d(data);
+	start.x = data->player.cord.x / SIZE_CUB;
+	start.y = data->player.cord.y / SIZE_CUB;
+	if (start.x - 10 < 0)
+		start.x = 0;
+	else
+		start.x -= 10;
+	if (start.y - 10 < 0)
+		start.y = 0;
+	else
+		start.y -= 10;
+	i = start.y;
+	draw_minimap(data, start, i);
 	start.x = data->player.cord.x - (start.x * SIZE_CUB);
 	start.y = data->player.cord.y - (start.y * SIZE_CUB);
 	draw_player(data, &start);

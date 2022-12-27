@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 16:06:11 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:37:10 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,14 @@ char				**get_map(char **splitted_file, int lenght);
 void				my_mlx_pixel_put(t_image *data, int x, int y, int color);
 int					draw(t_data *data);
 int					rendering(t_data *data);
-// void			circle(t_mlx *mlx, t_cord coord, int r, int color);
+int					destroy_win(t_data *data);
 void				circle(t_mlx *mlx, t_cord *coord, int r, int color);
-// void	circle(t_mlx *mlx, int x, int y, int r, int color);
 void				square(t_mlx *mlx, int x, int y, int color);
-void				line(t_data *data, double x_end, double y_end, int color);
-// void			draw_player(t_data *data);
+void				line(t_data *data, double x_end, double y_end,
+						t_cord *start);
 void				draw_player(t_data *data, t_cord *start);
+void				ws_move(t_data *data, int step, double dist);
+void				ad_move(t_data *data, int step, double dist);
 
 // Mouvements Functions:
 int					key_pressed(int keycode, t_data *data);
@@ -180,6 +181,12 @@ int					check_if_wall(t_data *data, double x_cord_win,
 double				limit_angle(double ray_angle);
 void				check_ray_position(t_data *data, double ray);
 double				distance(t_cord *point1, t_cord *point2);
+bool				found_horz_hit_wall(t_data *data, t_cord *intercept,
+						t_cord *step);
+bool				found_vert_hit_wall(t_data *data, t_cord *intercept,
+						t_cord *step);
+bool				horizontal_raycasting(t_data *data, double ray_angle);
+bool				vertical_raycasting(t_data *data, double ray_angle);
 double				distance_to_wall(t_data *data, double ray_angle);
 void				projection(t_data *data, double ray_angle, int i);
 void				move_player(t_data *data);

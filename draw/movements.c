@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 15:34:50 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:36:25 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,38 +76,12 @@ void	move_player(t_data *data)
 {
 	int		dist;
 	int		step;
-	double	x;
-	double	y;
 
 	dist = 0;
+	step = 0;
 	data->player.rotation_angle += data->move.rotation * M_PI / 180.0;
 	if (data->move.ws_move)
-	{
-		step = data->move.ws_move * SPEED;
-		x = data->player.cord.x + cos(data->player.rotation_angle) * step;
-		y = data->player.cord.y + sin(data->player.rotation_angle) * step;
-		if (!check_if_wall(data, x, y + dist))
-		{
-			data->player.cord.x = x;
-			data->player.cord.y = y;
-		}
-	}
+		ws_move(data, step, dist);
 	if (data->move.ad_move)
-	{
-		step = data->move.ad_move * SPEED;
-		x = data->player.cord.x + cos(data->player.rotation_angle + (M_PI / 2))
-			* step;
-		y = data->player.cord.y + sin(data->player.rotation_angle + (M_PI / 2))
-			* step;
-		if (limit_angle(data->player.rotation_angle) > M_PI / 2
-			&& limit_angle(data->player.rotation_angle) < 3 * M_PI / 2)
-			dist = 10 * data->move.ad_move;
-		else
-			dist = -10 * data->move.ad_move;
-		if (!check_if_wall(data, x, y))
-		{
-			data->player.cord.x = x;
-			data->player.cord.y = y;
-		}
-	}
+		ad_move(data, step, dist);
 }

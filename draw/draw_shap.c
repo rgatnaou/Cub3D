@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 15:58:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:26:15 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,7 @@ void	square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-void	line(t_data *data, double x_end, double y_end, int color)
-{
-	double	dis_x;
-	double	dis_y;
-	double	x;
-	double	y;
-	double	step;
-
-	x_end *= MINIMAP_FACTOR;
-	x = data->player.cord.x * MINIMAP_FACTOR;
-	y = data->player.cord.y * MINIMAP_FACTOR;
-	y_end *= MINIMAP_FACTOR;
-	dis_x = x_end - x;
-	dis_y = y_end - y;
-	step = fmax(fabs(dis_x), fabs(dis_y));
-	dis_x /= step;
-	dis_y /= step;
-	while (step >= 0)
-	{
-		my_mlx_pixel_put(&data->mlx.image, roundf(x), roundf(y), color);
-		x += dis_x;
-		y += dis_y;
-		step--;
-	}
-}
-
-void	line1(t_data *data, double x_end, double y_end, t_cord *start,
-		int color)
+void	line(t_data *data, double x_end, double y_end, t_cord *start)
 {
 	double	dis_x;
 	double	dis_y;
@@ -107,7 +80,7 @@ void	line1(t_data *data, double x_end, double y_end, t_cord *start,
 	dis_y /= step;
 	while (step)
 	{
-		my_mlx_pixel_put(&data->mlx.image, x, y, color);
+		my_mlx_pixel_put(&data->mlx.image, x, y, RED);
 		x += dis_x;
 		y += dis_y;
 		step--;
@@ -122,6 +95,6 @@ void	draw_player(t_data *data, t_cord *start)
 	i = 0;
 	ray_angle = data->player.rotation_angle - (data->fov / 2);
 	circle(&data->mlx, start, 5, RED);
-	line1(data, start->x + (cos(data->player.rotation_angle) * 10), start->y
-		+ (sin(data->player.rotation_angle) * 10), start, RED);
+	line(data, start->x + (cos(data->player.rotation_angle) * 10), start->y
+		+ (sin(data->player.rotation_angle) * 10), start);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_data.c                                       :+:      :+:    :+:   */
+/*   create_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 15:58:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:39:28 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	check_w_h(t_data *data)
 		checker = false;
 	if (!checker)
 	{
-		printf("error :the texture size is not 64 pixel\n");
+		printf("Error: The texture Size Is Not 64 * 64 Pixels\n");
 		free_data(data);
 		exit(1);
 	}
@@ -121,7 +121,7 @@ void	init_img(t_data *data)
 	img_ea = check_xpm(data, data->path_ea, 4);
 	if (img_no == NULL || img_so == NULL || img_we == NULL || img_ea == NULL)
 	{
-		printf("error :the texture is not valid\n");
+		printf("Error: The Texture Is Not Valid\n");
 		free_data(data);
 		exit(0);
 	}
