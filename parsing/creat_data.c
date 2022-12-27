@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 13:46:48 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:17:32 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,26 @@ void get_addr_img(t_data *data, void *img_no, void *img_so, void *img_we, void *
 			&data->mlx.image.endian);
     
 }
+bool check_w_h(t_data *data)
+{
+	bool	checker;
+
+	checker = true;
+	if (data->texture.so.width != 64 || data->texture.so.height != 64)
+		checker = false;
+	if (data->texture.no.width != 64 || data->texture.no.height != 64)
+		checker = false;
+	if (data->texture.we.width != 64 || data->texture.we.height != 64)
+		checker = false;
+	if (data->texture.ea.width != 64 || data->texture.ea.height != 64)
+		checker = false;
+	if(!checker)
+	{
+		printf("error :the texture size is not 64 pixel\n");
+		free_data(data);
+		exit(1);
+	}
+}
 void    init_img(t_data *data)
 {
     void *img_no;
@@ -88,23 +108,16 @@ void    init_img(t_data *data)
     void *img_ea;
     
     img_no = check_xpm(data, data->path_no, 1);
-        
     img_so = check_xpm(data, data->path_so, 2);
-    
     img_we = check_xpm(data, data->path_we, 3);
-    
     img_ea = check_xpm(data, data->path_ea, 4);
-    
-        printf("data\n");
     if (img_no == NULL || img_so == NULL || img_we == NULL || img_ea == NULL)
     {
+		printf("error :the texture is not valid\n");
         free_data(data);
-        free(img_no);
-        free(img_so);
-        free(img_we);
-        free(img_ea);
         exit(0);
     }
+	check_w_h(data);
     get_addr_img(data, img_no, img_so, img_we, img_ea);
 }
 
