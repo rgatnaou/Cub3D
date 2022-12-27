@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 09:38:08 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:32:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	found_horz_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 {
 	data->ray.horz.x = 0;
 	data->ray.horz.y = 0;
-	while (intercept->x >= 0 && intercept->x <= data->width
-		&& intercept->y >= 0 && intercept->y <= data->height)
+	while (intercept->x >= 0 && intercept->x <= data->width && intercept->y >= 0
+		&& intercept->y <= data->height)
 	{
 		if (check_if_wall(data, intercept->x, intercept->y - data->ray.up))
 		{
@@ -25,7 +25,7 @@ bool	found_horz_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 			data->ray.horz.y = intercept->y;
 			data->ray.horz_distance = distance(&data->player.cord,
 					&data->ray.horz);
-			return(true);
+			return (true);
 		}
 		else
 		{
@@ -41,8 +41,8 @@ bool	found_vert_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 {
 	data->ray.vert.x = 0;
 	data->ray.vert.y = 0;
-	while (intercept->x >= 0 && intercept->x <= data->width
-		&& intercept->y >= 0 && intercept->y <= data->height)
+	while (intercept->x >= 0 && intercept->x <= data->width && intercept->y >= 0
+		&& intercept->y <= data->height)
 	{
 		if (check_if_wall(data, intercept->x - !data->ray.right, intercept->y))
 		{
@@ -64,9 +64,8 @@ bool	found_vert_hit_wall(t_data *data, t_cord *intercept, t_cord *step)
 
 bool	horizontal_raycasting(t_data *data, double ray_angle)
 {
-	t_cord intercept;
-	t_cord step;
-
+	t_cord	intercept;
+	t_cord	step;
 
 	data->ray.horz_distance = INT_MAX;
 	intercept.y = floor(data->player.cord.y / SIZE_CUB) * SIZE_CUB;
@@ -85,9 +84,9 @@ bool	horizontal_raycasting(t_data *data, double ray_angle)
 
 bool	vertical_raycasting(t_data *data, double ray_angle)
 {
-	t_cord intercept;
-	t_cord step;
-	
+	t_cord	intercept;
+	t_cord	step;
+
 	data->ray.vert_distance = INT_MAX;
 	intercept.x = floor(data->player.cord.x / SIZE_CUB) * SIZE_CUB;
 	if (data->ray.right)
@@ -106,6 +105,7 @@ bool	vertical_raycasting(t_data *data, double ray_angle)
 double	distance_to_wall(t_data *data, double ray_angle)
 {
 	double	final_distance;
+
 	check_ray_position(data, ray_angle);
 	data->ray.horz_hit_wall = horizontal_raycasting(data, ray_angle);
 	data->ray.vert_hit_wall = vertical_raycasting(data, ray_angle);
@@ -121,9 +121,11 @@ double	distance_to_wall(t_data *data, double ray_angle)
 		data->ray.cast.y = data->ray.horz.y;
 		data->ray.vert_hit_wall = false;
 	}
-	final_distance = distance(&data->player.cord, &data->ray.cast) * cos(ray_angle - data->player.rotation_angle);
- 	return (final_distance);
+	final_distance = distance(&data->player.cord, &data->ray.cast)
+		* cos(ray_angle - data->player.rotation_angle);
+	return (final_distance);
 }
+
 void	draw_3d(t_data *data)
 {
 	int		x;
@@ -133,7 +135,6 @@ void	draw_3d(t_data *data)
 	ray_angle = data->player.rotation_angle - (FOV / 2);
 	while (x < WIDTH)
 	{
-		
 		projection(data, limit_angle(ray_angle), x);
 		ray_angle += FOV / WIDTH;
 		x++;

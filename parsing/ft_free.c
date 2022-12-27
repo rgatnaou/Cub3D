@@ -28,17 +28,17 @@ void	free_tab2(char **ptr)
 	ptr = NULL;
 }
 
-void    free_data(t_data *data)
+void	free_data(t_data *data)
 {
-    if (data)
-    {
-        free(data->path_no);
-        free(data->path_so);
-        free(data->path_we);
-        free(data->path_ea);
-        free_tab2(data->map);
-        free(data);
-    }
+	if (data)
+	{
+		free(data->path_no);
+		free(data->path_so);
+		free(data->path_we);
+		free(data->path_ea);
+		free_tab2(data->map);
+		free(data);
+	}
 }
 
 void	free_parse(t_parse *parse)

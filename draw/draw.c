@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 13:42:09 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:30:36 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,41 @@ int	destroy_win(t_data *data)
 
 void	draw_2d(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	t_cord	start;
 
 	draw_3d(data);
 	start.x = data->player.cord.x / SIZE_CUB;
 	start.y = data->player.cord.y / SIZE_CUB;
-
-	start.y = (start.y - 10 < 0)? 0 : start.y - 10;
-	start.x = (start.x - 10 < 0)? 0 : start.x - 10;
+	if (start.x - 10 < 0)
+		start.x = 0;
+	else
+		start.x -= 10;
+	if (start.y - 10 < 0)
+		start.y = 0;
+	else
+		start.y -= 10;
 	i = start.y;
 	while (i < start.y + 21 && data->map[i])
 	{
 		j = start.x;
-		while (data->map[i][j] && j < start.x + 31 && j < (int)ft_strlen(data->map[i]))
+		while (data->map[i][j] && j < start.x + 31
+			&& j < (int)ft_strlen(data->map[i]))
 		{
 			if (data->map[i][j] == '1')
-				square(&data->mlx, ((j - start.x) * SIZE_CUB) , ((i - start.y) * SIZE_CUB) , 0x000000);
+				square(&data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)
+						* SIZE_CUB), 0x000000);
 			else if (data->map[i][j] == '0')
-				square(&data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)* SIZE_CUB), WHITE);
+				square(&data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)
+						* SIZE_CUB), WHITE);
 			j++;
 		}
 		i++;
 	}
 	start.x = data->player.cord.x - (start.x * SIZE_CUB);
-	start.y = data->player.cord.y - (start.y * SIZE_CUB); 
-	draw_player(data ,&start);
+	start.y = data->player.cord.y - (start.y * SIZE_CUB);
+	draw_player(data, &start);
 	mlx_put_image_to_window(&data->mlx, data->mlx.win, data->mlx.image.img, 0,
 		0);
 }
@@ -87,8 +95,6 @@ int	draw(t_data *data)
 			&data->mlx.image.line_length,
 			&data->mlx.image.endian);
 	draw_2d(data);
-
-	
 	mlx_hook(data->mlx.win, 02, 0L, &key_pressed, data);
 	mlx_hook(data->mlx.win, 03, 0L, &key_release, data);
 	mlx_hook(data->mlx.win, 17, 0L, &destroy_win, data);
