@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 15:34:14 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:04:08 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 void	put_texture(t_data *data, t_cord *cord_wall, double wall_height,
 		unsigned int *arr)
 {
-	int		i;
-	int		textoffsetx;
-	int		textoffsety;
+	int		y;
+	int		offset_x;
+	int		offset_y;
 	double	dist;
 
-	i = cord_wall->y;
+	y = cord_wall->y;
 	if (data->ray.vert_hit_wall)
-		textoffsetx = ((int)data->ray.cast.y) % SIZE_CUB;
+		offset_x = ((int)data->ray.cast.y) % SIZE_CUB;
 	else
-		textoffsetx = ((int)data->ray.cast.x) % SIZE_CUB;
-	if (i < 0)
-		i = 0;
-	while (i < (wall_height + cord_wall->y))
+		offset_x = ((int)data->ray.cast.x) % SIZE_CUB;
+	if (y < 0)
+		y = 0;
+	while (y < (wall_height + cord_wall->y))
 	{
-		dist = i + wall_height / 2 - HEIGHT / 2;
-		textoffsety = dist * (64 / wall_height);
-		my_mlx_pixel_put(&data->mlx.image, cord_wall->x, i, arr[(64
-				* textoffsety) + textoffsetx]);
-		i++;
-		if (i > HEIGHT)
+		dist = y + wall_height / 2 - HEIGHT / 2;
+		offset_y = dist * (IMG_HEIGHT / wall_height);
+		my_mlx_pixel_put(&data->mlx.image, cord_wall->x, y, arr[(IMG_WIDTH
+				* offset_y) + offset_x]);
+		y++;
+		if (y > HEIGHT)
 			break ;
 	}
 }

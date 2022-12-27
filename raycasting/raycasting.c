@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:45:11 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 15:32:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:58:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,11 @@ void	draw_3d(t_data *data)
 	double	ray_angle;
 
 	x = 0;
-	ray_angle = data->player.rotation_angle - (FOV / 2);
+	ray_angle = data->player.rotation_angle - (data->fov / 2);
 	while (x < WIDTH)
 	{
 		projection(data, limit_angle(ray_angle), x);
-		ray_angle += FOV / WIDTH;
+		ray_angle += data->fov / WIDTH;
 		x++;
 	}
 }

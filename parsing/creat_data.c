@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 15:37:42 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:58:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	init_player(t_data *data)
 	data->move.ws_move = 0;
 	data->move.ad_move = 0;
 	data->move.rotation = 0;
-	data->projection = (WIDTH / 2) / tan(FOV / 2);
+	data->fov = (60 * (M_PI / 180));
+	data->projection = (WIDTH / 2) / tan(data->fov / 2);
 }
 
 void	*check_xpm(t_data *data, char *path, int nb)

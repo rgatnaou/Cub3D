@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:05:26 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:06:11 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@
 
 # define SIZE_CUB 64
 # define SPEED 4
-# define WIDTH 1696
-# define HEIGHT 960
-# define FOV (60 * (M_PI / 180))
+# define WIDTH 1200
+# define HEIGHT 900
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
 # define MINIMAP_FACTOR 0.2
-
 # define KEY_W 13
 # define KEY_D 2
 # define KEY_A 0
@@ -41,6 +39,8 @@
 # define KEY_ARROW_LEFT 123
 # define KEY_S 1
 # define KEY_ESC 53
+# define IMG_WIDTH 64
+# define IMG_HEIGHT 64
 
 typedef struct s_cord
 {
@@ -108,6 +108,7 @@ typedef struct s_textures
 
 typedef struct s_data
 {
+	double			fov;
 	char			**map;
 	int				floor_color;
 	int				ceiling_color;

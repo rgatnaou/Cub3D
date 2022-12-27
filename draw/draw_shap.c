@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 14:33:37 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:58:21 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	draw_player(t_data *data, t_cord *start)
 	double	ray_angle;
 
 	i = 0;
-	ray_angle = data->player.rotation_angle - (FOV / 2);
+	ray_angle = data->player.rotation_angle - (data->fov / 2);
 	circle(&data->mlx, start, 5, RED);
 	line1(data, start->x + (cos(data->player.rotation_angle) * 10), start->y
 		+ (sin(data->player.rotation_angle) * 10), start, RED);
