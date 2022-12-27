@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
+#    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/22 13:58:42 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/27 09:26:08 by rgatnaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 
 SRC =  main.c \
 	parsing/parse.c \
+	parsing/creat_data.c \
+	parsing/ft_free.c \
 	parsing/utils_map.c \
 	parsing/utils.c \
 	parsing/texture.c \

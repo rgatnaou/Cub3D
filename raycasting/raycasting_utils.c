@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:53:53 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/23 18:52:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:20:16 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,8 @@ double	limit_angle(double ray_angle)
 
 void	check_ray_position(t_data *data, double ray)
 {
-	data->ray.up_ray = 0;
-	data->ray.right_ray = 0;
-	data->ray.down_ray = 0;
-	data->ray.left_ray = 0;
-	if (ray > 0 && ray < M_PI)
-		data->ray.down_ray = 1;
-	data->ray.up_ray = !data->ray.down_ray;
-	if ((ray < 0.5 * M_PI) || (ray > 1.5 * M_PI))
-		data->ray.right_ray = 1;
-	data->ray.left_ray = !data->ray.right_ray;
+	data->ray.up  = (ray > M_PI);
+	data->ray.right = ((ray < 0.5 * M_PI) || (ray > 1.5 * M_PI));
 }
 
 int	check_if_wall(t_data *data, double x_cord_win, double y_cord_win)
@@ -43,14 +35,13 @@ int	check_if_wall(t_data *data, double x_cord_win, double y_cord_win)
 
 	x_cor_in_map = floor(x_cord_win / SIZE_CUB);
 	y_cor_in_map = floor(y_cord_win / SIZE_CUB);
-	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws
-		&& data->map[y_cor_in_map][x_cor_in_map] == '0')
-			return (0);	
-	return (1);
+	if (x_cor_in_map < data->nb_cls && y_cor_in_map < data->nb_rws)
+		return !(data->map[y_cor_in_map][x_cor_in_map] == '0');
+	return (0);
 }
 
-double	distance(int xplayer, int yplayer, double xpoint, double ypoint)
+double	distance(t_cord *point1, t_cord *point2)
 {
-	return (sqrt(((xpoint - xplayer) * (xpoint - xplayer)) + ((ypoint - yplayer)
-				* (ypoint - yplayer))));
+	return (sqrt(((point2->x - point1->x) * (point2->x - point1->x)) + 
+			((point2->y - point1->y) * (point2->y - point1->y))));
 }

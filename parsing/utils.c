@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:30:04 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/16 18:28:24 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/27 12:31:20 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,7 @@ char	*read_file(int fd)
 	return (file);
 }
 
-void	free_tab2(char **ptr)
-{
-	int	i;
 
-	i = 0;
-	if (ptr == NULL)
-		return ;
-	while (ptr[i])
-	{
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
-	ptr = NULL;
-}
 
 int	ft_error(char *msg, void *ptr)
 {
@@ -82,4 +68,22 @@ int	ft_error(char *msg, void *ptr)
 	if (ptr)
 		free(ptr);
 	return (-1);
+}
+
+t_parse	*init_parse(t_parse *parse)
+{
+	parse->data = malloc(sizeof(t_data));
+	if (!parse->data)
+	{
+		free(parse);
+		return (NULL);
+	}
+	parse->data->floor_color = 0;
+	parse->data->ceiling_color = 0;
+	parse->data->map = 0;
+	parse->data->path_no = 0;
+	parse->data->path_so = 0;
+	parse->data->path_we = 0;
+	parse->data->path_ea = 0;
+	return (parse);
 }
