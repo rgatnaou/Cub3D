@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 16:04:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:00:53 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height,
 	}
 }
 
+void	set_texture(t_data *data, t_cord cord_wall, double wall_height)
+{
+	if (data->ray.horz_hit_wall)
+	{
+		if (data->ray.up)
+			put_texture(data, &cord_wall, wall_height, data->texture.no.arr);
+		else
+			put_texture(data, &cord_wall, wall_height, data->texture.so.arr);
+	}
+	else
+	{
+		if (data->ray.right)
+			put_texture(data, &cord_wall, wall_height, data->texture.ea.arr);
+		else
+			put_texture(data, &cord_wall, wall_height, data->texture.we.arr);
+	}
+}
+
 void	projection(t_data *data, double ray_angle, int x)
 {
 	double	wall_height;
@@ -55,20 +73,7 @@ void	projection(t_data *data, double ray_angle, int x)
 		my_mlx_pixel_put(&data->mlx.image, cord_wall.x, y, data->ceiling_color);
 		y++;
 	}
-	if (data->ray.horz_hit_wall)
-	{
-		if (data->ray.up)
-			put_texture(data, &cord_wall, wall_height, data->texture.no.arr);
-		else
-			put_texture(data, &cord_wall, wall_height, data->texture.so.arr);
-	}
-	else
-	{
-		if (data->ray.right)
-			put_texture(data, &cord_wall, wall_height, data->texture.ea.arr);
-		else
-			put_texture(data, &cord_wall, wall_height, data->texture.we.arr);
-	}
+	set_texture(data, cord_wall, wall_height);
 	y = cord_wall.y + wall_height;
 	while (y < HEIGHT)
 	{
