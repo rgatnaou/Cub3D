@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:29:06 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 12:40:40 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:24:50 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_parse(t_parse *parse)
 	if (parse)
 	{
 		free(parse->file);
-		free_tab2(parse->splitted_file);
+		free_tab2(parse->sp_file);
 		free_data(parse->data);
 		free(parse);
 	}

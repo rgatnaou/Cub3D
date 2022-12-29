@@ -3,46 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:15:57 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/28 12:56:21 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:26:44 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	check_sp_map(char *splitted_file)
+int	check_sp_map(char *sp_file)
 {
 	int	i;
 
 	i = 0;
-	while (splitted_file[i] == ' ')
+	while (sp_file[i] == ' ')
 		i++;
-	if (splitted_file[i] == '\t')
-	{
-		while (splitted_file[i] == ' ' || splitted_file[i] == '\t')
-			i++;
-		if (!splitted_file[i])
-			return (0);
-		else
-		{
-			write(2, "Error : \"", 9);
-			write(2, splitted_file, ft_strlen(splitted_file));
-			return (ft_error(" \".\n", NULL));
-		}
-	}
-	if (splitted_file[i] == '1' || !splitted_file[i])
+	if (sp_file[i] == '1' || !sp_file[i])
 		return (0);
 	write(2, "Error : \"", 9);
-	write(2, splitted_file, ft_strlen(splitted_file));
+	write(2, sp_file, ft_strlen(sp_file));
 	return (ft_error(" \".\n", NULL));
 }
 
 int	texture_errors(char *line, int *text_val, t_data *data, char orientation)
 {
 	int	i;
-	int	fd;
 
 	i = 2;
 	(*text_val)++;
@@ -52,13 +38,6 @@ int	texture_errors(char *line, int *text_val, t_data *data, char orientation)
 		return (ft_error("Error :Texture Missing Separator.\n", NULL));
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	if (!line[i] && (*text_val)++)
-		return (ft_error("Error :Texture Missing Path.\n", NULL));
-	fd = open(&line[i], O_RDWR);
-	if ((fd == -1 || !ft_strrchr(line, '.') || ft_strncmp(ft_strrchr(line, '.'),
-				".xpm", 4)) && (*text_val)++)
-		return (ft_error("Error :Invalid Texture Path.\n", NULL));
-	close(fd);
 	if (orientation == 'N')
 		data->path_no = ft_strdup(&line[i]);
 	if (orientation == 'S')
@@ -85,7 +64,8 @@ int	check_color_rang(char **sp_color, int *text_val)
 				return (ft_error("Error :The Color Is Not Digit.\n", NULL));
 			j++;
 		}
-		if (ft_atoi(sp_color[i]) > 255 && (*text_val)++)
+		if (ft_strlen(sp_color[i]) > 3 && ft_atoi(sp_color[i]) > 255
+			&& (*text_val)++)
 			return (ft_error("Error :The Color Is Out Of Range.\n", NULL));
 		i++;
 	}
@@ -106,9 +86,8 @@ int	check_color(char *line, int *text_val, int *color)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	sp_color = ft_split(&line[i], ',');
-	i = ft_strlen(line) - 1;
-	if (line[i] == ',' || !sp_color || !sp_color[0] || !sp_color[1]
-		|| !sp_color[2] || sp_color[3])
+	if (find_caractere(&line[i], ',') != 2 || !sp_color
+		|| !sp_color[0] || !sp_color[1] || !sp_color[2] || sp_color[3])
 	{
 		(*text_val)++;
 		free_tab2(sp_color);
@@ -121,37 +100,31 @@ int	check_color(char *line, int *text_val, int *color)
 	return (0);
 }
 
-int	check_texture(t_parse *parse, int *texture_arr)
+int	check_texture(t_parse *parse, int *textures)
 {
 	int	i;
 
 	i = 0;
-	while (parse->splitted_file[i])
+	while (parse->sp_file[i])
 	{
-		if (!ft_strncmp(parse->splitted_file[i], "NO", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[0],
-				parse->data, 'N');
-		else if (!ft_strncmp(parse->splitted_file[i], "SO", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[1],
-				parse->data, 'S');
-		else if (!ft_strncmp(parse->splitted_file[i], "WE", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[2],
-				parse->data, 'W');
-		else if (!ft_strncmp(parse->splitted_file[i], "EA", 2))
-			texture_errors(parse->splitted_file[i], &texture_arr[3],
-				parse->data, 'E');
-		else if (!ft_strncmp(parse->splitted_file[i], "F", 1))
-			check_color(parse->splitted_file[i], &texture_arr[4],
-				&parse->data->floor_color);
-		else if (!ft_strncmp(parse->splitted_file[i], "C", 1))
-			check_color(parse->splitted_file[i], &texture_arr[5],
-				&parse->data->ceiling_color);
-		else if (check_sp_map(parse->splitted_file[i]))
+		if (!ft_strncmp(parse->sp_file[i], "NO", 2))
+			texture_errors(parse->sp_file[i], &textures[0], parse->data, 'N');
+		else if (!ft_strncmp(parse->sp_file[i], "SO", 2))
+			texture_errors(parse->sp_file[i], &textures[1], parse->data, 'S');
+		else if (!ft_strncmp(parse->sp_file[i], "WE", 2))
+			texture_errors(parse->sp_file[i], &textures[2], parse->data, 'W');
+		else if (!ft_strncmp(parse->sp_file[i], "EA", 2))
+			texture_errors(parse->sp_file[i], &textures[3], parse->data, 'E');
+		else if (!ft_strncmp(parse->sp_file[i], "F", 1))
+			check_color(parse->sp_file[i], &textures[4], &parse->data->floor);
+		else if (!ft_strncmp(parse->sp_file[i], "C", 1))
+			check_color(parse->sp_file[i], &textures[5], &parse->data->ceiling);
+		else if (check_sp_map(parse->sp_file[i]))
 			return (-1);
 		i++;
 	}
-	if (texture_arr[0] == 1 && texture_arr[1] == 1 && texture_arr[2] == 1
-		&& texture_arr[3] == 1 && texture_arr[4] == 1 && texture_arr[5] == 1)
+	if (textures[0] == 1 && textures[1] == 1 && textures[2] == 1
+		&& textures[3] == 1 && textures[4] == 1 && textures[5] == 1)
 		return (0);
 	return (-1);
 }

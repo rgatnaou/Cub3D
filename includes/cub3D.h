@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 18:37:10 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:09:51 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ typedef struct s_data
 {
 	double			fov;
 	char			**map;
-	int				floor_color;
-	int				ceiling_color;
+	int				floor;
+	int				ceiling;
 	char			*path_no;
 	char			*path_so;
 	char			*path_we;
@@ -131,15 +131,16 @@ typedef struct s_data
 typedef struct s_parse
 {
 	char			*file;
-	char			**splitted_file;
+	char			**sp_file;
 	t_data			*data;
 }					t_parse;
 
 // Begin Parsing:
 t_parse				*init_parse(t_parse *parse);
-t_data				*init_data(t_parse *parse);
+t_data				*create_data(t_parse *parse);
 void				free_data(t_data *data);
 void				free_parse(t_parse *parse);
+int					find_caractere(char *str, char sp);
 
 void				free_parse(t_parse *parse);
 char				*get_next_line(int fd);
@@ -152,7 +153,7 @@ int					check_map(t_parse *parse);
 int					wall(char *map);
 int					caractere_map(char *map, int *p, t_parse *parse, int y);
 int					space_map(char **map, int i, int j);
-char				**get_map(char **splitted_file, int lenght);
+char				**get_map(char **sp_file, int lenght);
 
 // End Parsing
 

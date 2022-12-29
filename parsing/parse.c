@@ -6,11 +6,27 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 12:40:46 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:24:50 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+t_parse	*init_parse(t_parse *parse)
+{
+	parse->data = malloc(sizeof(t_data));
+	if (!parse->data)
+	{
+		free(parse);
+		return (NULL);
+	}
+	parse->data->map = 0;
+	parse->data->path_no = 0;
+	parse->data->path_so = 0;
+	parse->data->path_we = 0;
+	parse->data->path_ea = 0;
+	return (parse);
+}
 
 char	*file_existed(int ac, char **av)
 {
@@ -62,12 +78,12 @@ t_data	*parse(int ac, char **av)
 	if (!parse)
 		return (NULL);
 	parse->file = file_existed(ac, av);
-	parse->splitted_file = ft_split(parse->file, '\n');
-	if (!parse->file || !parse->splitted_file || check_file(parse))
+	parse->sp_file = ft_split(parse->file, '\n');
+	if (!parse->file || !parse->sp_file || check_file(parse))
 	{
 		free_parse(parse);
 		return (NULL);
 	}
-	data = init_data(parse);
+	data = create_data(parse);
 	return (data);
 }

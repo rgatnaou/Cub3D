@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 18:39:28 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:24:50 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,13 @@ void	init_img(t_data *data)
 	get_addr_img(data, img_no, img_so, img_we, img_ea);
 }
 
-t_data	*init_data(t_parse *parse)
+t_data	*create_data(t_parse *parse)
 {
 	t_data	*data;
 
 	data = parse->data;
 	free(parse->file);
-	free_tab2(parse->splitted_file);
+	free_tab2(parse->sp_file);
 	free(parse);
 	width_height(data);
 	init_player(data);

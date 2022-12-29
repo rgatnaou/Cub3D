@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/28 13:00:53 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:26:16 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height,
 				* offset_y) + offset_x]);
 		y++;
 		if (y > HEIGHT)
-			break ;
+			break ;	
 	}
 }
 
@@ -70,14 +70,14 @@ void	projection(t_data *data, double ray_angle, int x)
 	y = 0;
 	while (y < cord_wall.y)
 	{
-		my_mlx_pixel_put(&data->mlx.image, cord_wall.x, y, data->ceiling_color);
+		my_mlx_pixel_put(&data->mlx.image, cord_wall.x, y, data->ceiling);
 		y++;
 	}
 	set_texture(data, cord_wall, wall_height);
 	y = cord_wall.y + wall_height;
 	while (y < HEIGHT)
 	{
-		my_mlx_pixel_put(&data->mlx.image, cord_wall.x, y, data->floor_color);
+		my_mlx_pixel_put(&data->mlx.image, cord_wall.x, y, data->floor);
 		y++;
 	}
 }
