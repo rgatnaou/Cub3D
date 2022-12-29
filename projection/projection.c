@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/29 14:26:16 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:33:08 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height,
 				* offset_y) + offset_x]);
 		y++;
 		if (y > HEIGHT)
-			break ;	
+			break ;
 	}
 }
 

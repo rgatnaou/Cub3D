@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 12:24:50 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:22:01 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,83 +50,21 @@ void	init_player(t_data *data)
 	data->projection = (WIDTH / 2) / tan(data->fov / 2);
 }
 
-void	*check_xpm(t_data *data, char *path, int nb)
-{
-	if (nb == 1)
-		return (mlx_xpm_file_to_image(&data->mlx, path, &data->texture.no.width,
-				&data->texture.no.height));
-	else if (nb == 2)
-		return (mlx_xpm_file_to_image(&data->mlx, path, &data->texture.so.width,
-				&data->texture.so.height));
-	else if (nb == 3)
-		return (mlx_xpm_file_to_image(&data->mlx, path, &data->texture.we.width,
-				&data->texture.we.height));
-	else
-		return (mlx_xpm_file_to_image(&data->mlx, path, &data->texture.ea.width,
-				&data->texture.ea.height));
-}
-
-void	get_addr_img(t_data *data, void *img_no, void *img_so, void *img_we,
-		void *img_ea)
-{
-	data->texture.no.arr = (unsigned int *)mlx_get_data_addr(img_no,
-			&data->mlx.image.bits_per_pixel,
-			&data->mlx.image.line_length,
-			&data->mlx.image.endian);
-	data->texture.so.arr = (unsigned int *)mlx_get_data_addr(img_so,
-			&data->mlx.image.bits_per_pixel,
-			&data->mlx.image.line_length,
-			&data->mlx.image.endian);
-	data->texture.we.arr = (unsigned int *)mlx_get_data_addr(img_we,
-			&data->mlx.image.bits_per_pixel,
-			&data->mlx.image.line_length,
-			&data->mlx.image.endian);
-	data->texture.ea.arr = (unsigned int *)mlx_get_data_addr(img_ea,
-			&data->mlx.image.bits_per_pixel,
-			&data->mlx.image.line_length,
-			&data->mlx.image.endian);
-}
-
-void	check_w_h(t_data *data)
-{
-	bool	checker;
-
-	checker = true;
-	if (data->texture.so.width != 64 || data->texture.so.height != 64)
-		checker = false;
-	if (data->texture.no.width != 64 || data->texture.no.height != 64)
-		checker = false;
-	if (data->texture.we.width != 64 || data->texture.we.height != 64)
-		checker = false;
-	if (data->texture.ea.width != 64 || data->texture.ea.height != 64)
-		checker = false;
-	if (!checker)
-	{
-		printf("Error: The texture Size Is Not 64 * 64 Pixels\n");
-		free_data(data);
-		exit(1);
-	}
-}
-
 void	init_img(t_data *data)
 {
-	void	*img_no;
-	void	*img_so;
-	void	*img_we;
-	void	*img_ea;
-
-	img_no = check_xpm(data, data->path_no, 1);
-	img_so = check_xpm(data, data->path_so, 2);
-	img_we = check_xpm(data, data->path_we, 3);
-	img_ea = check_xpm(data, data->path_ea, 4);
-	if (img_no == NULL || img_so == NULL || img_we == NULL || img_ea == NULL)
+	data->texture.no.img_ptr = check_xpm(data, data->path_no, 1);
+	data->texture.so.img_ptr = check_xpm(data, data->path_so, 2);
+	data->texture.we.img_ptr = check_xpm(data, data->path_we, 3);
+	data->texture.ea.img_ptr = check_xpm(data, data->path_ea, 4);
+	if (data->texture.no.img_ptr == NULL || data->texture.so.img_ptr == NULL
+		|| data->texture.we.img_ptr == NULL || data->texture.ea.img_ptr == NULL)
 	{
 		printf("Error: The Texture Is Not Valid\n");
 		free_data(data);
 		exit(0);
 	}
 	check_w_h(data);
-	get_addr_img(data, img_no, img_so, img_we, img_ea);
+	get_addr_img(data);
 }
 
 t_data	*create_data(t_parse *parse)

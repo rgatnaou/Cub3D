@@ -6,7 +6,7 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/27 18:35:49 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/29 15:22:42 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 SRC =  main.c \
 	parsing/parse.c \
 	parsing/create_data.c \
+	parsing/create_data_utils.c \
 	parsing/ft_free.c \
 	parsing/utils_map.c \
 	parsing/utils.c \

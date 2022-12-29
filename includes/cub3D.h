@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 14:09:51 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:23:38 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_player
 typedef struct s_texture
 {
 	unsigned int	*arr;
+	void			*img_ptr;
 	int				width;
 	int				height;
 }					t_texture;
@@ -154,6 +155,9 @@ int					wall(char *map);
 int					caractere_map(char *map, int *p, t_parse *parse, int y);
 int					space_map(char **map, int i, int j);
 char				**get_map(char **sp_file, int lenght);
+void				*check_xpm(t_data *data, char *path, int nb);
+void				get_addr_img(t_data *data);
+void				check_w_h(t_data *data);
 
 // End Parsing
 
