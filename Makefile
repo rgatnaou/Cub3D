@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
+#    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/29 15:22:42 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/29 15:50:20 by rgatnaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ LIBFT = libft/libft.a
 
 HEADER = includes/cub3D.h
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror
 
 SRC =  main.c \
 	parsing/parse.c \
@@ -42,7 +42,7 @@ SRC =  main.c \
 
 OBJECTS = $(SRC:.c=.o)
 
-%.o : %.c $(HEADER) $(SRC)
+%.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 all: MAKELIBFT $(NAME)

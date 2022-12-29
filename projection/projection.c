@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/29 14:33:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:48:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ void	projection(t_data *data, double ray_angle, int x)
 	double	wall_height;
 	t_cord	cord_wall;
 	int		y;
+	double	distance;
 
-	wall_height = (SIZE_CUB / distance_to_wall(data, ray_angle))
+	distance = distance_to_wall(data, ray_angle);
+	if (distance < 1)
+		distance = 1;
+	wall_height = (SIZE_CUB / distance)
 		* data->projection;
 	cord_wall.x = x;
 	cord_wall.y = HEIGHT / 2 - wall_height / 2;

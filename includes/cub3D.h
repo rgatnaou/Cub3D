@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 15:23:38 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:10:50 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define WHITE 0Xffffff
 # define BLUE 0X0000ff
 # define RED 0Xff0000
-# define MINIMAP_FACTOR 0.2
+# define MINIMAP 12
 # define KEY_W 13
 # define KEY_D 2
 # define KEY_A 0
@@ -167,9 +167,9 @@ int					draw(t_data *data);
 int					rendering(t_data *data);
 int					destroy_win(t_data *data);
 void				circle(t_mlx *mlx, t_cord *coord, int r, int color);
-void				square(t_mlx *mlx, int x, int y, int color);
-void				line(t_data *data, double x_end, double y_end,
-						t_cord *start);
+void				square(t_mlx *mlx, t_cord *coord, int color);
+void				line(t_data *data, t_cord *start,
+						t_cord *end);
 void				draw_player(t_data *data, t_cord *start);
 void				ws_move(t_data *data, int step, double dist);
 void				ad_move(t_data *data, int step, double dist);

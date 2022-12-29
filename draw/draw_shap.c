@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 18:26:15 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:32:02 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	circle(t_mlx *mlx, t_cord *coord, int r, int color)
 	double	x1;
 	double	y1;
 
-	coord->x *= MINIMAP_FACTOR;
-	coord->y *= MINIMAP_FACTOR;
-	r *= MINIMAP_FACTOR;
 	while (r)
 	{
 		i = 0;
@@ -38,32 +35,31 @@ void	circle(t_mlx *mlx, t_cord *coord, int r, int color)
 	}
 }
 
-void	square(t_mlx *mlx, int x, int y, int color)
+void	square(t_mlx *mlx, t_cord *cord, int color)
 {
-	int	i;
-	int	j;
-	int	size_cube_minimap;
+	int		i;
+	int		j;
+	t_cord	draw;
 
-	size_cube_minimap = SIZE_CUB * MINIMAP_FACTOR;
-	x *= MINIMAP_FACTOR;
-	y *= MINIMAP_FACTOR;
 	i = 0;
-	while (i <= size_cube_minimap)
+	while (i <= MINIMAP)
 	{
 		j = 0;
-		while (j <= size_cube_minimap && ((x + j) < WIDTH && (y + i) < HEIGHT))
+		draw.x = cord->x + j;
+		draw.y = cord->y + i;
+		while (j <= MINIMAP && (draw.x < WIDTH && draw.y < HEIGHT))
 		{
 			if (i == 0 || j == 0)
-				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), 0x808080);
+				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, 0x808080);
 			else
-				my_mlx_pixel_put(&mlx->image, (x + j), (y + i), color);
+				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	line(t_data *data, double x_end, double y_end, t_cord *start)
+void	line(t_data *data, t_cord *start, t_cord *end)
 {
 	double	dis_x;
 	double	dis_y;
@@ -73,8 +69,8 @@ void	line(t_data *data, double x_end, double y_end, t_cord *start)
 
 	x = start->x;
 	y = start->y;
-	dis_x = x_end - x;
-	dis_y = y_end - y;
+	dis_x = end->x - x;
+	dis_y = end->y - y;
 	step = fmax(fabs(dis_x), fabs(dis_y));
 	dis_x /= step;
 	dis_y /= step;
@@ -90,11 +86,11 @@ void	line(t_data *data, double x_end, double y_end, t_cord *start)
 void	draw_player(t_data *data, t_cord *start)
 {
 	int		i;
-	double	ray_angle;
+	t_cord	end;
 
 	i = 0;
-	ray_angle = data->player.rotation_angle - (data->fov / 2);
-	circle(&data->mlx, start, 5, RED);
-	line(data, start->x + (cos(data->player.rotation_angle) * 10), start->y
-		+ (sin(data->player.rotation_angle) * 10), start);
+	circle(&data->mlx, start, 2, RED);
+	end.x = start->x + (cos(data->player.rotation_angle) * 10);
+	end.y = start->y + (sin(data->player.rotation_angle) * 10);
+	line(data, start, &end);
 }

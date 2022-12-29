@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/27 18:20:23 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:31:32 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	draw_minimap(t_data *data, t_cord start, int i)
+void	draw_minimap(t_data *data, t_cord *start, int i)
 {
-	int	j;
+	int		j;
+	t_cord	cub;
 
-	while (i < start.y + 21 && data->map[i])
+	while (i < start->y + 21 && data->map[i])
 	{
-		j = start.x;
-		while (data->map[i][j] && j < start.x + 31
+		j = start->x;
+		while (data->map[i][j] && j < start->x + 21
 			&& j < (int)ft_strlen(data->map[i]))
 		{
+			cub.x = (j - start->x) * MINIMAP;
+			cub.y = (i - start->y) * MINIMAP;
 			if (data->map[i][j] == '1')
-				square(&data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)
-						* SIZE_CUB), 0x000000);
+				square(&data->mlx, &cub, 0x000000);
 			else if (data->map[i][j] == '0')
-				square(&data->mlx, ((j - start.x) * SIZE_CUB), ((i - start.y)
-						* SIZE_CUB), WHITE);
+				square(&data->mlx, &cub, WHITE);
 			j++;
 		}
 		i++;
@@ -51,9 +52,9 @@ void	draw_2d(t_data *data)
 	else
 		start.y -= 10;
 	i = start.y;
-	draw_minimap(data, start, i);
-	start.x = data->player.cord.x - (start.x * SIZE_CUB);
-	start.y = data->player.cord.y - (start.y * SIZE_CUB);
+	draw_minimap(data, &start, i);
+	start.x = (data->player.cord.x / SIZE_CUB - start.x) * MINIMAP;
+	start.y = (data->player.cord.y / SIZE_CUB - start.y) * MINIMAP;
 	draw_player(data, &start);
 	mlx_put_image_to_window(&data->mlx, data->mlx.win, data->mlx.image.img, 0,
 		0);
