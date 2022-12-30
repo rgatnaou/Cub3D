@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:21:45 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/30 10:27:53 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:27:02 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,7 @@ int	final_parse_map(char **map)
 			if (map[i][j] == '0' &&
 				((map[i + 1] && (int)ft_strlen(map[i + 1]) <= j) || (i != 0
 							&& j >= (int)ft_strlen(map[i - 1]))))
-			{
-				while (map[i][j] && map[i][j] == ' ')
-					j++;
-				if (map[i][j])
-					return (-1);
-			}
+				return (-1);
 			j++;
 		}
 	}

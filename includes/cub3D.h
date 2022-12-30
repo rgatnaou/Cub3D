@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/30 10:59:41 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:16:19 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define KEY_ARROW_RIGHT 124
 # define KEY_ARROW_DOWN 125
 # define KEY_ARROW_LEFT 123
-# define KEY_S 1
 # define KEY_ESC 53
 # define IMG_WIDTH 64
 # define IMG_HEIGHT 64
