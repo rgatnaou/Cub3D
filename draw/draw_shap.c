@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/29 16:32:02 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:12:42 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	square(t_mlx *mlx, t_cord *cord, int color)
 	t_cord	draw;
 
 	i = 0;
-	while (i <= MINIMAP)
+	while (i < MINIMAP)
 	{
 		j = 0;
-		draw.x = cord->x + j;
-		draw.y = cord->y + i;
-		while (j <= MINIMAP && (draw.x < WIDTH && draw.y < HEIGHT))
+		while (j < MINIMAP)
 		{
+			draw.x = cord->x + j;
+			draw.y = cord->y + i;
 			if (i == 0 || j == 0)
 				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, 0x808080);
 			else

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 16:10:50 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:59:41 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,8 @@ void				square(t_mlx *mlx, t_cord *coord, int color);
 void				line(t_data *data, t_cord *start,
 						t_cord *end);
 void				draw_player(t_data *data, t_cord *start);
-void				ws_move(t_data *data, int step, double dist);
-void				ad_move(t_data *data, int step, double dist);
+int					check_if_wall2(t_data *data, double x_cord_win,
+						double y_cord_win);	
 
 // Mouvements Functions:
 int					key_pressed(int keycode, t_data *data);

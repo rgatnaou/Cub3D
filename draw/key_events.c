@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:02:03 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 15:42:20 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:01:22 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x < WIDTH && x >= 0) && (y < HEIGHT && y >= 0))
+	{
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel
+					/ 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+int	destroy_win(t_data *data)
+{
+	mlx_destroy_image(data->mlx.init, data->mlx.image.img);
+	mlx_destroy_window(data->mlx.init, data->mlx.win);
+	free_data(data);
+	exit(0);
+}
 
 int	key_release(int keycode, t_data *data)
 {

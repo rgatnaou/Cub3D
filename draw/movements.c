@@ -3,85 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:48:51 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/27 18:36:25 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:01:23 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	key_press_d(t_data *data)
+void	ws_move(t_data *data)
 {
-	double	angle;
-	double	x_player;
-	double	y_player;
+	double	x;
+	double	y;
+	int		step;
 
-	angle = data->player.rotation_angle + (M_PI / 2);
-	x_player = (data->player.cord.x + (cos(angle) * SPEED));
-	y_player = (data->player.cord.y + (sin(angle) * SPEED));
-	if (!check_if_wall(data, x_player, y_player))
+	step = data->move.ws_move * SPEED;
+	x = data->player.cord.x + cos(data->player.rotation_angle) * step;
+	y = data->player.cord.y + sin(data->player.rotation_angle) * step;
+	if (!check_if_wall(data, x, y) && !check_if_wall2(data, x, y))
 	{
-		data->player.cord.x = x_player;
-		data->player.cord.y = y_player;
+		data->player.cord.x = x;
+		data->player.cord.y = y;
 	}
 }
 
-void	key_press_a(t_data *data)
+void	ad_move(t_data *data)
 {
-	double	angle;
-	double	x_player;
-	double	y_player;
+	double	x;
+	double	y;
+	int		step;
 
-	angle = data->player.rotation_angle - (M_PI / 2);
-	x_player = (data->player.cord.x + (cos(angle) * SPEED));
-	y_player = (data->player.cord.y + (sin(angle) * SPEED));
-	if (!check_if_wall(data, x_player, y_player))
+	step = data->move.ad_move * SPEED;
+	x = data->player.cord.x + cos(data->player.rotation_angle + (M_PI / 2))
+		* step;
+	y = data->player.cord.y + sin(data->player.rotation_angle + (M_PI / 2))
+		* step;
+	if (!check_if_wall(data, x, y) && !check_if_wall2(data, x, y))
 	{
-		data->player.cord.x = x_player;
-		data->player.cord.y = y_player;
-	}
-}
-
-void	key_press_s(t_data *data)
-{
-	double	x_player;
-	double	y_player;
-
-	x_player = (data->player.cord.x - cos(data->player.rotation_angle) * SPEED);
-	y_player = (data->player.cord.y - sin(data->player.rotation_angle) * SPEED);
-	if (!check_if_wall(data, x_player, y_player))
-	{
-		data->player.cord.x = x_player;
-		data->player.cord.y = y_player;
-	}
-}
-
-void	key_press_w(t_data *data)
-{
-	double	x_player;
-	double	y_player;
-
-	x_player = (data->player.cord.x + cos(data->player.rotation_angle) * SPEED);
-	y_player = (data->player.cord.y + sin(data->player.rotation_angle) * SPEED);
-	if (!check_if_wall(data, x_player, y_player))
-	{
-		data->player.cord.x = x_player;
-		data->player.cord.y = y_player;
+		data->player.cord.x = x;
+		data->player.cord.y = y;
 	}
 }
 
 void	move_player(t_data *data)
 {
-	int		dist;
-	int		step;
-
-	dist = 0;
-	step = 0;
 	data->player.rotation_angle += data->move.rotation * M_PI / 180.0;
 	if (data->move.ws_move)
-		ws_move(data, step, dist);
+		ws_move(data);
 	if (data->move.ad_move)
-		ad_move(data, step, dist);
+		ad_move(data);
 }
