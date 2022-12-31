@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/31 12:59:49 by rgatnaou         ###   ########.fr        #
+#    Updated: 2022/12/31 13:47:41 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FLAG_MLX = -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRC =  main.c \
 	parsing/parse.c \
