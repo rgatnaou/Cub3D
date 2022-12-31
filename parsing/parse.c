@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:32:50 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 12:24:50 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 13:41:23 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,21 @@ char	*file_existed(int ac, char **av)
 
 	i = 0;
 	if (ac != 2)
-		exit(ft_error("Error : Give Me One Argument\n", NULL));
+	{
+		ft_error("Error : Give Me One Argument\n", NULL);
+		return (NULL);
+	}
 	fd = open(av[1], O_RDWR);
 	if (fd == -1 || !ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1],
 				'.'), ".cub", 4))
-		exit(ft_error("Error : Map Not Found!\n", NULL));
+	{
+		ft_error("Error : Map Not Found!\n", NULL);
+		return (NULL);
+	}
 	file = read_file(fd);
 	close(fd);
 	if (!file)
-		exit(ft_error("Error : Map Is Empty.\n", NULL));
+		ft_error("Error : Map Is Empty.\n", NULL);
 	return (file);
 }
 

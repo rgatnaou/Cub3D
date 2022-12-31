@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/31 11:35:45 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 13:29:29 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	draw_minimap(t_data *data, t_cord *start)
 	while (i < start->y + 21 && data->map[i])
 	{
 		j = start->x;
-		while (data->map[i][j] && j < start->x + 21)
+		while (data->map[i][j] && j < start->x + 21
+		&& j < (int)ft_strlen(data->map[i]))
 		{
 			cub.x = (j - start->x) * MINIMAP;
 			cub.y = (i - start->y) * MINIMAP;
