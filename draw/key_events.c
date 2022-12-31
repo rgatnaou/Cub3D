@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:02:03 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/30 11:01:22 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:43:56 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 int	destroy_win(t_data *data)
 {
 	mlx_destroy_image(data->mlx.init, data->mlx.image.img);
+	mlx_destroy_image(data->mlx.init, data->texture.no.img_ptr);
+	mlx_destroy_image(data->mlx.init, data->texture.so.img_ptr);
+	mlx_destroy_image(data->mlx.init, data->texture.ea.img_ptr);
+	mlx_destroy_image(data->mlx.init, data->texture.we.img_ptr);
 	mlx_destroy_window(data->mlx.init, data->mlx.win);
 	free_data(data);
+	sleep(100);
 	exit(0);
 }
 

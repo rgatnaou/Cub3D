@@ -6,22 +6,23 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/30 11:08:20 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:35:45 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	draw_minimap(t_data *data, t_cord *start, int i)
+void	draw_minimap(t_data *data, t_cord *start)
 {
+	int		i;
 	int		j;
 	t_cord	cub;
 
+	i = start->y;
 	while (i < start->y + 21 && data->map[i])
 	{
 		j = start->x;
-		while (data->map[i][j] && j < start->x + 21
-			&& j < (int)ft_strlen(data->map[i]))
+		while (data->map[i][j] && j < start->x + 21)
 		{
 			cub.x = (j - start->x) * MINIMAP;
 			cub.y = (i - start->y) * MINIMAP;
@@ -37,7 +38,6 @@ void	draw_minimap(t_data *data, t_cord *start, int i)
 
 void	draw_2d(t_data *data)
 {
-	int		i;
 	t_cord	start;
 
 	draw_3d(data);
@@ -51,8 +51,7 @@ void	draw_2d(t_data *data)
 		start.y = 0;
 	else
 		start.y -= 10;
-	i = start.y;
-	draw_minimap(data, &start, i);
+	draw_minimap(data, &start);
 	start.x = (data->player.cord.x / SIZE_CUB - start.x) * MINIMAP;
 	start.y = (data->player.cord.y / SIZE_CUB - start.y) * MINIMAP;
 	draw_player(data, &start);

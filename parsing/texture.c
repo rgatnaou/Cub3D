@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:15:57 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/29 12:26:44 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 08:20:11 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	texture_errors(char *line, int *text_val, t_data *data, char orientation)
 		return (ft_error("Error :Texture Missing Separator.\n", NULL));
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
+	if (line[i] == '\0' && (*text_val)++)
+		return (ft_error("Error :Texture Missing Path.\n", NULL));
 	if (orientation == 'N')
 		data->path_no = ft_strdup(&line[i]);
 	if (orientation == 'S')
