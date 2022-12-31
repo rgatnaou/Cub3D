@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:02:03 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/31 12:43:56 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:50:14 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	destroy_win(t_data *data)
 	mlx_destroy_image(data->mlx.init, data->texture.we.img_ptr);
 	mlx_destroy_window(data->mlx.init, data->mlx.win);
 	free_data(data);
-	sleep(100);
 	exit(0);
 }
 
