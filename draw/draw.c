@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 18:26:29 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/31 13:29:29 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:32:54 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_minimap(t_data *data, t_cord *start)
 			cub.x = (j - start->x) * MINIMAP;
 			cub.y = (i - start->y) * MINIMAP;
 			if (data->map[i][j] == '1')
-				square(&data->mlx, &cub, 0x000000);
+				square(&data->mlx, &cub, BLACK);
 			else if (data->map[i][j] == '0')
 				square(&data->mlx, &cub, WHITE);
 			j++;

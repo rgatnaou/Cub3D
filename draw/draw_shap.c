@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:43:43 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/30 11:12:42 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:18 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	square(t_mlx *mlx, t_cord *cord, int color)
 			draw.x = cord->x + j;
 			draw.y = cord->y + i;
 			if (i == 0 || j == 0)
-				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, 0x808080);
+				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, GRAY);
 			else
 				my_mlx_pixel_put(&mlx->image, draw.x, draw.y, color);
 			j++;

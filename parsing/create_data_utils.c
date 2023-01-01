@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_data_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:19:21 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/31 08:22:44 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:36:52 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_w_h(t_data *data)
 		checker = false;
 	if (!checker)
 	{
-		ft_error("Error: The texture Size Is Not 64 * 64 Pixels\n", NULL);
+		ft_error("Error: The texture Size Is Not 64 * 64 Pixels.\n", NULL);
 		free_data(data);
 		exit(1);
 	}

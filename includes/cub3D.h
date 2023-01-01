@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 18:01:56 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/30 15:16:19 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:13 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 # define WIDTH 1200
 # define HEIGHT 900
 # define WHITE 0Xffffff
-# define BLUE 0X0000ff
 # define RED 0Xff0000
+# define BLACK 0X000000
+# define GRAY 0x808080
 # define MINIMAP 12
 # define KEY_W 13
 # define KEY_D 2

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/29 15:48:54 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:58:08 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	projection(t_data *data, double ray_angle, int x)
 	int		y;
 	double	distance;
 
-	distance = distance_to_wall(data, ray_angle);
+ 	distance = distance_to_wall(data, ray_angle);
 	if (distance < 1)
 		distance = 1;
 	wall_height = (SIZE_CUB / distance)

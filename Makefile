@@ -6,12 +6,12 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/31 13:47:41 by ykhadiri         ###   ########.fr        #
+#    Updated: 2022/12/31 15:03:55 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = CUB3D
+NAME = cub3d
 
 LIBFT = libft/libft.a
 

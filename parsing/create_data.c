@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:39:43 by rgatnaou          #+#    #+#             */
-/*   Updated: 2022/12/31 09:22:41 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:35:50 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_img(t_data *data)
 	if (data->texture.no.img_ptr == NULL || data->texture.so.img_ptr == NULL
 		|| data->texture.we.img_ptr == NULL || data->texture.ea.img_ptr == NULL)
 	{
-		ft_error("Error: The Texture Is Not Valid\n", NULL);
+		ft_error("Error: The Texture Is Not Valid.\n", NULL);
 		if (data->texture.no.img_ptr)
 			mlx_destroy_image(&data->mlx, data->texture.no.img_ptr);
 		if (data->texture.so.img_ptr)
