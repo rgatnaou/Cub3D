@@ -6,12 +6,14 @@
 #    By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 18:37:56 by rgatnaou          #+#    #+#              #
-#    Updated: 2022/12/31 15:03:55 by ykhadiri         ###   ########.fr        #
+#    Updated: 2023/01/01 14:48:56 by ykhadiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = cub3d
+NAME = cub3D
+
+NAME_b = cub3D_bonus
 
 LIBFT = libft/libft.a
 
@@ -53,12 +55,17 @@ MAKELIBFT:
 
 $(NAME): $(OBJECTS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ $(LIBFT) $(FLAG_MLX) -o $(NAME)
+	
+bonus: MAKELIBFT $(NAME_b)
+
+$(NAME_b) :$(OBJECTS) $(LIBFT)
+	$(CC) $(CFLAGS) $^ $(LIBFT) $(FLAG_MLX) -o $(NAME_b)
 
 clean:
 	make fclean -C libft
 	rm -rf $(OBJECTS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(NAME_b)
 
 re: fclean all

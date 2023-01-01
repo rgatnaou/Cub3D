@@ -6,7 +6,7 @@
 /*   By: ykhadiri <ykhadiri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:05:42 by ykhadiri          #+#    #+#             */
-/*   Updated: 2022/12/31 18:58:08 by ykhadiri         ###   ########.fr       */
+/*   Updated: 2023/01/01 14:21:59 by ykhadiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	put_texture(t_data *data, t_cord *cord_wall, double wall_height,
 		y = 0;
 	while (y < (wall_height + cord_wall->y))
 	{
-		dist = y + wall_height / 2 - HEIGHT / 2;
+		dist = y - (HEIGHT / 2 - wall_height / 2);
 		offset_y = dist * (IMG_HEIGHT / wall_height);
 		my_mlx_pixel_put(&data->mlx.image, cord_wall->x, y, arr[(IMG_WIDTH
 				* offset_y) + offset_x]);
@@ -64,7 +64,7 @@ void	projection(t_data *data, double ray_angle, int x)
 	int		y;
 	double	distance;
 
- 	distance = distance_to_wall(data, ray_angle);
+	distance = distance_to_wall(data, ray_angle);
 	if (distance < 1)
 		distance = 1;
 	wall_height = (SIZE_CUB / distance)
