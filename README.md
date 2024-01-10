@@ -1,2 +1,2 @@
-# Cub3D
-This project is inspired by the world-famous eponymous 90's game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you'll have to find your way.
+# Game Play
+<img width="1199" alt="Screen Shot 2023-01-01 at 6 43 09 PM" src="https://user-images.githubusercontent.com/77007791/210180070-5caf74ab-f5cd-43af-80d2-7b174eddfc2a.png">
